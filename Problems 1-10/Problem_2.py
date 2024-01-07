@@ -1,4 +1,6 @@
 def sumEvenFibonacci(n):
+    '''Sums the even numbers in the Fibonacci sequence up to n.
+    '''
     a0, a1 = 1, 1
     suma = 0
     while a1 <= n:
