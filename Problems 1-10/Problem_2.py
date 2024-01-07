@@ -11,6 +11,5 @@ def sumEvenFibonacci(n):
 
 
 if __name__ == "__main__":
-    print(sumEvenFibonacci(10)) # 10
     print(sumEvenFibonacci(34)) # 44
-    print(sumEvenFibonacci(4000000))
+    print(sumEvenFibonacci(4000000)) # 4613732
