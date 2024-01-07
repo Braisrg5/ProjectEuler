@@ -6,5 +6,5 @@ def sum35(n):
 
 if __name__ == "__main__":
     print(sum35(10)) # 23
-    print(sum35(1000)) # 
+    print(sum35(1000)) # 233168
     
