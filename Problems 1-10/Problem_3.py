@@ -22,23 +22,28 @@ def is_prime(n):
 
 
 def primeFactors(n, listFact = []):
-    '''Constructs a list of the factors of a number, from smaller to larger.'''
-    if n % 2 == 0:
-        return primeFactors(n/2, listFact + [2])
+    '''Constructs a list of the factors of a number, from smallest to largest. 
+    Works in a similar manner to the previous function, but calls itself after
+    adding each factor, and at the same time divides the number by them
+    '''
+    end = floor(sqrt(n))
+    if n == 1:
+        return listFact
+    elif n % 2 == 0:
+        return primeFactors(n//2, listFact + [2])
     elif n % 3 == 0:
-        return primeFactors(n/3, listFact + [3])
-    for j in range(6, int(n)+2, 6):
+        return primeFactors(n//3, listFact + [3])
+    for j in range(6, end+2, 6):
         p1, p2 = j-1, j+1
-        if n % p1 == 0 and is_prime(p1):
-            return primeFactors(n/p1, listFact + [p1])
-        elif n % p2 == 0 and is_prime(p2):
-            return primeFactors(n/p2, listFact + [p2])
-    return listFact
+        if n % p1 == 0:
+            return primeFactors(n//p1, listFact + [p1])
+        elif n % p2 == 0:
+            return primeFactors(n//p2, listFact + [p2])
+    return listFact + [n]
         
 
-def largePrimeFact(n):
-    return primeFactors(n)[-1]
-    
-    
 if __name__ == "__main__":
-    print(primeFactors(600851475143))
+    print(primeFactors(5350800)) # [2, 2, 2, 2, 3, 5, 5, 7, 7, 7, 13]
+    print(primeFactors(600851475143)) # [71, 839, 1471, 6857]
+    print(primeFactors(1))
+
