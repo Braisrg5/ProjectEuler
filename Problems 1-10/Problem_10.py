@@ -42,6 +42,28 @@ def sumPrimesUpTo(n):
     return sum(primeList) + 5
 
 
+def sieveEratosthenes(n):
+    '''Basic implementation of the sieve of Eratosthenes.
+    Very unoptimized but much faster than previously.
+    '''
+    nums = list(range(2, n + 1))
+    i, p = 0, 2
+    while True:
+        if p*p > n:
+            break
+        for k in range(p, floor(n/p)+1):
+            if p*k in nums: nums.remove(p*k)
+        i += 1
+        p = nums[i]
+    return sum(nums)
+   
+
 if __name__ == "__main__":
-    print(sumPrimesUpTo(10)) # 17
-    print(sumPrimesUpTo(2000000)) # 142913828922, 6.8s
+    # print(sumPrimesUpTo(10)) # 17
+    # print(sumPrimesUpTo(2000000)) # 142913828922, 6.8s
+    start = time()
+    print(sumPrimesUpTo(10000))
+    print(time() - start, "seconds")
+    start = time()
+    print(sieveEratosthenes(10000))
+    print(time() - start, "seconds")
