@@ -48,14 +48,14 @@ def sieveEratosthenes(n):
     Very unoptimized but much faster than previously.
     '''
     nums = list(range(2, n + 1))
-    numsDict = {num:0 for num in nums}
+    numsDict = {num:True for num in nums}
     for num in numsDict:
         if num*num > n:
             break
-        if numsDict[num] == 0:
+        if numsDict[num] == True:
             for k in range(num, floor(n/num)+1):
-                numsDict[num*k] = 1
-    return sum([k for k, v in numsDict.items() if v == 0])
+                numsDict[num*k] = False
+    return sum([k for k, v in numsDict.items() if v])
    
 
 if __name__ == "__main__":
