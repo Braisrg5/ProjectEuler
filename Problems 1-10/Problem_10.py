@@ -5,7 +5,6 @@ Find the sum of all the primes below two million.
 
 from math import sqrt, floor
 from time import time
-from numpy import unique
 
 def primesUpTo(n, primeList):
     '''Returns the list of primes up to the square root of n.
