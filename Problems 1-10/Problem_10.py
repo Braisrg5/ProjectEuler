@@ -5,6 +5,7 @@ Find the sum of all the primes below two million.
 
 from math import sqrt, floor
 from time import time
+from numpy import unique
 
 def primesUpTo(n, primeList):
     '''Returns the list of primes up to the square root of n.
@@ -47,23 +48,22 @@ def sieveEratosthenes(n):
     Very unoptimized but much faster than previously.
     '''
     nums = list(range(2, n + 1))
-    i, p = 0, 2
-    while True:
-        if p*p > n:
+    numsDict = {num:0 for num in nums}
+    for num in numsDict:
+        if num*num > n:
             break
-        for k in range(p, floor(n/p)+1):
-            if p*k in nums: nums.remove(p*k)
-        i += 1
-        p = nums[i]
-    return sum(nums)
+        if numsDict[num] == 0:
+            for k in range(num, floor(n/num)+1):
+                numsDict[num*k] = 1
+    return sum([k for k, v in numsDict.items() if v == 0])
    
 
 if __name__ == "__main__":
     # print(sumPrimesUpTo(10)) # 17
     # print(sumPrimesUpTo(2000000)) # 142913828922, 6.8s
     start = time()
-    print(sumPrimesUpTo(10000)) # 0.006s
+    print(sumPrimesUpTo(2000000)) # 6.8s
     print(time() - start, "seconds")
     start = time()
-    print(sieveEratosthenes(10000)) # 0.5s
+    print(sieveEratosthenes(2000000)) # 0.92s
     print(time() - start, "seconds")
