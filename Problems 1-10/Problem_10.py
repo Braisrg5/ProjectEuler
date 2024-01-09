@@ -43,25 +43,9 @@ def sumPrimesUpTo(n):
     return sum(primeList) + 5
 
 
-def sieveEratosthenes_v2_0(n):
-    '''Basic implementation of the sieve of Eratosthenes.
-    Very unoptimized but much faster than previously.
-    '''
-    nums = list(range(2, n + 1))
-    numsDict = {num:True for num in nums}
-    for num in numsDict:
-        if num*num > n:
-            break
-        if numsDict[num] == True:
-            for k in range(num, floor(n/num)+1):
-                numsDict[num*k] = False
-    return sum([k for k, v in numsDict.items() if v])
-
-
-
 def sieveEratosthenes_v2_1(n):
     '''Basic implementation of the sieve of Eratosthenes.
-    Twice as fast compared with v2.
+    Twice as fast compared with v2_0.
     '''
     nums = list(range(3, n + 1, 2))
     numsDict = {num:True for num in nums}
@@ -76,10 +60,4 @@ def sieveEratosthenes_v2_1(n):
 
 if __name__ == "__main__":
     # print(sumPrimesUpTo(10)) # 17
-    # print(sumPrimesUpTo(2000000)) # 142913828922, 6.8s
-    start = time()
-    print(sieveEratosthenes_v2_0(2000000)) # 0.96s
-    print(time() - start, "seconds")
-    start = time()
-    print(sieveEratosthenes_v2_1(2000000)) # 0.43s
-    print(time() - start, "seconds")
+    print(sieveEratosthenes_v2_1(2000000)) # 142913828922, 0.43s
