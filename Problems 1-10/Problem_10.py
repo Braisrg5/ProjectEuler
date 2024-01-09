@@ -62,8 +62,8 @@ if __name__ == "__main__":
     # print(sumPrimesUpTo(10)) # 17
     # print(sumPrimesUpTo(2000000)) # 142913828922, 6.8s
     start = time()
-    print(sumPrimesUpTo(10000))
+    print(sumPrimesUpTo(10000)) # 0.006s
     print(time() - start, "seconds")
     start = time()
-    print(sieveEratosthenes(10000))
+    print(sieveEratosthenes(10000)) # 0.5s
     print(time() - start, "seconds")
