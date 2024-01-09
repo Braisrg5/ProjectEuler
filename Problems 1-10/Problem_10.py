@@ -6,17 +6,6 @@ Find the sum of all the primes below two million.
 from math import sqrt, floor
 from time import time
 
-def primesUpTo(n, primeList):
-    '''Returns the list of primes up to the square root of n.
-    '''
-    end = floor(sqrt(n))
-    l = []
-    for i in primeList:
-        if i > end:
-            break
-        l.append(i)
-    return l
-
 
 def sieveEratosthenes_v2_1(n):
     '''Basic implementation of the sieve of Eratosthenes.
