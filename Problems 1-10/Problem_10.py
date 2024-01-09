@@ -45,7 +45,7 @@ def sumPrimesUpTo(n):
 
 def sieveEratosthenes(n):
     '''Basic implementation of the sieve of Eratosthenes.
-    Very unoptimized but much faster than previously.
+    Much faster than previously, uses dictionaries.
     '''
     nums = list(range(2, n + 1))
     numsDict = {num:True for num in nums}
