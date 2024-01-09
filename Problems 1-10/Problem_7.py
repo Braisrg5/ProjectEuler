@@ -15,7 +15,7 @@ def primesUpTo(n, primeList):
 def nthPrime(n):
     '''Returns the nth prime number.
     '''
-    current, primeList = 6, [2, 3, 5, 7, 11, 13]
+    primeList = [2, 3, 5, 7, 11, 13]
     if n <= 6:
         return primeList[n-1]
     # Not needed to divide by 2 or 3, we take numbers of the form 6*j +- 1
