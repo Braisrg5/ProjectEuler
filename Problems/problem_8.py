@@ -10,7 +10,7 @@ from functools import reduce
 def loadNumber():
     '''Loads the 1000-digit number from the file and returns it as a string.
     '''
-    file = open("Problem_8/Big_number.txt", "r")
+    file = open("resources/big_number.txt", "r")
     num = "".join([i.replace("\n","") for i in file.readlines()])
     file.close()
     return num
