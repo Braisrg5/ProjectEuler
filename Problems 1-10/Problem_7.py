@@ -7,7 +7,7 @@ What is the 10001st prime number?
 from math import log, ceil, sqrt, floor
 
 def primesUpTo(n, primeList):
-    '''Returns the list of primes up to n.
+    '''Returns the list of primes up to the square root of n.
     '''
     end = floor(sqrt(n))
     l = []
