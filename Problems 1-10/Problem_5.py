@@ -1,3 +1,10 @@
+'''2520 is the smallest number that can be divided by each of the numbers from
+1 to 10 without any reminder.
+What is the smallest positive number that is evenly divisible by all the 
+numbers from 1 to 20?
+'''
+
+
 from math import sqrt, floor
 
 def primeFactors(n, listFact = []):
@@ -55,4 +62,7 @@ def lcm(numbers):
 
 
 if __name__ == '__main__':
-    print(lcm(list(range(1,21))))
+    tenFirst = list(range(1,11))
+    print(lcm(tenFirst)) # 2520
+    twentyFirst = list(range(1,21))
+    print(lcm(twentyFirst)) # 232792560

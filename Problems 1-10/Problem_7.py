@@ -1,3 +1,9 @@
+'''By listing the first six prime numbers: 2, 3, 5, 7, 11 and 13, we can see
+that the 6th prime is 13.
+What is the 10001st prime number?
+'''
+
+
 from math import log, ceil, sqrt, floor
 
 def primesUpTo(n, primeList):
@@ -13,7 +19,10 @@ def primesUpTo(n, primeList):
 
 
 def nthPrime(n):
-    '''Returns the nth prime number.
+    '''Returns the nth prime number. Creates a list progressively of primes in
+    order to do the checking in an easier manner. The list could be stored in
+    a file to further use, but I didn't feel like it was neccesary.
+    I may implement it in the future.
     '''
     primeList = [2, 3, 5, 7, 11, 13]
     if n <= 6:
@@ -35,4 +44,5 @@ def nthPrime(n):
     return primeList[n-3]
 
 if __name__ == "__main__":
-    print(nthPrime(10001))
+    print(nthPrime(6)) # 13
+    print(nthPrime(10001)) # 104743
