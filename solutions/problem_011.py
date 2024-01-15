@@ -3,20 +3,22 @@ have been marked in red. The product of these numbers is
 26 x 63 x 78 x 14 = 1788696.
 
 What is the greatest product of four adjacent numbers in the same
-direction (up, down, left, right, or diagonally) in the 20 x 20 grid?
+direction (up, down, left, right, or diagonally) in the 20 x 20 grid in
+11_grid.txt?
 """
 
 import numpy as np
 from functools import reduce
 
 
-def load_grid():
-    """Loads the 20x20 grid into a numpy array with proper format."""
-    file = open("resources/11_grid.txt", "r")
-    grid = np.array(
-        [[int(j) for j in i.replace("\n", "").split(" ")]
-         for i in file.readlines()]
-    )
+def load_grid(path):
+    """Loads the 20x20 grid from path into a numpy array with proper
+    format."""
+    file = open(path, "r")
+    grid = np.array([[
+        int(j) for j in i.replace("\n", "").split(" ")]
+        for i in file.readlines()
+    ])
     file.close()
     return grid
 
@@ -56,7 +58,7 @@ def big_prod(n):
     """Returns the greatest product of n adjacent numbers in every
     direction in the 20 x 20 grid.
     """
-    grid = load_grid()
+    grid = load_grid("resources/11_grid.txt")
     h_big = horizontal(grid, n)
     # To find the vertical product, we transpose the matrix
     v_big = horizontal(grid.transpose(), n)

@@ -13,7 +13,8 @@ hundred natural numbers and the square of the sum.
 def diff_squares(n):
     """Returns the difference between the sum of the squares and the
     square of the sum of the nth natural numbers using Faulhaber's
-    formula in both cases."""
+    formula in both cases.
+    """
     sum_squared = n**2 * (n + 1) ** 2 // 4
     sum_of_squares = (2 * n**3 + 3 * n**2 + n) // 6
     return sum_squared - sum_of_squares

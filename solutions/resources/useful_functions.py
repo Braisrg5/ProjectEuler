@@ -50,3 +50,8 @@ def counts(ls):
     for i in ls:
         counts[i] = counts.get(i, 0) + 1
     return counts
+
+
+def digit_sum(n):
+    """Sums the digits in base 10 of a number n."""
+    return sum([int(i) for i in str(n)])

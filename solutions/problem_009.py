@@ -6,9 +6,9 @@ There exists exactly one Pythagorean triplet for which
 a + b + c = 1000.
 
 Find the product abc.
-"""
 
-"""The crux of the problem resides in finding the numbers a, b and c.
+
+The crux of the problem resides in finding the numbers a, b and c.
 With a bit of mathematical reasoning, we can simplify the problem:
             a^2 + b^2 = c^2  =>  c = sqrt(a^2 + b^2)
             a + b + c = 1000  =>  c = 1000 - a - b.
