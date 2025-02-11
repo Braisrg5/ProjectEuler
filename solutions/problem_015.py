@@ -21,8 +21,9 @@ from math import factorial
 
 def paths(n):
     n_fact = factorial(n)
-    return factorial(2*n) // (n_fact*n_fact)
+    return factorial(2 * n) // (n_fact * n_fact)
 
 
-if __name__ == '__main__':
-    print(paths(20))
+if __name__ == "__main__":
+    print(paths(2))  # 6
+    print(paths(20))  # 137846528820, 0.0s

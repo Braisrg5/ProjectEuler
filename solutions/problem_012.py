@@ -37,8 +37,9 @@ def div_triangle_number(D):
         T = n * (n + 1) / 2
         divs = count_divisors(T)
         n += 1
-    return T
+    return int(T)
 
 
 if __name__ == "__main__":
+    print(div_triangle_number(5))  # 28
     print(div_triangle_number(500))  # 76576500, 0.22s

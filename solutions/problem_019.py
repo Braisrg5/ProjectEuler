@@ -46,5 +46,5 @@ def sundays_twentieth_century():
     return sundays
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(sundays_twentieth_century())  # 171, 0.0003s

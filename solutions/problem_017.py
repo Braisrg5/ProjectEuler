@@ -8,7 +8,8 @@ out in words, how many letters would be used?
 NOTE: Do not count spaces or hyphens. For example, 342 (three hundred
 and forty-two) contains 23 letters and 115 (one hundred and fifteen)
 contains 20 letters. The use of "and" when writing out numbers is in
-compliance with british usage."""
+compliance with british usage.
+"""
 
 
 def num_to_letters(n):
@@ -16,12 +17,16 @@ def num_to_letters(n):
     This function is actually never called, but I used it during
     development to make sure that I was counting properly.
     """
-    nums_ref = {'0': '', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
-                '5': 'five', '6': 'six', '7': 'seven', '8': 'eight',
-                '9': 'nine', '10': 'ten', '11': 'eleven', '12': 'twelve',
-                '14': 'fourteen', '18': 'eighteen'}
-    prefixes = {'2': 'twen', '3': 'thir', '4': 'for', '5': 'fif', '6': 'six',
-                '7': 'seven', '8': 'eigh', '9': 'nine'}
+    nums_ref = {
+        '0': '', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
+        '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine',
+        '10': 'ten', '11': 'eleven', '12': 'twelve', '14': 'fourteen',
+        '18': 'eighteen'
+    }
+    prefixes = {
+        '2': 'twen', '3': 'thir', '4': 'for', '5': 'fif', '6': 'six',
+        '7': 'seven', '8': 'eigh', '9': 'nine'
+    }
     str_n = str(n)
     if str_n in nums_ref:
         return nums_ref[str_n]
@@ -67,4 +72,5 @@ def sum_letters(n):
 
 
 if __name__ == "__main__":
+    print(sum_letters(5))  # 19
     print(sum_letters(1000))  # 21124, 0.002s

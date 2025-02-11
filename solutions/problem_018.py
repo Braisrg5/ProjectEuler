@@ -16,14 +16,17 @@ solved by brute force, and requires a clever method! ;o)
 
 
 I originally brute-forced this problem, and reading the thread I got
-spoiled the "clever" method, so Imma do it that way."""
+spoiled the "clever" method, so Imma do it that way.
+"""
 
 
 def load_triangle(path):
     """Loads the triangle from the path and returns it as an array."""
     file = open(path, "r")
-    triangle = [[int(j) for j in i.replace("\n", "").split(" ")]
-                for i in file.readlines()]
+    triangle = [
+        [int(j) for j in i.replace("\n", "").split(" ")]
+        for i in file.readlines()
+    ]
     file.close()
     return triangle
 
@@ -41,5 +44,12 @@ def max_route(triangle):
 
 
 if __name__ == "__main__":
+    small_triangle = [
+        [3],
+        [7, 4],
+        [2, 4, 6],
+        [8, 5, 9, 3]
+    ]
+    print(max_route(small_triangle))  # 23
     triangle = load_triangle("resources/18_triangle.txt")
     print(max_route(triangle))  # 1074, 0.0002s

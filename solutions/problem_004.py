@@ -7,9 +7,7 @@ numbers.
 """
 
 
-def is_palindrome(n):
-    """Checks if a number n is a palindrome"""
-    return n == int(str(n)[::-1])
+from resources.useful_functions import is_palindrome
 
 
 def palindromes():
