@@ -11,4 +11,5 @@ from math import factorial
 
 
 if __name__ == "__main__":
+    print(digit_sum(factorial(10)))  # 27
     print(digit_sum(factorial(100)))  # 648, 0.0s

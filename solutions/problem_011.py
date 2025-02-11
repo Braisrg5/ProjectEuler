@@ -15,8 +15,8 @@ def load_grid(path):
     """Loads the 20x20 grid from path into a numpy array with proper
     format."""
     file = open(path, "r")
-    grid = np.array([[
-        int(j) for j in i.replace("\n", "").split(" ")]
+    grid = np.array([
+        [int(j) for j in i.replace("\n", "").split(" ")]
         for i in file.readlines()
     ])
     file.close()

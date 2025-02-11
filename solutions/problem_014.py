@@ -54,7 +54,7 @@ def longest_chain_v2(bound):
             elif n_it % 2 == 0:
                 n_it = n_it // 2
             else:
-                n_it = 3 * n_it + 1
+                n_it = (3 * n_it + 1) // 2
             length += 1
         nums_len[n] = length
         if length > largest:
@@ -75,9 +75,10 @@ def longest_chain_v3(bound):
                 break
             elif n_it % 2 == 0:
                 n_it = n_it // 2
+                length += 1
             else:
-                n_it = 3 * n_it + 1
-            length += 1
+                n_it = (3 * n_it + 1) // 2
+                length += 2
         lengths.append(length)
         if length > largest:
             largest = length
@@ -86,6 +87,7 @@ def longest_chain_v3(bound):
 
 
 if __name__ == "__main__":
+    print(Collatz_sequence(13))  # 10
     # print(longest_chain(1000000))  # 837799, 16.306s
     # print(longest_chain_v2(1000000))  # 837799, 1.75s
-    print(longest_chain_v3(1000000))  # 836699, 1.16s
+    print(longest_chain_v3(1000000))  # 836699, 0.87s
