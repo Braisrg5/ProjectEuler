@@ -1,6 +1,12 @@
 from math import floor, sqrt, ceil, isqrt
 
 
+def is_pandigital(num):
+    '''Checks if a number is 1 to 9 pandigital.
+    '''
+    return set(num) == set("123456789")
+
+
 def is_palindrome(n):
     """Checks if a number n is a palindrome"""
     return n == int(str(n)[::-1])
@@ -87,20 +93,36 @@ def sum_divisors(n):
     return sum(divisors_set)
 
 
-def sieve_Eratosthenes(n):
+def sieve_Eratosthenes(N):
     """Basic implementation of the sieve of Eratosthenes."""
-    nums = list(range(3, n + 1, 2))
-    nums_dict = {num: True for num in nums}
-    for num in nums_dict:
-        if num * num > n:
-            break
-        if nums_dict[num]:
-            for k in range(num, floor(n / num) + 1, 2):
-                nums_dict[num * k] = False
-    return [2] + [k for k, v in nums_dict.items() if v]
+    sieve = [True] * (N+1)
+    sieve[0] = sieve[1] = False
+    for i in range(2, floor(sqrt(N))+1):
+        if sieve[i]:
+            for j in range(i*i, N+1, i):
+                sieve[j] = False
+    return [i for i in range(2, N+1) if sieve[i]]
 
 
 def digits_odd(n):
     """Returns True if all the digits of a number n are odd."""
     n = str(n)
     return sum([int(i) % 2 for i in n]) == len(n)
+
+
+def is_triangle(t):
+    '''Determines if a number is a triangle number.
+    '''
+    return sqrt(8*t + 1).is_integer()
+
+
+def is_pentagonal(P):
+    """Checks if a number is pentagonal."""
+    n = (1 + sqrt(1 + 24*P))/6
+    return n.is_integer()
+
+
+def is_hexagonal(H):
+    """Checks if a number is hexagonal."""
+    n = (1 + sqrt(1 + 8 * H)) / 4
+    return n.is_integer()
