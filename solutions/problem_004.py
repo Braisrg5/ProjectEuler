@@ -8,6 +8,7 @@ numbers.
 
 
 from resources.useful_functions import is_palindrome
+from time import perf_counter
 
 
 def palindromes():
@@ -18,16 +19,12 @@ def palindromes():
     for i in range(999, 100, -1):
         for j in range(999, i - 1, -1):
             large = i * j
-            if is_palindrome(large) and large > largest:
+            if large > largest and is_palindrome(large):
                 largest = large
     return largest
-    # One-liner alternative solution
-    """return max([
-        i*j for i in range(999, 100, -1)
-        for j in range(999, i-1, -1)
-        if is_palindrome(i*j)
-    ])"""
 
 
 if __name__ == "__main__":
-    print(palindromes())  # 906609, 0.17s
+    start = perf_counter()
+    print(palindromes())  # 906609, 0.07s
+    print(perf_counter() - start)

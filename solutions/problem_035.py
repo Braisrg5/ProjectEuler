@@ -17,7 +17,7 @@ def rotate_number(n):
     """Returns all rotations of the digits of a number n."""
     n = str(n)
     rotations = {int(n[i:] + n[:i]) for i in range(len(n))}
-    return list(rotations)
+    return rotations
 
 
 def circular_primes(bound):
@@ -33,7 +33,7 @@ def circular_primes(bound):
                 num_circular += 1
             elif all(p in primes for p in rotations):
                 num_circular += len(rotations)
-                for p in rotations[1:]:
+                for p in list(rotations)[1:]:
                     primes.remove(p)
         if perf_counter() - start > 2:
             print(prime)
@@ -72,8 +72,8 @@ def circular_primes_v3(bound):
             rotations = rotate_number(prime)
             if len(rotations) == 1:
                 circ_primes.add(prime)
-            elif all(is_prime(p) for p in rotations):
-                circ_primes = circ_primes | set(rotations)
+            elif all(is_prime(p) for p in list(rotations)):
+                circ_primes = circ_primes | rotations
     return len(circ_primes)
 
 
@@ -87,8 +87,8 @@ def circular_primes_v4(bound):
             rotations = rotate_number(prime)
             if len(rotations) == 1:
                 circ_primes.add(prime)
-            elif all(is_prime(p) for p in rotations):
-                circ_primes = circ_primes | set(rotations)
+            elif all(is_prime(p) for p in list(rotations)):
+                circ_primes = circ_primes | rotations
     return len(circ_primes)
 
 
@@ -98,4 +98,4 @@ if __name__ == '__main__':
     # print(circular_primes(1000000))  # 55, 172s
     # print(circular_primes_v2(1000000))  # 55, 1.40s
     # print(circular_primes_v3(1000000))  # 55, 1.23s
-    print(circular_primes_v4(1000000))  # 55, 0.43s
+    print(circular_primes_v4(1000000))  # 55, 0.19s

@@ -1,5 +1,5 @@
 from math import floor, sqrt
-# from time import perf_counter
+from time import perf_counter
 from useful_functions import prime_factors
 from collections import Counter
 
@@ -27,17 +27,9 @@ def sieve_v2(N):
                 nums_dict[num * k] = False
     return [2] + [k for k, v in nums_dict.items() if v]
 
-
-'''if __name__ == "__main__":
-    for i in range(1, 20):
-        N = 10 ** i
-        startv1 = perf_counter()
-        print(N)
-        primes_v1 = sieve_v1(N)
-        print(perf_counter() - startv1)
-        startv2 = perf_counter()
-        primes_v2 = sieve_v2(N)
-        print(perf_counter() - startv2)'''
+start = perf_counter()
+sieve_v1(1000000000)
+print(perf_counter() - start)
 
 
 def transform_factors(n):
