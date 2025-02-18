@@ -36,7 +36,10 @@ Teniendo en cuenta que para cada reemplazo, podemos cambiar X por cualquier
 dígito del 0 al 9, y * por el mismo dígito, podemos ir una por una comprobando
 '''
 from itertools import combinations
+from resources.useful_functions import is_prime, sieve_Eratosthenes
+from collections import Counter
 from math import log10, floor
+from time import perf_counter
 
 
 def bit_strings(digits, subs):
@@ -48,40 +51,84 @@ def bit_strings(digits, subs):
         yield ''.join('*' if i in indices else 'X' for i in range(digits))
 
 
-def replacements(code, xs, digits):
+def replacements(code, xs):
     '''code is a string like 'X*X' or 'XX**X'
     xs is the number of X in the code
     digits is the length of the code
     Yields all possible replacements of 'X' with digits from 0 to 9 each
     and * with digits from 0 to 9
     '''
-    limit, num = 10**digits - 1, 0
-    set_nums = set()
+    limit, num = 10**xs - 1, 0
+    if code[0] == 'X':
+        num = 10**(xs - 1)
+    if code[-1] == 'X':
+        num += 1
     while num < limit:
         if num == 0:
-            str_num = '0' * digits
-        elif num < 10**(digits - 1):
+            str_num = '0' * xs
+        elif num < 10**(xs - 1):
             digs = floor(log10(num)) + 1
-            str_num = '0' * (digits - digs) + str(num)
+            str_num = '0' * (xs - digs) + str(num)
         else:
             str_num = str(num)
-        print(str_num)
 
         i, new_code = 0, ''
         for el in code:
             if el == 'X':
-                new_code += str_num[i]
+                new_code = new_code + str_num[i]
                 i += 1
             else:
-                new_code += el
-        code = new_code
+                new_code = new_code + el
+        yield new_code
+        if code[-1] == 'X':
+            num += 2
 
-        for i in range(10):
-            set_nums.add(int(code.replace('*', str(i))))
-        num += 1
-    return set_nums
+
+def find_prime(x, max_digs):
+    '''Finds the smallest prime with x primes among the ten generated numbers
+    '''
+    # Digits of the number
+    for d in range(2, max_digs+1):
+        # Number of digits to be replaces
+        for subs in range(1, d):
+            # All possible codes for the current digits and replacements
+            for code in bit_strings(d, subs):
+                # If the last digit has to be replaced, we won't have more than
+                # 5 possible primes (the odd numbers)
+                if x <= 5 or code[-1] != '*':
+                    # If the code begins with '*', we exclude 0
+                    end = (1 if code[0] == '*' else 0)
+                    for initial in replacements(code, d - subs):
+                        count = 0
+                        # We substitute from 9 to 0 (or 1) and count the primes
+                        for i in range(9, end-1, -1):
+                            num = int(initial.replace('*', str(i)))
+                            if is_prime(num):
+                                count += 1
+                        # If we found x primes, return the number and the mask
+                        if count == x:
+                            return num, initial
+    # Not enough digits
+    return -1
+
+
+def find_prime_v2(x, limit):
+    primes = sieve_Eratosthenes(limit)[4:]
+    primes_set = set(primes)
+    for prime in primes:
+        str_prime = str(prime)
+        digits = len(str_prime)
+        repeats = Counter(str_prime)
+    return
 
 
 if __name__ == '__main__':
-    print(replacements('X*X', 2, 3))
-    pass
+    start = perf_counter()
+    print(find_prime(5, 6))
+    print(f'Execution time: {perf_counter() - start} seconds')
+    start = perf_counter()
+    print(find_prime_v2(5, 1000000))
+    print(f'Execution time: {perf_counter() - start} seconds')
+    start = perf_counter()
+    print(sieve_Eratosthenes(1000000)[0])
+    print(f'Execution time: {perf_counter() - start} seconds')
