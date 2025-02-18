@@ -15,6 +15,7 @@ If we sum the fifth powers of the digits of 999999, we get
 bigger number cannot have this property.
 After a while, I've further expanded the approach for nth powers.
 """
+global digit_power
 
 
 def calc_bound(n):
@@ -41,13 +42,13 @@ def sum_sum_nth_pows(n):
     their digits.
     """
     bound = calc_bound(n)
-    sum_nth = set()
+    total = 0
     for i in range(10, bound):
         if pow_digit_sum(i, n) == i:
-            sum_nth.add(i)
-    return sum_nth
+            total += i
+    return total
 
 
 if __name__ == "__main__":
     print(sum_sum_nth_pows(4))  # 19316
-    print(sum_sum_nth_pows(5))  # 443839, 0.53s
+    print(sum_sum_nth_pows(5))  # 443839, 0.29s
