@@ -17,7 +17,7 @@ million.
 
 
 def Collatz_sequence(n):
-    """Calculates the length of the collatz sequence for n."""
+    """Calculates the length of the Collatz sequence for n."""
     length = 1
     while n > 1:
         if n % 2 == 0:
@@ -86,8 +86,30 @@ def longest_chain_v3(bound):
     return index, largest
 
 
+def longest_chain_v4(bound):
+    lengths = [0] * bound
+    lengths[1] = 1
+    largest, index = 1, 1
+    for n in range(2, bound):
+        length = 0
+        n_it = n
+        while n_it >= n:
+            if n_it & 1 == 0:
+                n_it >>= 1  # Bitwise for n_it // 2
+                length += 1
+            else:
+                n_it = (3 * n_it + 1) >> 1
+                length += 2
+        length += lengths[n_it]
+        lengths[n] = length
+        if length > largest:
+            largest, index = length, n
+    return index  # , largest
+
+
 if __name__ == "__main__":
     print(Collatz_sequence(13))  # 10
     # print(longest_chain(1000000))  # 837799, 16.306s
     # print(longest_chain_v2(1000000))  # 837799, 1.75s
-    print(longest_chain_v3(1000000))  # 836699, 0.87s
+    # print(longest_chain_v3(1000000))  # 837799, 0.60s
+    print(longest_chain_v4(1000000))  # 837799, 0.40s
