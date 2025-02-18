@@ -85,12 +85,17 @@ def find_divisors(n):
 
 def sum_divisors(n):
     """Sums the proper divisors of a number n."""
-    divisors_set = {1}
-    bound = isqrt(n) + 1
-    for d in range(2, bound):
+    if n <= 1:
+        return 0
+    total = 1
+    bound = isqrt(n)
+    for d in range(2, bound + 1):
         if n % d == 0:
-            divisors_set.update((d, n // d))
-    return sum(divisors_set)
+            total += d
+            pair = n // d
+            if d != pair:
+                total += pair
+    return total
 
 
 def sieve_Eratosthenes(N):
