@@ -8,7 +8,7 @@ exceed four million, find the sum of the even-valued terms.
 """
 
 
-def sum_even_fibonacci(n):
+def sum_even_Fibonacci(n):
     """Sums the even numbers in the Fibonacci sequence up to n."""
     a0, a1 = 1, 1
     s = 0
@@ -20,4 +20,4 @@ def sum_even_fibonacci(n):
 
 
 if __name__ == "__main__":
-    print(sum_even_fibonacci(4000000))  # 4613732, 0.001s
+    print(sum_even_Fibonacci(4000000))  # 4613732, 0.001s
