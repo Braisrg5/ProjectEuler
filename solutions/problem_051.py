@@ -34,6 +34,10 @@ k = 1, ..., n-1, podemos calcular la cantidad total de patrones de reemplazo:
 
 Teniendo en cuenta que para cada reemplazo, podemos cambiar X por cualquier
 dígito del 0 al 9, y * por el mismo dígito, podemos ir una por una comprobando
+
+--------------------------------------------
+
+Intuición para
 '''
 from math import log10, floor
 from itertools import combinations
@@ -218,6 +222,62 @@ def find_prime_v3(x):
     return -1
 
 
+# Optimized version for the case of x = 8
+def find_prime_8():
+    '''Finds the smallest prime which, by replacing part of the number with
+    the same digit, is part of an 8 prime value family
+    '''
+    for prime in primes:
+        str_prime = str(prime)
+        count_digits = Counter(str_prime)
+        if len(count_digits) == 1:
+            continue
+        for digit, count in count_digits.items():
+            num_primes = 0
+            if count < 3 or digit not in '012' or str_prime[-1] == digit:
+                continue
+            elif count == 3:
+                nums = ('0123456789' if str_prime[0] != digit else '123456789')
+                for i in nums:
+                    new_prime = int(str_prime.replace(digit, i))
+                    if new_prime in primes_set:
+                        num_primes += 1
+                if num_primes == 8:
+                    return prime, str_prime.replace(digit, '*')
+            # What all this block basically does is to substitute 3 digits out
+            # of whatever count there is in all possible combinations
+            # 211113 could be masked as 21***3, 2***13, 2*1**3 and 2**1*3
+            # If the digit repeats 5 times, there are even more combinations
+            else:
+                # All possible groups of 3 of the digit to be replaced
+                for mask in bit_strings(count, 3):
+                    # If we are masking the first digit, it can't be 0
+                    nums = ('0123456789' if mask[0] != '*' else '123456789')
+                    # Temporal mask and values for the mask index and primes
+                    prime_mask, num_primes, mask_index = '', 0, 0
+                    for dig in str_prime:
+                        # If the digit in the number is to be replaced
+                        if dig == digit:
+                            # We first check what the mask tells and if the
+                            # value is not '*', we keep the original digit
+                            mask_value = mask[mask_index]
+                            prime_mask += (
+                                mask_value if mask_value == '*' else dig
+                            )
+                            mask_index += 1
+                        # If the digit is not to be replaced, we just keep it
+                        else:
+                            prime_mask += dig
+                    # Now, we are ready to substitute where we are supposed to
+                    for i in nums:
+                        new_prime = int(prime_mask.replace('*', i))
+                        if new_prime in primes_set:
+                            num_primes += 1
+                    if num_primes == 8:
+                        return prime, prime_mask
+    return -1
+
+
 if __name__ == '__main__':
     max_digs = 6
     limit = 10**max_digs  # 6 digits
@@ -227,5 +287,8 @@ if __name__ == '__main__':
     print(find_prime_v3(6))  # (13, '*X')
     print(find_prime_v3(7))  # (56003, 'XX**X')
     # print(find_prime(8, max_digs))  # (121313, '*X*X*X'), 6.9s
-    print(find_prime_v2(8))  # (121313, '*X*X*X'), 0.21s
-    print(find_prime_v3(8))  # 121313, 0.51s, slow but correct answer for x = 5
+    # print(find_prime_v2(8))  # (121313, '*X*X*X'), 0.21s
+    # Slow but correct for x = 5
+    # print(find_prime_v3(8))  # (121313,'*X*X*X'), 0.51s
+    # Optimization for the case x = 8
+    print(find_prime_8())  # (121313, '*2*3*3'), 0.013s
