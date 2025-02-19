@@ -288,7 +288,7 @@ if __name__ == '__main__':
     print(find_prime_v3(7))  # (56003, 'XX**X')
     # print(find_prime(8, max_digs))  # (121313, '*X*X*X'), 6.9s
     # print(find_prime_v2(8))  # (121313, '*X*X*X'), 0.21s
-    # Slow process but correct for x = 5
+    # A bit slower but correct for x = 5
     # print(find_prime_v3(8))  # (121313,'*X*X*X'), 0.51s
     # Optimization for the case x = 8
     print(find_prime_8())  # (121313, '*2*3*3'), 0.013s
