@@ -15,7 +15,6 @@ With a bit of mathematical reasoning, we can simplify the problem:
 So,
             sqrt(a^2 + b^2) = 1000 - a - b
             a^2 + b^2 = (1000 - a - b)^2
-
 and thus,
             a^2 + b^2 = a^2 + b^2 + 2*a*b + 10^6 - 2000*a - 2000*b
 which reduces to:

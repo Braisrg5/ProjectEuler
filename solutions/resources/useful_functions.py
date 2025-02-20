@@ -8,7 +8,8 @@ def is_pandigital(num):
 
 def is_palindrome(n):
     '''Checks if a number n is a palindrome'''
-    return n == int(str(n)[::-1])
+    reversed_n = int(str(n)[::-1])
+    return n == reversed_n
 
 
 def is_prime(n):
@@ -23,14 +24,15 @@ def is_prime(n):
     elif n % 2 == 0 or n % 3 == 0:
         return False
 
-    # We only need to check until the integer square root of n (1*)
+    # Only necessary to check until the integer square root of n (1*)
     end = isqrt(n)
-    # We only need to check the numbers of the form 6*j + 1 and 6*j - 1,
+    # It's enough to check the numbers of the form 6*j + 1 and 6*j - 1,
     # because in mod 6 every other number is not prime (2*)
-    # end+2 to ensure that 6*j+1 is included
+    # end+2 to ensure that 6*j+1 is included in edge cases
     for j in range(6, end + 2, 6):
         if n % (j - 1) == 0 or n % (j + 1) == 0:
             return False
+    # If every test fails, n is a prime number
     return True
 
 
@@ -39,23 +41,30 @@ def prime_factors(n, list_fact=[]):
     The factors are generated recursively, starting with an empty list. Once a
     factor is found, it is appended to the list, the number is divided by it
     and the function rerun '''
-    # We only need to check until the integer square root of n (1*)
+    # Check until the integer square root of n (1*)
     end = isqrt(n)
+    # If n is equal to 1, there are no prime factors
     if n == 1:
         return list_fact
+    # If n is even or divisible by 3, the function is called again
     elif n % 2 == 0:
         return prime_factors(n // 2, list_fact + [2])
     elif n % 3 == 0:
         return prime_factors(n // 3, list_fact + [3])
+    # Same as is_prime, it's enough to check the numbers of the form 6*j + 1
+    # and 6*j - 1 (2*)
+    # end+2 to ensure that 6*j+1 is included in edge cases
     for j in range(6, end + 2, 6):
         p1, p2 = j - 1, j + 1
         if n % p1 == 0:
             return prime_factors(n // p1, list_fact + [p1])
         elif n % p2 == 0:
             return prime_factors(n // p2, list_fact + [p2])
+    # No more factors found, n is a prime number and the list is returned
     return list_fact + [n]
 
 
+# Same as collections.Counter?
 def counts(ls):
     '''Counts the number of times an element appears on a list.'''
     counts = dict()
@@ -66,16 +75,20 @@ def counts(ls):
 
 def digit_sum(n):
     '''Sums the digits in base 10 of a number n.'''
-    return sum([int(i) for i in str(n)])
+    return sum(int(i) for i in str(n))
 
 
+# Could be optimized, similarly to prime_factors
 def find_divisors(n):
     '''Finds the proper divisors of a number n.'''
     if n == 1:
         return []
     divisors = [1]
-    bound = ceil(sqrt(n)) + 1
-    for d in range(2, bound):
+    # Divisors are always in pair, see (1*)
+    # Bound has to be ceil(sqrt(n))
+    bound = ceil(sqrt(n))
+    for d in range(2, bound + 1):
+        # If n / d == d, d is the square root of n
         if n / d == d:
             divisors.append(d)
         elif n % d == 0:
@@ -84,6 +97,7 @@ def find_divisors(n):
     return divisors
 
 
+# Very similar to find_divisors, but we calculate the sum
 def sum_divisors(n):
     '''Sums the proper divisors of a number n.'''
     if n <= 1:
@@ -101,6 +115,7 @@ def sum_divisors(n):
 
 def sieve_Eratosthenes(N):
     '''Basic implementation of the sieve of Eratosthenes.'''
+    # See https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
     sieve = [True] * (N+1)
     sieve[0] = sieve[1] = False
     for i in range(2, floor(sqrt(N))+1):
@@ -113,23 +128,25 @@ def sieve_Eratosthenes(N):
 def digits_odd(n):
     '''Returns True if all the digits of a number n are odd.'''
     n = str(n)
-    return sum([int(i) % 2 for i in n]) == len(n)
+    return sum(int(i) % 2 for i in n) == len(n)
 
 
 def is_triangle(t):
-    '''Determines if a number is a triangle number.
-    '''
+    '''Determines if a number is a triangle number.'''
+    # Formulas are derived in (3*)
     return sqrt(8*t + 1).is_integer()
 
 
 def is_pentagonal(P):
     '''Checks if a number is pentagonal.'''
+    # Formulas are derived in (3*)
     n = (1 + sqrt(1 + 24*P))/6
     return n.is_integer()
 
 
 def is_hexagonal(H):
     '''Checks if a number is hexagonal.'''
+    # Formulas are derived in (3*)
     n = (1 + sqrt(1 + 8 * H)) / 4
     return n.is_integer()
 
@@ -166,6 +183,11 @@ In the column 6, the numbers are divisible by 6
 
 That leaves us with the numbers in the columns 5 and -1, which can be
 calculated as 6*j + 1 and 6*j - 1, where j is an integer.
+
+
+(3*)
+For triangle numbers, the formula is
+T(n) = n*(n+1)/2 => n^2 + n - 2T = 0 => n = [-1 +- sqrt(1 + 8*2T)]/2
 
 
 '''
