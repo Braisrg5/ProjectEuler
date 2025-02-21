@@ -20,6 +20,7 @@ million.
 def Collatz_sequence(n):
     '''Calculates the length of the Collatz sequence for n.'''
     length = 1
+    # This just calculates the sequence until n becomes 1.
     while n > 1:
         if n % 2 == 0:
             n = n // 2
@@ -88,21 +89,28 @@ def longest_chain_v3(bound):
 
 
 def longest_chain_v4(bound):
+    # The lengths list is initialized with 0s and the length of 1 is set to 1.
     lengths = [0] * bound
     lengths[1] = 1
+
+    # The largest chain length and the corresponding number are initialized.
     largest, index = 1, 1
     for n in range(2, bound):
-        length = 0
-        n_it = n
+        length, n_it = 0, n  # Parameters for the loop.
+        # When n_it is smaller than n, the chain length is already stored.
         while n_it >= n:
             if n_it & 1 == 0:
                 n_it >>= 1  # Bitwise for n_it // 2
                 length += 1
             else:
-                n_it = (3 * n_it + 1) >> 1
+                n_it = (3*n_it + 1) >> 1
                 length += 2
+        # We add to the current chain length the length of the stored chain.
         length += lengths[n_it]
+        # And add it to the lengths list.
         lengths[n] = length
+
+        # If the new length is larger than the current, it is updated.
         if length > largest:
             largest, index = length, n
     return index  # , largest

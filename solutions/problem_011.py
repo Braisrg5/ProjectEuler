@@ -1,4 +1,5 @@
-'''In the 20 x 20 grid in the file, four numbers along a diagonal line have
+'''https://projecteuler.net/problem=11
+In the 20 x 20 grid in the file, four numbers along a diagonal line have
 been marked in red. The product of these numbers is
 
             26 x 63 x 78 x 14 = 1788696.
@@ -12,12 +13,11 @@ from functools import reduce
 
 def load_grid(path):
     '''Loads the 20x20 grid from path into a numpy array with proper format.'''
-    file = open(path, 'r')
-    grid = np.array([
-        [int(j) for j in i.replace('\n', '').split(' ')]
-        for i in file.readlines()
-    ])
-    file.close()
+    with open(path, 'r') as file:
+        grid = np.array([
+            [int(j) for j in i.replace('\n', '').split(' ')]
+            for i in file.readlines()
+        ])
     return grid
 
 
@@ -44,8 +44,11 @@ def diagonals_matrix(grid):
     (y, x) = np.shape(grid)
     # Max length and number of diagonals
     nx, ny = min(x, y), x + y - 1
+
     # Matrix of the diagonals in the original grid
     d_grid = np.zeros((ny, nx))
+
+    # For each line in the new matrix
     for i in range(x + y - 1):
         # We take the diagonal
         diag_k = np.diag(grid, k=-y + 1 + i)
@@ -54,6 +57,7 @@ def diagonals_matrix(grid):
             diag_k = np.pad(diag_k, (0, nx - len(diag_k) % nx))
         # We store the diagonal in the matrix
         d_grid[i,] = diag_k
+
     return d_grid
 
 
@@ -62,11 +66,15 @@ def big_prod(n):
     in the 20 x 20 grid. (1*)
     '''
     grid = load_grid('resources/11_grid.txt')
+    # Calculate the biggest horizontal product
     h_big = horizontal(grid, n)
+
     # To find the vertical product, we transpose the matrix
     v_big = horizontal(grid.transpose(), n)
+
     # The diagonals_matrix function finds a matrix where each row is a diagonal
     diag_neg = horizontal(diagonals_matrix(grid), n)
+
     # For the other diagonal, we flip the matrix first
     diag_pos = horizontal(diagonals_matrix(np.fliplr(grid)), n)
     return max(h_big, v_big, diag_neg, diag_pos)

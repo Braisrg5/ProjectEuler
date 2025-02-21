@@ -12,9 +12,8 @@ from functools import reduce
 def load_number(path):
     '''Loads the 1000-digit number from path and returns it as a
     string.'''
-    file = open(path, 'r')
-    num = ''.join([i.replace('\n', '') for i in file.readlines()])
-    file.close()
+    with open(path, 'r') as file:
+        num = ''.join([i.replace('\n', '') for i in file.readlines()])
     return num
 
 

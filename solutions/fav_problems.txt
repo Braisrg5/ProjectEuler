@@ -1,3 +1,6 @@
 Some of my fave problems/functions to solve have been:
 
 -Problem 3 and the prime_factors function
+-Problem 7 and the sieve of Eratosthenes
+-Problem 8 and specially problem 11
+-Problem 14

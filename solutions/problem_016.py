@@ -9,4 +9,5 @@ from resources.useful_functions import digit_sum
 
 if __name__ == '__main__':
     print(digit_sum(2**15))  # 26
+    # Computers are strong
     print(digit_sum(2**1000))  # 1366, 0.0s
