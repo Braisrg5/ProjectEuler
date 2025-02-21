@@ -1,4 +1,5 @@
-"""Starting with the number 1 and moving to the right in a clockwise
+'''https://projecteuler.net/problem=28
+Starting with the number 1 and moving to the right in a clockwise
 direction a 5 by 5 spiral is formed as follows:
                 21 22 23 24 25
                 20  7  8  9 10
@@ -28,13 +29,13 @@ And we stop when the number is n x n.
 
 In the actual program, I implement two counters and calculate the
 number of steps previously.
-"""
+'''
 
 
 def sum_diags(n):
-    """Finds the sum of the diagonals of a square matrix of size
+    '''Finds the sum of the diagonals of a square matrix of size
     n x n constructed by the previously described method.
-    """
+    '''
     s, k = 1, 1
     for i in range(2, n+1, 2):
         for j in range(4):
@@ -43,6 +44,6 @@ def sum_diags(n):
     return s
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(sum_diags(5))  # 101
     print(sum_diags(1001))  # 669171001, 0.0004s

@@ -1,4 +1,5 @@
-"""
+'''https://projecteuler.net/problem=43
+
 The number, 1406357289, is a 0 to 9 pandigital number because it is made up of
 each of the digits 0 to 9 in some order, but it also has a rather interesting
 sub-string divisibility property.
@@ -20,17 +21,17 @@ Lo que creo que será más fácil será primero hacerme una lista con todos los
 pandigitales de 0 a 3 que son divisibles entre 17, 13, 11, 7, 5, 3 y 2.
 Después, empezar con los de 17 y recorrerme la lista de los de 13, mirando que
 se cumpla la propiedad, y así sucesivamente.
-"""
+'''
 global dict_3
 global list_property
 global primes
 
 
 def pandigitals_l3(n):
-    """
+    '''
     Generates all pandigital numbers of length 3 that are divisible by n,
     including those starting with 0.
-    """
+    '''
     pd = []
     # Only numbers less than 4 digits, we start at n and the step`is also
     # n to consider all multiples of the prime`
@@ -44,8 +45,8 @@ def pandigitals_l3(n):
             # If the number has 2 digits, first and second digit must be
             # different and second digit mustn't be 0
             # (020 and 022 aren't valid)
-            if str_i[0] != str_i[1] and str_i[1] != "0":
-                pd.append("0" + str_i)
+            if str_i[0] != str_i[1] and str_i[1] != '0':
+                pd.append('0' + str_i)
         else:
             # If the number has 3 digits, all digits must be different
             if (
@@ -57,13 +58,13 @@ def pandigitals_l3(n):
 
 
 def recurring_property(num, i):
-    """Finds recursively the pandigital numbers that satisfy the property.
+    '''Finds recursively the pandigital numbers that satisfy the property.
     primes = [2, 3, 5, 7, 11, 13]
     We start with a number that is divisible by 17, go through the pandigitals
     of three digits that are divisible by 13 checking if the property is
     satisfied. If it is, we do the same thing with 11, and so on. This is done
     recursively to simplify the code (the alternative was to make an if tower).
-    """
+    '''
     if i >= 0:
         # i is the index of the prime number we are checking,
         # so i = 5 => p = 13; i = 4 => p = 11, and so on.
@@ -73,11 +74,11 @@ def recurring_property(num, i):
     else:
         # The property has been satisfied! But there is a digit missing, we
         # have to add it and then append the number to the list.
-        missing = set("0123456789") - set(num)
+        missing = set('0123456789') - set(num)
         list_property.append(int(missing.pop() + num))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     dict_3 = {i: pandigitals_l3(i) for i in [17, 13, 11, 7, 5, 3, 2]}
     primes = [2, 3, 5, 7, 11, 13]
     list_property = []

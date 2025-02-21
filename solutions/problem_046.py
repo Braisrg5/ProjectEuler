@@ -1,4 +1,5 @@
-'''It was proposed by Christian Goldbach that every odd composite number can
+'''https://projecteuler.net/problem=46
+It was proposed by Christian Goldbach that every odd composite number can
 be written as the sum of a prime and twice a square.
                 9=7+2*12
                 15=7+2*22
@@ -51,5 +52,5 @@ def missing_odd_composite(N):
     return list(set(composite)-set(ptwicesq))[0]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(missing_odd_composite(6000))  # 5777, 0.004s

@@ -1,4 +1,5 @@
-"""145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+'''https://projecteuler.net/problem=34
+145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
 
 Find the sum of all numbers which are equal to the sum of the factorial
 of their digits.
@@ -29,7 +30,7 @@ n is the number of zeros, of the form:
                 (n, 0, ..., x, ...)
 That way covering every case where any number of 0s are before or after
 the first non-zero digit.
-"""
+'''
 
 
 from math import factorial, floor, log10
@@ -37,16 +38,16 @@ from itertools import combinations_with_replacement as combinations_wr
 
 
 def is_sum_digit_factorial(n, factorials=[factorial(i) for i in range(10)]):
-    """Checks if a number is the sum of the factorials of its
+    '''Checks if a number is the sum of the factorials of its
     digits.
-    """
+    '''
     return sum([factorials[int(i)] for i in str(n)]) == n
 
 
 def sum_sum_factorial(bound):
-    """Finds the sum of the numbers that are the sum of the factorials
+    '''Finds the sum of the numbers that are the sum of the factorials
     of their digits.
-    """
+    '''
     factorials = [factorial(i) for i in range(10)]
     s = 0
     for i in range(10, bound):
@@ -56,9 +57,9 @@ def sum_sum_factorial(bound):
 
 
 def transform(combs):
-    """Transforms the combinations to add the cases explained at the
+    '''Transforms the combinations to add the cases explained at the
     beginning.
-    """
+    '''
     combs_copy = combs.copy()
     for i in range(len(combs)):
         c = list(combs[i])
@@ -74,9 +75,9 @@ def transform(combs):
 
 
 def sum_sum_factorial_v2(bound):
-    """Finds the sum of the numbers that are the sum of the factorials
+    '''Finds the sum of the numbers that are the sum of the factorials
     of their digits.
-    """
+    '''
     factorials = [factorial(i) for i in range(1, 10)]
     digits_lim = floor(log10(bound)) + 1
     all_combinations = list(combinations_wr([0] + factorials, digits_lim))
@@ -89,7 +90,7 @@ def sum_sum_factorial_v2(bound):
     return sum(sum_factorial)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(is_sum_digit_factorial(145))  # True
     # print(sum_sum_factorial(2540160))  # 40730, 3.17s
     print(sum_sum_factorial_v2(2540160))  # 40730, 0.06s

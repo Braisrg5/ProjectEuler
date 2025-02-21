@@ -1,4 +1,5 @@
-'''Take the number 192 and multiply it by each of 1, 2, and 3:
+'''https://projecteuler.net/problem=38
+Take the number 192 and multiply it by each of 1, 2, and 3:
 
     192 * 1 = 192
     192 * 2 = 384
@@ -60,7 +61,7 @@ encuentre.
 def is_pandigital(num):
     '''Checks if a number is 1 to 9 pandigital.
     '''
-    return set(num) == set("123456789")
+    return set(num) == set('123456789')
 
 
 def pandigital_multiples_2():
@@ -80,9 +81,9 @@ def pandigital_multiples_2():
 
 # No need to check for n = 3, for x = 329 the number is less than 918273645
 '''def pandigital_multiples_3():
-    """Finds all 1 to 9 pandigital 9-digit number that can be formed as
+    '''Finds all 1 to 9 pandigital 9-digit number that can be formed as
     the concatenated products of an integer with n = 3.
-    """
+    '''
     pandigital_multiples = {}
     for x in range(123, 330):
         concatenate = str(x) + str(2*x) + str(3*x)

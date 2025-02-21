@@ -1,4 +1,5 @@
-"""Euler discovered the remarkable quadratic formula:
+'''https://projecteuler.net/problem=27
+Euler discovered the remarkable quadratic formula:
                 n^2 + n + 41
 It turns out that the formula will produce 40 primes for the
 consecutive integer values 0 <= n <= 39. However, when n = 40, 40^2 +
@@ -31,16 +32,16 @@ find p and p' such that:
                 2 < p < 997 (biggest prime lesser than 1000)
                 2 < p' < 1001 + p
 And then calculate a and b.
-"""
+'''
 
 
 from resources.useful_functions import is_prime
 
 
 def consecutive_primes(a, b, bound=83):
-    """Finds the number of consecutive primes that produces the formula
+    '''Finds the number of consecutive primes that produces the formula
     n^2 + an + b, starting with n = 0.
-    """
+    '''
     for n in range(0, bound):
         val = n*n + a*n + b
         if val <= 0:
@@ -52,10 +53,10 @@ def consecutive_primes(a, b, bound=83):
 
 
 def max_cons_primes(bound):
-    """Finds the pair (a, b) that produces the maximum number of primes
+    '''Finds the pair (a, b) that produces the maximum number of primes
     in the formula n^2 + an + b, starting with n = 0, where
     |a| < bound and |b| <= bound.
-    """
+    '''
     list_p = {i for i in range(2, bound) if is_prime(i)}
     list_p_prime = {i for i in range(2, 2*(bound + 1)) if is_prime(i)}
     d_primes = dict()
@@ -68,7 +69,7 @@ def max_cons_primes(bound):
     return max(d_primes, key=d_primes.get)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(consecutive_primes(1, 41))  # 40
     print(consecutive_primes(-79, 1601, 100))  # 80
     print(max_cons_primes(1000))  # (-61, 971), 0.18s

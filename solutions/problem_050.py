@@ -1,4 +1,5 @@
-'''The prime 41, can be written as the sum of six consecutive primes:
+'''https://projecteuler.net/problem=50
+The prime 41, can be written as the sum of six consecutive primes:
 
             41 = 2 + 3 + 5 + 7 + 11 + 13
 
@@ -96,7 +97,7 @@ def consecutive_prime_sum_v2(N):
     return max_prime
 
 
-"""def consecutive_prime_sum_v3(N):
+'''def consecutive_prime_sum_v3(N):
     '''Finds the longest sum of consecutive primes that adds to a prime below
     N. Uses prefix sums to optimize subsequence sum calculations. The
     optimization is more noticeable for bigger values of N.'''
@@ -129,10 +130,10 @@ def consecutive_prime_sum_v2(N):
                 elif length_k > max_length and suma in primes_set:
                     max_length = j - i + 1
                     max_prime = suma
-    return max_prime"""
+    return max_prime'''
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(consecutive_prime_sum_v2(100))  # 41
     print(consecutive_prime_sum_v2(1000))  # 953
     # print(consecutive_prime_sum(1000000))  # 997651, 0.145 seconds

@@ -1,0 +1,3 @@
+Some of my fave problems/functions to solve have been:
+
+-Problem 3 and the prime_factors function

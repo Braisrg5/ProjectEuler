@@ -1,4 +1,5 @@
-'''We shall say that an n-digit number is pandigital if it makes use of all
+'''https://projecteuler.net/problem=41
+We shall say that an n-digit number is pandigital if it makes use of all
 the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital
 and is also prime.
 
@@ -23,10 +24,10 @@ def largest_pandigital_prime():
         for num in pandigital:
             if is_prime(num):
                 return num
-        print("No primes found for n = ", n)
+        print('No primes found for n = ', n)
     # If no prime is found for any n, return -1.
     return -1
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(largest_pandigital_prime())  # 7652413, 0.23s

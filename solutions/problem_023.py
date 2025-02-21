@@ -1,4 +1,5 @@
-"""A perfect number is a number for which the sum of its proper divisors is
+'''https://projecteuler.net/problem=23
+A perfect number is a number for which the sum of its proper divisors is
 exactly equal to the number. For example, the sum of the proper divisors of 28
 would be 1 + 2 + 4 + 7 = 28, which means that 28 is a perfect number.
 
@@ -15,18 +16,18 @@ less than this limit.
 
 Find the sum of all the positive integers which cannot be written as the sum
 of two abundant numbers.
-"""
+'''
 from itertools import combinations_with_replacement as combinations_wr
 from resources.useful_functions import sum_divisors
 
 
 def is_abundant(n):
-    """Checks if n is an abundant number."""
+    '''Checks if n is an abundant number.'''
     return n > 1 and sum_divisors(n) > n
 
 
 def is_sum_abundants(n, abundants):
-    """Checks if n is a sum of two abundant numbers."""
+    '''Checks if n is a sum of two abundant numbers.'''
     half_n = n // 2
     for num in abundants:
         if num > half_n:
@@ -37,9 +38,9 @@ def is_sum_abundants(n, abundants):
 
 
 def not_sum_abundants(n):
-    """Generates all the numbers that are not the sum of two abundant
+    '''Generates all the numbers that are not the sum of two abundant
     numbers and that are less than n.
-    """
+    '''
     abundants = [i for i in range(1, n) if is_abundant(i)]
     sum_abundants = [n+m for (n, m) in combinations_wr(abundants, 2)]
     for i in range(1, n):
@@ -49,9 +50,9 @@ def not_sum_abundants(n):
 
 
 def not_sum_abundants_v2(n):
-    """Generates the sum of all the numbers that are not the sum of two
+    '''Generates the sum of all the numbers that are not the sum of two
     abundant numbers and that are less than n.
-    """
+    '''
     abundants = {i for i in range(1, n+1) if is_abundant(i)}
     not_sums = set(x for x in range(1, n+1))
     for n in abundants:
@@ -61,14 +62,14 @@ def not_sum_abundants_v2(n):
 
 
 def not_sum_abundants_v3(n):
-    """Generates the sum of all the numbers that are not the sum of two
+    '''Generates the sum of all the numbers that are not the sum of two
     abundant numbers and that are less than n.
-    """
+    '''
     abundants = {i for i in range(1, n+1) if is_abundant(i)}
     return sum(i for i in range(1, n+1) if not is_sum_abundants(i, abundants))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # print(sum(not_sum_abundants()))  # 4179871, 647s
     # print(not_sum_abundants_v2(28123))  # 4179871, 2.5s
     print(not_sum_abundants_v3(28123))  # 4179871, 0.30s

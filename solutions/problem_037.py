@@ -1,4 +1,5 @@
-"""The number 3797 has an interesting property. Being prime itself, it
+'''https://projecteuler.net/problem=37
+The number 3797 has an interesting property. Being prime itself, it
 is possible to continuously remove digits from left to right, and
 remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work
 from right to left: 3797, 379, 37, and 3.
@@ -7,7 +8,7 @@ Find the sum of the only eleven primes that are both truncatable from
 left to right and right to left.
 
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
-"""
+'''
 
 
 from resources.useful_functions import is_prime, digits_odd
@@ -77,7 +78,7 @@ def sum_truncatable_primes_v2(bound):
     return -1
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(check_truncatable(3797))  # True
     # print(sum_truncatable_primes(800000))  # 748317, 1.24s
     print(sum_truncatable_primes_v2(800000))  # 748317, 1.16s

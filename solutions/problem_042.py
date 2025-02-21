@@ -1,4 +1,5 @@
-'''
+'''https://projecteuler.net/problem=42
+
 The nth term of the sequence of triangle numbers is given by, tn = ½n(n+1); so
 the first ten triangle numbers are:
 
@@ -26,7 +27,7 @@ def load_words(path):
     f = open(path, 'r')
     text = f.read()
     f.close()
-    return [word.replace('"', '') for word in text.split(',')]
+    return [word.replace(''', '') for word in text.split(',')]
 
 
 def transform_to_num(words):

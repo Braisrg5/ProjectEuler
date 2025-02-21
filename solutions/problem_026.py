@@ -1,4 +1,5 @@
-"""A unit fraction contains 1 in the numerator. The decimal
+'''https://projecteuler.net/problem=26
+A unit fraction contains 1 in the numerator. The decimal
 representation of the unit fractions with denominators 2 to 10 are
 given:
                 1/2 = 0.5
@@ -15,14 +16,14 @@ can be seen that 1/7 has a 6-digit recurring cycle.
 
 Find the value of d < 1000 for which 1/d contains the longest recurring
 cycle in its decimal fraction part.
-"""
+'''
 
 
 from resources.useful_functions import is_prime
 
 
 def recurring_cycle(d):
-    """Finds the length of the repitend of 1/d"""
+    '''Finds the length of the repitend of 1/d'''
     remainders = [1]
     D = 10
     for i in range(d):
@@ -40,7 +41,7 @@ def recurring_cycle(d):
 
 
 def longest_recurring_cycle(bound):
-    """Finds the largest repitend of 1/d where d < bound."""
+    '''Finds the largest repitend of 1/d where d < bound.'''
     primes = {i for i in range(2, bound) if is_prime(i)}
     d_cycle = dict()
     for d in primes:
@@ -48,6 +49,6 @@ def longest_recurring_cycle(bound):
     return max(d_cycle, key=d_cycle.get)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(longest_recurring_cycle(11))  # 7
     print(longest_recurring_cycle(1000))  # 983, 0.12s

@@ -1,4 +1,5 @@
-'''The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
+'''https://projecteuler.net/problem=48
+The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
 
 Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
 
@@ -33,6 +34,6 @@ def calc_sum_last_ten_digits(N, builtin=False):
     return series
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     MOD = 10**10
     print(calc_sum_last_ten_digits(1000))  # 9876543210, 0.04s

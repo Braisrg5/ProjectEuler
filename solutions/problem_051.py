@@ -1,4 +1,5 @@
-'''By replacing the 1^st digit of the 2-digit number *3, it turns out that six
+'''https://projecteuler.net/problem=51
+By replacing the 1^st digit of the 2-digit number *3, it turns out that six
 of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
 
 By replacing the 3^rd and 4^th digits of 56**3 with the same digit, this

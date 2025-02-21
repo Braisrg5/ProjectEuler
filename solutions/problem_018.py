@@ -1,4 +1,5 @@
-"""By starting at the top of the triangle below and moving to adjacent
+'''https://projecteuler.net/problem=18
+By starting at the top of the triangle below and moving to adjacent
 numbers on the row below, the maximum total from top to bottom is 23.
                3
               7 4
@@ -16,15 +17,15 @@ solved by brute force, and requires a clever method! ;o)
 
 
 I originally brute-forced this problem, and reading the thread I got
-spoiled the "clever" method, so Imma do it that way.
-"""
+spoiled the 'clever' method, so Imma do it that way.
+'''
 
 
 def load_triangle(path):
-    """Loads the triangle from the path and returns it as an array."""
-    file = open(path, "r")
+    '''Loads the triangle from the path and returns it as an array.'''
+    file = open(path, 'r')
     triangle = [
-        [int(j) for j in i.replace("\n", "").split(" ")]
+        [int(j) for j in i.replace('\n', '').split(' ')]
         for i in file.readlines()
     ]
     file.close()
@@ -32,7 +33,7 @@ def load_triangle(path):
 
 
 def max_route(triangle):
-    """Finds the maximum sum top to bottom in the triangle."""
+    '''Finds the maximum sum top to bottom in the triangle.'''
     n = len(triangle)
     accumulated = triangle[n-1]
     for k in range(n-2, -1, -1):
@@ -43,7 +44,7 @@ def max_route(triangle):
     return accumulated[0]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     small_triangle = [
         [3],
         [7, 4],
@@ -51,5 +52,5 @@ if __name__ == "__main__":
         [8, 5, 9, 3]
     ]
     print(max_route(small_triangle))  # 23
-    triangle = load_triangle("resources/18_triangle.txt")
+    triangle = load_triangle('resources/18_triangle.txt')
     print(max_route(triangle))  # 1074, 0.0002s

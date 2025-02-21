@@ -1,4 +1,5 @@
-"""If the numbers 1 to 5 are written out in words: one, two, three,
+'''https://projecteuler.net/problem=17
+If the numbers 1 to 5 are written out in words: one, two, three,
 four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in
 total.
 
@@ -7,16 +8,16 @@ out in words, how many letters would be used?
 
 NOTE: Do not count spaces or hyphens. For example, 342 (three hundred
 and forty-two) contains 23 letters and 115 (one hundred and fifteen)
-contains 20 letters. The use of "and" when writing out numbers is in
+contains 20 letters. The use of 'and' when writing out numbers is in
 compliance with british usage.
-"""
+'''
 
 
 def num_to_letters(n):
-    """Writes a number n out in British English.
+    '''Writes a number n out in British English.
     This function is actually never called, but I used it during
     development to make sure that I was counting properly.
-    """
+    '''
     nums_ref = {
         '0': '', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
         '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine',
@@ -31,22 +32,22 @@ def num_to_letters(n):
     if str_n in nums_ref:
         return nums_ref[str_n]
     elif 13 <= n <= 19:
-        return prefixes[str_n[1]] + "teen"
+        return prefixes[str_n[1]] + 'teen'
     elif 20 <= n <= 99:
-        return prefixes[str_n[0]] + "ty " + nums_ref[str_n[1]]
+        return prefixes[str_n[0]] + 'ty ' + nums_ref[str_n[1]]
     elif n == 1000:
-        return "one thousand"
+        return 'one thousand'
     elif n % 100 == 0:
-        return nums_ref[str_n[0]] + " hundred"
+        return nums_ref[str_n[0]] + ' hundred'
     else:
-        return (nums_ref[str_n[0]] + " hundred " + "and "
+        return (nums_ref[str_n[0]] + ' hundred ' + 'and '
                 + num_to_letters(int(str_n[1:])))
 
 
 def num_to_letter_count(n):
-    """Counts the number of letters in a number n written in British
+    '''Counts the number of letters in a number n written in British
     English.
-    """
+    '''
     nums_ref = {'0': 0, '1': 3, '2': 3, '3': 5, '4': 4, '5': 4, '6': 3,
                 '7': 5, '8': 5, '9': 4, '10': 3, '11': 6, '12': 6, '14': 8,
                 '18': 8}
@@ -71,6 +72,6 @@ def sum_letters(n):
     return sum([num_to_letter_count(i) for i in range(1, n + 1)])
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(sum_letters(5))  # 19
     print(sum_letters(1000))  # 21124, 0.002s

@@ -1,4 +1,5 @@
-"""The following iterative sequence is defined for the set of
+'''https://projecteuler.net/problem=14
+The following iterative sequence is defined for the set of
 positive integers:
                 n -> n/2 (n is even)
                 n -> 3n + 1 (n is odd)
@@ -13,11 +14,11 @@ Which starting number, under one million, produces the longest chain?
 
 NOTE: Once the chain starts the terms are allowed to go above one
 million.
-"""
+'''
 
 
 def Collatz_sequence(n):
-    """Calculates the length of the Collatz sequence for n."""
+    '''Calculates the length of the Collatz sequence for n.'''
     length = 1
     while n > 1:
         if n % 2 == 0:
@@ -29,9 +30,9 @@ def Collatz_sequence(n):
 
 
 def longest_chain(bound):
-    """Calculates the number that produces the longest chain with the
+    '''Calculates the number that produces the longest chain with the
     Collatz function between those smaller than the bound.
-    """
+    '''
     num, longest = 1, 1
     for n in range(1, bound):
         length = Collatz_sequence(n)
@@ -107,7 +108,7 @@ def longest_chain_v4(bound):
     return index  # , largest
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(Collatz_sequence(13))  # 10
     # print(longest_chain(1000000))  # 837799, 16.306s
     # print(longest_chain_v2(1000000))  # 837799, 1.75s

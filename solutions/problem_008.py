@@ -1,4 +1,5 @@
-'''The four adjacent digits in the 1000-digit number in the file that
+'''https://projecteuler.net/problem=8
+The four adjacent digits in the 1000-digit number in the file that
 have the greatest product are 9 x 9 x 8 x 9 = 5832.
 
 Find the thirteen adjacent digits in the 1000-digit number in
@@ -23,6 +24,8 @@ def prod_adj_dig(n):
     '''
     num = load_number('resources/8_big_number.txt')
     digits = len(num)
+    # The total number of products is the length of the number minus the amount
+    # of digits we want to multiply plus one (1*)
     totalProds = digits - n + 1
     biggest = 1
     for i in range(totalProds):
@@ -37,3 +40,18 @@ def prod_adj_dig(n):
 if __name__ == '__main__':
     print(prod_adj_dig(4))  # 5832
     print(prod_adj_dig(13))  # 23514624000, 0.003s
+
+
+'''
+#-------#
+# Notes #
+#-------#
+
+(1*)
+For example, the number 1234567890 has 10 digits, and all of the possible 4
+adjacent digits would be:
+
+    1234, 2345, 3456, 4567, 5678, 6789, 7890
+
+Which is precisely 10 - 4 + 1 = 7 possible products.
+'''

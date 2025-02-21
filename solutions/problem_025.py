@@ -1,4 +1,5 @@
-"""The Fibonacci sequence is defined by the recurrence relation:
+'''https://projecteuler.net/problem=25
+The Fibonacci sequence is defined by the recurrence relation:
                 Fn = Fn-1 + Fn-2, where F1 = 1 and F2 = 1.
 Hence the first 12 terms will be:
                 F1 = 1
@@ -17,15 +18,15 @@ The 12th term, F12, is the first term to contain three digits.
 
 What is the index of the first term in the Fibonacci sequence to
 contain 1000 digits?
-"""
+'''
 
 
 from math import log10, ceil
 
 
 def fibonacci_digits(d):
-    """Finds the index of the first term in the Fibonacci sequence to
-    contain d digits."""
+    '''Finds the index of the first term in the Fibonacci sequence to
+    contain d digits.'''
     a0, a1 = 1, 1
     c = 2
     digs = ceil(log10(a1))
@@ -36,6 +37,6 @@ def fibonacci_digits(d):
     return c
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(fibonacci_digits(3))  # 12
     print(fibonacci_digits(1000))  # 4782, 0.002s

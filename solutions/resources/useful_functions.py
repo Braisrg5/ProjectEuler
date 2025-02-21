@@ -168,6 +168,7 @@ def is_hexagonal(H):
 #-------#
 # Notes #
 #-------#
+
 (1*)
 For any n, its divisors are always in pairs: if d is a divisor of n,
 then so is D = n//d.

@@ -1,4 +1,5 @@
-'''The arithmetic sequence, 1487, 4817, 8147, which each of the terms increases
+'''https://projecteuler.net/problem=49
+The arithmetic sequence, 1487, 4817, 8147, which each of the terms increases
 by 3300, is unusual in two ways: (i) each of the three terms are prime, and,
 (ii) each of the 4-digit numbers are permutations of one another.
 
