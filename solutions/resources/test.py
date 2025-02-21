@@ -27,9 +27,9 @@ def sieve_v2(N):
                 nums_dict[num * k] = False
     return [2] + [k for k, v in nums_dict.items() if v]
 
-start = perf_counter()
-sieve_v1(1000000000)
-print(perf_counter() - start)
+# start = perf_counter()
+# sieve_v1(1000000000)
+# print(perf_counter() - start)
 
 
 def transform_factors(n):
@@ -40,8 +40,40 @@ def transform_factors(n):
     return [fact ** count for fact, count in fact_count.items()]
 
 
-'''for i in range(20, 100000000):
-    factors = transform_factors(i)
-    if len(factors) - len(set(factors)) != 0:
+# for i in range(20, 100000000):
+#     factors = transform_factors(i)
+#     if len(factors) - len(set(factors)) != 0:
+#         print("HEY")
+
+def is_pentagonal(P):
+    '''Checks if a number is pentagonal.'''
+    # Formulas are derived in (3*)
+    n = (1 + sqrt(1 + 24*P))/6
+    return n.is_integer()
+
+
+def is_pentagonal_v2(P):
+    return sqrt(1 + 24*P) % 6 == 5
+
+
+def is_hexagonal(H):
+    '''Checks if a number is hexagonal.'''
+    # Formulas are derived in (3*)
+    n = (1 + sqrt(1 + 8*H))/4
+    return n.is_integer()
+
+
+def is_hexagonal_v2(H):
+    return sqrt(1 + 8*H) % 4 == 3
+
+
+start = perf_counter()
+MAX = 10000000
+for i in range(1, MAX):
+    if is_hexagonal_v2(i) != is_hexagonal(i):
         print("HEY")
-'''
+
+for i in range(1, MAX):
+    if is_pentagonal_v2(i) != is_pentagonal(i):
+        print("HEY")
+print(perf_counter() - start)

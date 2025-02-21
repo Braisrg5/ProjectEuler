@@ -1,22 +1,19 @@
-"""In the 20 x 20 grid in the file, four numbers along a diagonal line
-have been marked in red. The product of these numbers is
+'''In the 20 x 20 grid in the file, four numbers along a diagonal line have
+been marked in red. The product of these numbers is
 26 x 63 x 78 x 14 = 1788696.
 
-What is the greatest product of four adjacent numbers in the same
-direction (up, down, left, right, or diagonally) in the 20 x 20 grid in
-11_grid.txt?
-"""
-
+What is the greatest product of four adjacent numbers in the same direction
+(up, down, left, right, or diagonally) in the 20 x 20 grid in 11_grid.txt?
+'''
 import numpy as np
 from functools import reduce
 
 
 def load_grid(path):
-    """Loads the 20x20 grid from path into a numpy array with proper
-    format."""
-    file = open(path, "r")
+    '''Loads the 20x20 grid from path into a numpy array with proper format.'''
+    file = open(path, 'r')
     grid = np.array([
-        [int(j) for j in i.replace("\n", "").split(" ")]
+        [int(j) for j in i.replace('\n', '').split(' ')]
         for i in file.readlines()
     ])
     file.close()
@@ -24,10 +21,10 @@ def load_grid(path):
 
 
 def horizontal(grid, n):
-    """Given a numpy grid, returns the biggest product of n adjacent
-    numbers in the horizontal direction (i.e. from left to right).
-    """
+    '''Given a numpy grid, returns the biggest product of n adjacent numbers
+    in the horizontal direction (i.e. from left to right).'''
     (y, x) = np.shape(grid)
+    # Total products for a single line
     totalProds = x - n + 1
     biggest = 0
     for i in range(y):
@@ -40,9 +37,8 @@ def horizontal(grid, n):
 
 
 def diagonals_matrix(grid):
-    """Returns an array which consists of the diagonals of a given
-    grid, starting at the bottom left and ending at the top right.
-    """
+    '''Returns an array which consists of the diagonals of a given grid,
+    starting at the bottom left and ending at the top right.'''
     (y, x) = np.shape(grid)
     nx, ny = min(x, y), x + y - 1
     d_grid = np.zeros((ny, nx))
@@ -55,10 +51,10 @@ def diagonals_matrix(grid):
 
 
 def big_prod(n):
-    """Returns the greatest product of n adjacent numbers in every
+    '''Returns the greatest product of n adjacent numbers in every
     direction in the 20 x 20 grid.
-    """
-    grid = load_grid("resources/11_grid.txt")
+    '''
+    grid = load_grid('resources/11_grid.txt')
     h_big = horizontal(grid, n)
     # To find the vertical product, we transpose the matrix
     v_big = horizontal(grid.transpose(), n)
@@ -69,5 +65,5 @@ def big_prod(n):
     return max(h_big, v_big, diag_neg, diag_pos)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(big_prod(4))  # 70600674, 0.006s

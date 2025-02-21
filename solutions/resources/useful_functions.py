@@ -137,18 +137,31 @@ def is_triangle(t):
     return sqrt(8*t + 1).is_integer()
 
 
+# def is_pentagonal_old(P):
+#     '''Checks if a number is pentagonal.'''
+#     # Formulas are derived in (3*)
+#     n = (1 + sqrt(1 + 24*P))/6
+#     return n.is_integer()
+
+
+# Slightly faster
 def is_pentagonal(P):
     '''Checks if a number is pentagonal.'''
-    # Formulas are derived in (3*)
-    n = (1 + sqrt(1 + 24*P))/6
-    return n.is_integer()
+    # Formulas are derived in (3**)
+    return sqrt(1 + 24*P) % 6 == 5
+
+
+# def is_hexagonal_old(H):
+#     '''Checks if a number is hexagonal.'''
+#     # Formulas are derived in (3*)
+#     n = (1 + sqrt(1 + 8*H))/4
+#     return n.is_integer()
 
 
 def is_hexagonal(H):
     '''Checks if a number is hexagonal.'''
-    # Formulas are derived in (3*)
-    n = (1 + sqrt(1 + 8 * H)) / 4
-    return n.is_integer()
+    # Formulas are derived in (3**)
+    return sqrt(1 + 8*H) % 4 == 3
 
 
 '''
@@ -186,8 +199,34 @@ calculated as 6*j + 1 and 6*j - 1, where j is an integer.
 
 
 (3*)
-For triangle numbers, the formula is
-T(n) = n*(n+1)/2 => n^2 + n - 2T = 0 => n = [-1 +- sqrt(1 + 8*2T)]/2
+For triangle numbers, the formula is:
+T(n) = n*(n+1)/2 => n^2 + n - 2T = 0 => n = [-1 +- sqrt(1 + 8T)]/2
+n has to be greater than 0 so we only take the positive root.
+In order for T to be a triangular number, sqrt(1 + 8*2T) must be an integer.
+This is enough because 1+8*2T is odd, and sqrt(odd) = odd (in case it exists)
+
+For pentagonal numbers, the formula is:
+P(n) = n*(3n - 1)/2 => 3n^2 - n - 2P = 0 => n = [1 + sqrt(1 + 24*P)]/6
+We aren't as lucky as before (sqrt(1 + 24*2) = 7 but 8 is not divisible by 6)
+so we need to check if the whole expression for n is an integer. (3**)
+
+For hexagonal numbers, the formula is:
+H(n) = 2n^2 + n => 2n^2 + n - H = 0 => n = [1 + sqrt(1 + 8*H)]/4
+We also need to check if the whole expression for n is an integer. (3**)
 
 
+(3**)
+For pentagonal numbers, if we take sqrt(1 + 24*P) mod 6, we get sqrt(1). Now,
+what numbers mod 6 are the square root of 1?
+
+    0*0 = 0; 1*1 = 1; 2*2 = 4; 3*3 = 3; 4*4 = 4; 5*5 = 1
+
+So, sqrt(1) mod 6 = 1 or 5, and in our particular case we are interested when
+it is equal to 5, because then (1 + 5)/6 would be an integer.
+
+For hexagonal numbers, if we take sqrt(1 + 8*H) mod 4, we also get sqrt(1).
+What numbers mod 4 are the square root of 1?
+
+    0*0 = 0; 1*1 = 1; 2*2 = 0; 3*3 = 1
+So, sqrt(1) mod 4 = 1 or 3, and in our particular case we are interested in 3
 '''
