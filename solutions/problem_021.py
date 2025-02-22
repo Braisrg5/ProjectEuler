@@ -8,14 +8,7 @@ For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22,
 1, 2, 4, 71 and 142; so d(284) = 220.
 
 Evaluate the sum of all the amicable numbers under 10000.
-
-
-I could calculate the proper divisors of each number from the prime
-factors, but I don't think it's quicker than just dividing until the
-square root of the number.
 '''
-
-
 from resources.useful_functions import sum_divisors
 
 
@@ -23,17 +16,23 @@ def is_amicable(n):
     '''Checks if n is an amicable number.'''
     if n == 1:
         return False
+
+    # We first find the number which is sum of n divisors
     friend_n = sum_divisors(n)
+    # If this number is equal to n, it is not amicable
     if friend_n == n:
         return False
+    # If the sum of friend_n's divisors is equal to n, then n is amicable
     elif sum_divisors(friend_n) == n:
         return True
-    return False
+    # If the above test fails, then n is not amicable
+    else:
+        return False
 
 
 def sum_amicables(bound):
     '''Sums all amicable numbers under a given bound.'''
-    return sum([i for i in range(1, bound) if is_amicable(i)])
+    return sum(i for i in range(1, bound) if is_amicable(i))
 
 
 if __name__ == '__main__':

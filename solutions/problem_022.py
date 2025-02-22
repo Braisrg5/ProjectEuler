@@ -1,23 +1,21 @@
 '''https://projecteuler.net/problem=22
-Using 22_names.txt, a 46K text file containing over five-thousand
-first names, begin by sorting it into alphabetical order. Then working
-out the alphabetical value for each name, multiply this value by its
-alphabetical position in the list to obtain a name score.
-For example, when the list is sorted into alphabetical order, COLIN,
-which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the
-list. So, COLIN would obtain a name score of 938 x 53 = 49714.
+Using 22_names.txt, a 46K text file containing over five-thousand first names,
+begin by sorting it into alphabetical order. Then working out the alphabetical
+value for each name, multiply this value by its alphabetical position in the
+list to obtain a name score.
+For example, when the list is sorted into alphabetical order, COLIN, which is
+worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would
+obtain a name score of 938 x 53 = 49714.
 
 What is the total of all the name scores in the file?
 '''
 
 
 def load_names(path):
-    '''Loads the names from path into a list'''
-    file = open(path, 'r')
-    names = file.read().split('', '')
-    file.close()
-    names[0] = names[0].replace(''', '')
-    names[-1] = names[-1].replace(''', '')
+    '''Loads the names from path into a list.'''
+    with open(path, 'r') as file:
+        names = file.read().split(',')
+    names = [name.strip('"') for name in names]  # Remove quotes
     return names
 
 

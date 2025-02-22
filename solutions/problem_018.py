@@ -14,21 +14,16 @@ NOTE: As there are only 16384 routes, it is possible to solve this
 problem by trying every route. However, Problem 67, is the same
 challenge with a triangle containing one-hundred rows; it cannot be
 solved by brute force, and requires a clever method! ;o)
-
-
-I originally brute-forced this problem, and reading the thread I got
-spoiled the 'clever' method, so Imma do it that way.
 '''
 
 
 def load_triangle(path):
     '''Loads the triangle from the path and returns it as an array.'''
-    file = open(path, 'r')
-    triangle = [
-        [int(j) for j in i.replace('\n', '').split(' ')]
-        for i in file.readlines()
-    ]
-    file.close()
+    with open(path, 'r') as file:
+        triangle = [
+            [int(j) for j in i.replace('\n', '').split(' ')]
+            for i in file.readlines()
+        ]
     return triangle
 
 
