@@ -8,3 +8,6 @@ Some of my fave problems/functions to solve have been:
 -Problem 19
 -Problem 23
 -Problem 24
+-Problem 26
+-Problem 27
+-Problem 28
