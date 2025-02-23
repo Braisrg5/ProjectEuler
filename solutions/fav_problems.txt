@@ -5,3 +5,6 @@ Some of my fave problems/functions to solve have been:
 -Problem 8 and specially problem 11
 -Problem 14
 -Problem 17
+-Problem 19
+-Problem 23
+-Problem 24

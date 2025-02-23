@@ -16,11 +16,9 @@ Hence the first 12 terms will be:
                 F12 = 144
 The 12th term, F12, is the first term to contain three digits.
 
-What is the index of the first term in the Fibonacci sequence to
-contain 1000 digits?
+What is the index of the first term in the Fibonacci sequence to contain 1000
+digits?
 '''
-
-
 from math import log10, ceil
 
 
@@ -28,13 +26,15 @@ def fibonacci_digits(d):
     '''Finds the index of the first term in the Fibonacci sequence to
     contain d digits.'''
     a0, a1 = 1, 1
-    c = 2
+    # Current position of the a1 term in the Fibonacci sequence
+    nth = 2
     digs = ceil(log10(a1))
+    # We iterate until the number of digits is equal to d
     while digs < d:
         a0, a1 = a1, a0 + a1
         digs = ceil(log10(a1))
-        c += 1
-    return c
+        nth += 1
+    return nth
 
 
 if __name__ == '__main__':

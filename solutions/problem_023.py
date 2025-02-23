@@ -28,8 +28,11 @@ def is_abundant(n):
 
 def is_sum_abundants(n, abundants):
     '''Checks if n is a sum of two abundant numbers.'''
-    half_n = n // 2
+    # Integer division for the half of the number (eq to floor(n/2))
+    half_n = n//2
+    # We iterate over the abundant numbers from smallest to largest
     for num in abundants:
+        # If the abundant number is greater than half of n, we can stop (1*)
         if num > half_n:
             break
         if (n - num) in abundants:
@@ -38,11 +41,10 @@ def is_sum_abundants(n, abundants):
 
 
 def not_sum_abundants(n):
-    '''Generates all the numbers that are not the sum of two abundant
-    numbers and that are less than n.
-    '''
-    abundants = [i for i in range(1, n) if is_abundant(i)]
-    sum_abundants = [n+m for (n, m) in combinations_wr(abundants, 2)]
+    '''Generates all the numbers that are not the sum of two abundant numbers
+    and that are less than n.'''
+    abundants = {i for i in range(1, n) if is_abundant(i)}
+    sum_abundants = {n+m for (n, m) in combinations_wr(abundants, 2)}
     for i in range(1, n):
         if i not in sum_abundants:
             yield i
@@ -51,8 +53,7 @@ def not_sum_abundants(n):
 
 def not_sum_abundants_v2(n):
     '''Generates the sum of all the numbers that are not the sum of two
-    abundant numbers and that are less than n.
-    '''
+    abundant numbers and that are less than n.'''
     abundants = {i for i in range(1, n+1) if is_abundant(i)}
     not_sums = set(x for x in range(1, n+1))
     for n in abundants:
@@ -65,11 +66,29 @@ def not_sum_abundants_v3(n):
     '''Generates the sum of all the numbers that are not the sum of two
     abundant numbers and that are less than n.
     '''
+    # Set of all the abundant numbers
     abundants = {i for i in range(1, n+1) if is_abundant(i)}
+    # If the number is not a sum of abundants, we add it to the sum
     return sum(i for i in range(1, n+1) if not is_sum_abundants(i, abundants))
 
 
 if __name__ == '__main__':
-    # print(sum(not_sum_abundants()))  # 4179871, 647s
-    # print(not_sum_abundants_v2(28123))  # 4179871, 2.5s
-    print(not_sum_abundants_v3(28123))  # 4179871, 0.30s
+    # print(sum(not_sum_abundants(28123)))  # 4179871, 1.95s
+    # print(not_sum_abundants_v2(28123))  # 4179871, 4.5s
+    print(not_sum_abundants_v3(28123))  # 4179871, 0.55s
+
+
+'''
+#-------#
+# Notes #
+#-------#
+
+(1*)
+We iterate through the list of abundant numbers in increasing order.
+For each abundant number num, we check if the difference n - num is also in the
+set of abundant numbers. If both num and (n - num) are abundant numbers, then n
+can be expressed as the sum of two abundant numbers, num + (n - num) = n.
+
+We can stop the test when num is greater than n/2, because at that point
+(n - num) > num and we would be running over values we already checked.
+'''

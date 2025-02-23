@@ -21,14 +21,20 @@ def load_names(path):
 
 def alphabetic_score(name):
     '''Returns the alphabetic score of a name.'''
+    # Dictionary with scores for the letters
     letter_value = {
-        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7,
-        'H': 8, 'I': 9, 'J': 10, 'K': 11, 'L': 12, 'M': 13,
-        'N': 14, 'O': 15, 'P': 16, 'Q': 17, 'R': 18, 'S': 19,
-        'T': 20, 'U': 21, 'V': 22, 'W': 23, 'X': 24, 'Y': 25,
+        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
+        'J': 10, 'K': 11, 'L': 12, 'M': 13, 'N': 14, 'O': 15, 'P': 16, 'Q': 17,
+        'R': 18, 'S': 19, 'T': 20, 'U': 21, 'V': 22, 'W': 23, 'X': 24, 'Y': 25,
         'Z': 26
     }
-    return sum([letter_value[letter] for letter in name])
+    return sum(letter_value[letter] for letter in name)
+
+
+def alphabetic_score_v2(name):
+    '''Returns the alphabetic score of a name.'''
+    # ord function is faster
+    return sum(ord(letter)-64 for letter in name)
 
 
 def total_name_score():
@@ -41,6 +47,17 @@ def total_name_score():
     return s
 
 
+def total_name_score_v2():
+    '''Returns the total score of all the names in the file.'''
+    names = load_names('resources/22_names.txt')
+    i, s = 1, 0
+    for name in sorted(names):
+        s += i*alphabetic_score_v2(name)
+        i += 1
+    return s
+
+
 if __name__ == '__main__':
     print(alphabetic_score('COLIN'))  # 53
-    print(total_name_score())  # 871198282, 0.012s
+    # print(total_name_score())  # 871198282, 0.017s
+    print(total_name_score_v2())  # 871198282, 0.009s

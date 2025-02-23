@@ -1,6 +1,6 @@
 '''https://projecteuler.net/problem=19
-You are given the following information, but you may prefer to do
-some research for yourself.
+You are given the following information, but you may prefer to do some research
+for yourself.
     1 Jan 1900 was a Monday.
     Thirty days has September,
     April, June and November.
@@ -11,16 +11,16 @@ some research for yourself.
     A leap year occurs on any year evenly divisible by 4, but not on a
     century unless it is divisible by 400.
 
-How many Sundays fell on the first of the month during the twentieth
-century (1 Jan 1901 to 31 Dec 2000)?
+How many Sundays fell on the first of the month during the twentieth century
+(1 Jan 1901 to 31 Dec 2000)?
 '''
 
 
 # Sunday = 0, Monday = 1, Tuesday = 2...
 def first_month_sundays(year, jan_first):
-    '''Counts the number of Sundays that fell on the first of the month
-    during a given year where the 1st of January is provided and also
-    what day of the week is the 1st of January of the next year.
+    '''Counts the number of Sundays that fell on the first of the month during
+    a given year where the 1st of January is provided and also what day of the
+    week is the 1st of January of the next year.
     '''
     # Number of days of each month
     months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -42,8 +42,8 @@ def first_month_sundays(year, jan_first):
 
 
 def sundays_twentieth_century():
-    '''Counts the number of Sundays that fell on the first of the month
-    during the twentieth century (1 Jan 1901 to 31 Dec 2000).'''
+    '''Counts the number of Sundays that fell on the first of the month during
+    the twentieth century (1 Jan 1901 to 31 Dec 2000).'''
     # We first initialize the variable for the year 1901
     jan_first = first_month_sundays(1900, 1)[1]
 
