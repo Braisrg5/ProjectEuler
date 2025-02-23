@@ -11,7 +11,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 '''
 
 
-from resources.useful_functions import is_prime, digits_odd
+from resources.useful_functions import is_prime, digits_odd, sieve_Eratosthenes
 from math import floor, log10
 
 
@@ -78,7 +78,45 @@ def sum_truncatable_primes_v2(bound):
     return -1
 
 
+def check_truncatable_v2(p, primes_set):
+    '''Returns whether a prime is truncatable.'''
+    digits = int(log10(p))
+    # Right to left
+    p_check = p
+    while p_check > 10:
+        p_check //= 10
+        if p_check not in primes_set:
+            return False
+
+    # Left to right
+    p_check = p
+    while p_check > 10:
+        p_check %= 10**digits
+        digits -= 1
+        if p_check not in primes_set:
+            return False
+    return True
+
+
+def sum_truncatable_primes_v3(bound):
+    '''Sums all the truncatable primes.'''
+    primes = sieve_Eratosthenes(bound)
+    primes_set = set(primes)
+    primes = primes[4:]
+
+    trunc_primes = [23]
+    for p in primes:
+        if digits_odd(p) and check_truncatable_v2(p, primes_set):
+            trunc_primes.append(p)
+        if len(trunc_primes) == 11:
+            print(trunc_primes)
+            return sum(trunc_primes)
+    # Bound too small
+    return -1
+
+
 if __name__ == '__main__':
     print(check_truncatable(3797))  # True
     # print(sum_truncatable_primes(800000))  # 748317, 1.24s
-    print(sum_truncatable_primes_v2(800000))  # 748317, 1.16s
+    # print(sum_truncatable_primes_v2(800000))  # 748317, 0.63s
+    print(sum_truncatable_primes_v3(800000))  # 748317, 0.09s

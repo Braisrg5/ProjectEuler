@@ -6,8 +6,6 @@ There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31,
 
 How many circular primes are there below one million?
 '''
-
-
 from resources.useful_functions import (
     sieve_Eratosthenes, is_prime, digits_odd
 )
@@ -79,17 +77,24 @@ def circular_primes_v3(bound):
 
 
 def circular_primes_v4(bound):
-    primes = sieve_Eratosthenes(bound)
-    circ_primes = set()
+    '''Finds how many circular primes are there below one million.'''
+    # Generate primes using the sieve up to bound
+    primes = sieve_Eratosthenes(bound)[5:]
+    primes_set = set(primes)  # Convert to set for O(1) lookups
+
+    # Initialize the set of circular primes with one digit primes and 11
+    circ_primes = set([2, 3, 5, 7, 11])
     for prime in primes:
-        if prime < 10:
-            circ_primes.add(prime)
-        elif digits_odd(prime):
+        # Only consider odd digits for circular primes, because if any digit is
+        # even, at least one rotation will not be prime.
+        if digits_odd(prime):
+            # Find every distinct rotation of the prime number
             rotations = rotate_number(prime)
-            if len(rotations) == 1:
-                circ_primes.add(prime)
-            elif all(is_prime(p) for p in list(rotations)):
+            # If all rotations are prime, p is circular
+            if all(p in primes_set for p in list(rotations)):
+                # | is the operator for set union
                 circ_primes = circ_primes | rotations
+
     return len(circ_primes)
 
 
@@ -99,4 +104,4 @@ if __name__ == '__main__':
     # print(circular_primes(1000000))  # 55, 172s
     # print(circular_primes_v2(1000000))  # 55, 1.40s
     # print(circular_primes_v3(1000000))  # 55, 1.23s
-    print(circular_primes_v4(1000000))  # 55, 0.19s
+    print(circular_primes_v4(1000000))  # 55, 0.13s
