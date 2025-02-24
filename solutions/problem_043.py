@@ -16,15 +16,12 @@ the following:
     d8d9d10=289 is divisible by 17
 
 Find the sum of all 0 to 9 pandigital numbers with this property.
-
-Lo que creo que será más fácil será primero hacerme una lista con todos los
-pandigitales de 0 a 3 que son divisibles entre 17, 13, 11, 7, 5, 3 y 2.
-Después, empezar con los de 17 y recorrerme la lista de los de 13, mirando que
-se cumpla la propiedad, y así sucesivamente.
 '''
 global dict_3
 global list_property
 global primes
+primes = [2, 3, 5, 7, 11, 13]
+list_property = []
 
 
 def pandigitals_l3(n):
@@ -60,11 +57,11 @@ def pandigitals_l3(n):
 def recurring_property(num, i):
     '''Finds recursively the pandigital numbers that satisfy the property.
     primes = [2, 3, 5, 7, 11, 13]
-    We start with a 3-digit number that is divisible by 17, go through the
-    pandigitals of three digits that are divisible by 13 checking if the
-    property is satisfied. If it is, we do the same thing with 11, and so on.
-    This is done recursively to simplify the code (the alternative was to make
-    an if tower).'''
+    We start with a 3-digit 9 to 1 pandigital number that is divisible by 17,
+    go through the pandigitals of three digits that are divisible by 13
+    checking if the property is satisfied. If it is, we do the same thing with
+    11, and so on. This is done recursively to simplify the code (the
+    alternative was to make an if tower).'''
     if i >= 0:
         # i is the index of the prime number we are checking,
         # so i = 5 => p = 13; i = 4 => p = 11, and so on.
@@ -78,10 +75,15 @@ def recurring_property(num, i):
         list_property.append(int(missing.pop() + num))
 
 
-if __name__ == '__main__':
-    dict_3 = {i: pandigitals_l3(i) for i in [17, 13, 11, 7, 5, 3, 2]}
-    primes = [2, 3, 5, 7, 11, 13]
-    list_property = []
+def sum_pandigitals_property():
     for t17 in dict_3[17]:
         recurring_property(t17, 5)
-    print(sum(list_property))  # 16695334890, 0.001s
+    return sum(list_property)
+
+
+if __name__ == '__main__':
+    dict_3 = {i: pandigitals_l3(i) for i in [17, 13, 11, 7, 5, 3, 2]}
+    print(sum_pandigitals_property())  # 16695334890, 0.001s
+
+'''
+'''
