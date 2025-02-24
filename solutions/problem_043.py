@@ -60,11 +60,11 @@ def pandigitals_l3(n):
 def recurring_property(num, i):
     '''Finds recursively the pandigital numbers that satisfy the property.
     primes = [2, 3, 5, 7, 11, 13]
-    We start with a number that is divisible by 17, go through the pandigitals
-    of three digits that are divisible by 13 checking if the property is
-    satisfied. If it is, we do the same thing with 11, and so on. This is done
-    recursively to simplify the code (the alternative was to make an if tower).
-    '''
+    We start with a 3-digit number that is divisible by 17, go through the
+    pandigitals of three digits that are divisible by 13 checking if the
+    property is satisfied. If it is, we do the same thing with 11, and so on.
+    This is done recursively to simplify the code (the alternative was to make
+    an if tower).'''
     if i >= 0:
         # i is the index of the prime number we are checking,
         # so i = 5 => p = 13; i = 4 => p = 11, and so on.

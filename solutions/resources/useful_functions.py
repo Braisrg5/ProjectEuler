@@ -64,7 +64,7 @@ def prime_factors(n, list_fact=[]):
     return list_fact + [n]
 
 
-# Same as collections.Counter?
+# Same as collections.Counter? Yes
 def counts(ls):
     '''Counts the number of times an element appears on a list.'''
     counts = dict()

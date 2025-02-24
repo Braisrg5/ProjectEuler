@@ -10,16 +10,16 @@ from resources.useful_functions import is_prime
 
 
 def generate_pandigitals(n):
-    '''Generates all n-digit pandigital numbers from biggest to smallest.
-    '''
+    '''Generates all n-digit pandigital numbers from biggest to smallest.'''
     pandigitals = list(permutations([str(i) for i in range(1, n+1)]))
-    return sorted([int(''.join(p)) for p in pandigitals])[::-1]
+    return sorted(int(''.join(p)) for p in pandigitals)[::-1]
 
 
 def largest_pandigital_prime():
-    '''Returns the largest n-digit pandigital prime that exists.
-    '''
-    for n in range(9, 0, -1):
+    '''Returns the largest n-digit pandigital prime that exists.'''
+    # n can't be 9, 8, 6, 5, 3 or 2 because of (1*).
+    for n in range(7, 0, -3):
+        # Generate all n-digit pandigital numbers from biggest to smallest.
         pandigital = generate_pandigitals(n)
         for num in pandigital:
             if is_prime(num):
@@ -30,4 +30,19 @@ def largest_pandigital_prime():
 
 
 if __name__ == '__main__':
-    print(largest_pandigital_prime())  # 7652413, 0.23s
+    print(largest_pandigital_prime())  # 7652413, 0.002s
+
+
+'''
+#-------#
+# Notes #
+#-------#
+
+(1*)
+For n = 9, 1+2+3+4+5+6+7+8+9 = 45, which is divisible by 3, so not prime.
+For n = 8, 1+2+3+4+5+6+7+8 = 36, which is divisible by 3, so not prime.
+For n = 7, 1+2+3+4+5+6+7 = 28, which is not divisible by 3, so could be prime.
+
+Same goes for n = 6, sum = 21, and n = 5, sum = 15, which are divisible by 3.
+And n = 3, sum = 6, and n = 2, sum = 3.
+'''
