@@ -12,3 +12,10 @@ Some of my fave problems/functions to solve have been:
 -Problem 27
 -Problem 28
 -Problem 35
+-Problem 37
+-Problem 38
+-Problem 39
+-Problem 40
+-Problem 43
+-Problem 44
+-Problem 46

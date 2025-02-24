@@ -13,13 +13,16 @@ from resources.useful_functions import is_hexagonal, is_pentagonal
 
 
 def tph(MIN, MAX):
-    '''Finds the next triangle number that is pentagonal and hexagonal.'''
+    '''Finds the first triangle number between MIN and MAX that is pentagonal
+    and hexagonal.'''
     for n in range(MIN, MAX):
         Tn = n*(n+1)//2
         if is_pentagonal(Tn) and is_hexagonal(Tn):
             return Tn
+    # No numbers with the property in the range specified
+    return -1
 
 
 if __name__ == '__main__':
     print(tph(2, 286))  # 40755
-    print(tph(286, 10**10))  # 1533776805, 0.057s
+    print(tph(286, 10**5))  # 1533776805, 0.057s

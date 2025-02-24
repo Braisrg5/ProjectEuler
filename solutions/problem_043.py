@@ -62,21 +62,32 @@ def recurring_property(num, i):
     checking if the property is satisfied. If it is, we do the same thing with
     11, and so on. This is done recursively to simplify the code (the
     alternative was to make an if tower).'''
+    # i is the index of the prime number we are checking, so i = 5 => p = 13;
+    # i = 4 => p = 11, and so on.
     if i >= 0:
-        # i is the index of the prime number we are checking,
-        # so i = 5 => p = 13; i = 4 => p = 11, and so on.
-        for triad in dict_3[primes[i]]:
+        p = primes[i]
+        # So, we take a triad for the current prime
+        for triad in dict_3[p]:
+            # First two digits of the constructed num have to coincide with the
+            # last two digits of the new triad
+            # Also the new digit can't be in the constructed num (pandigital)
             if num[:2] == triad[1:] and triad[0] not in num:
+                # We call the property updating the constructed num and for the
+                # next prime number
                 recurring_property(triad[0] + num, i - 1)
+    # All primes have been checked
     else:
         # The property has been satisfied! But there is a digit missing, we
         # have to add it and then append the number to the list.
         missing = set('0123456789') - set(num)
-        list_property.append(int(missing.pop() + num))
+        final_num = int(missing.pop() + num)
+        print(final_num)
+        list_property.append(final_num)
 
 
 def sum_pandigitals_property():
     for t17 in dict_3[17]:
+        # Initialize testing with the triads divisible by 17
         recurring_property(t17, 5)
     return sum(list_property)
 
@@ -85,5 +96,17 @@ if __name__ == '__main__':
     dict_3 = {i: pandigitals_l3(i) for i in [17, 13, 11, 7, 5, 3, 2]}
     print(sum_pandigitals_property())  # 16695334890, 0.001s
 
+
 '''
+#-------#
+# Notes #
+#-------#
+
+(1*)
+What I think will be easier is to first make a list of all the 9 to 0
+pandigital numbers less than 3 digits that are divisible by 17, and do the same
+for 13, 11, 7, 5, 3 and 2.
+Then, start with one of the divisible by 17, let's call it div17 and go through
+the list of those divisible by 13, checking if the last 2 digits coincide with
+the first 2 of div17. If there is a match, we do the same with 11, and so on.
 '''
