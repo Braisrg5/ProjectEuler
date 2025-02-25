@@ -30,7 +30,7 @@ def transform_to_num(words):
     for word in words:
         num = 0
         for letter in word:
-            # ASCII value of the letter (A=65, B=66,...) normalizes to 1-26
+            # ASCII value of the letter (A=65, B=66,...) normalized to 1-26
             num += ord(letter) - 64
         nums.append(num)
     return nums
