@@ -235,6 +235,7 @@ def find_prime_8():
             # 211113 could be masked as 21***3, 2*1**3, 2**1*3 and 2***13
             # If the digit repeats 5 times, there are even more combinations
             else:
+                #
                 # All possible groups of 3 of the digit to be replaced
                 for mask in bit_strings(count, 3):
 
