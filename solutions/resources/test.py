@@ -1,6 +1,6 @@
 from math import floor, sqrt
 from time import perf_counter
-from useful_functions import prime_factors
+from useful_functions import prime_factors, prime_factors_sieve
 from collections import Counter
 
 
@@ -67,13 +67,13 @@ def is_hexagonal_v2(H):
     return sqrt(1 + 8*H) % 4 == 3
 
 
+MAX = 1000000
 start = perf_counter()
-MAX = 10000000
 for i in range(1, MAX):
-    if is_hexagonal_v2(i) != is_hexagonal(i):
-        print("HEY")
+    prime_factors(i)
+print(perf_counter() - start)
 
+start = perf_counter()
 for i in range(1, MAX):
-    if is_pentagonal_v2(i) != is_pentagonal(i):
-        print("HEY")
+    prime_factors_sieve(i)
 print(perf_counter() - start)
