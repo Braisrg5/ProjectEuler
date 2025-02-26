@@ -84,7 +84,7 @@ for i in range(1, MAX):
     prime_factors_sieve(i)
 print(perf_counter() - start)'''
 
-MAX = 100
+MAX = 27
 
 '''start = perf_counter()
 primes1 = sieve_Eratosthenes(MAX)
@@ -94,6 +94,4 @@ start = perf_counter()
 primes2 = sieve_Pritchards_wheel(MAX)
 print(perf_counter()-start)
 
-'''if primes1 != primes2:
-    print(primes1)
-    print(primes2)'''
+print(primes2)

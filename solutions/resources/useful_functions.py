@@ -138,15 +138,28 @@ def sieve_Eratosthenes(N):
 
 def sieve_Pritchards_wheel(N):
     """Sieve of Eratosthenes optimized with a (2,3,5) wheel."""
-    while True:
-        primes = [2, 3]
-        primes_prod = prod(primes)
+    primes = [2, 3]
+    primes_prod = prod(primes)
 
-        sieve = bytearray([True]) * (primes_prod+1)
-        for p in primes:
-            sieve[p:primes_prod+1:p] = bytearray([False])*((primes_prod - p)//p + 1)
-        print(list(sieve))
-        a = input()
+    sieve = bytearray([True]) * (primes_prod+1)
+    for p in primes:
+        sieve[p:primes_prod+1:p] = bytearray([False])*(
+            (primes_prod - p)//p + 1
+        )
+    coprimes = [i for i, is_prime in enumerate(sieve) if is_prime]
+    new_prime = coprimes[2]
+    while new_prime <= isqrt(N):
+        primes.append(new_prime)
+        primes_prod *= new_prime
+        if primes_prod <= N:
+            new_coprimes = []
+            for i in range(new_prime):
+                new_coprimes += [j + 6*i for j in coprimes]
+        new_coprimes = [i for i in new_coprimes if i not in [new_prime*j for j in coprimes]]
+        coprimes = new_coprimes
+        new_prime = coprimes[2]
+
+    return primes + coprimes
 
 
 def digits_odd(n):
