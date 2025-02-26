@@ -1,7 +1,13 @@
-from math import floor, sqrt
 from time import perf_counter
-from useful_functions import prime_factors, prime_factors_sieve
+from math import floor, sqrt
+from useful_functions import (
+    prime_factors, sieve_Pritchards_wheel
+    )
 from collections import Counter
+
+# Avoid error messages
+start = perf_counter()
+start += 1
 
 
 def sieve_v1(N):
@@ -67,7 +73,7 @@ def is_hexagonal_v2(H):
     return sqrt(1 + 8*H) % 4 == 3
 
 
-MAX = 1000000
+'''MAX = 1000000
 start = perf_counter()
 for i in range(1, MAX):
     prime_factors(i)
@@ -76,4 +82,18 @@ print(perf_counter() - start)
 start = perf_counter()
 for i in range(1, MAX):
     prime_factors_sieve(i)
-print(perf_counter() - start)
+print(perf_counter() - start)'''
+
+MAX = 100
+
+'''start = perf_counter()
+primes1 = sieve_Eratosthenes(MAX)
+print(perf_counter()-start)'''
+
+start = perf_counter()
+primes2 = sieve_Pritchards_wheel(MAX)
+print(perf_counter()-start)
+
+'''if primes1 != primes2:
+    print(primes1)
+    print(primes2)'''

@@ -1,4 +1,4 @@
-from math import floor, sqrt, ceil, isqrt
+from math import floor, sqrt, ceil, isqrt, prod
 
 
 def is_pandigital(num):
@@ -113,9 +113,9 @@ def sum_divisors(n):
     return total
 
 
-def sieve_Eratosthenes(N):
-    '''Basic implementation of the sieve of Eratosthenes.'''
-    # See https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+def sieve_Eratosthenes_old(N):
+    '''Basic implementation of the sieve of Eratosthenes.
+    https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'''
     sieve = [True] * (N+1)
     sieve[0] = sieve[1] = False
     for i in range(2, floor(sqrt(N))+1):
@@ -123,6 +123,30 @@ def sieve_Eratosthenes(N):
             for j in range(i*i, N+1, i):
                 sieve[j] = False
     return [i for i in range(2, N+1) if sieve[i]]
+
+
+def sieve_Eratosthenes(N):
+    '''Basic implementation of the sieve of Eratosthenes.
+    https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'''
+    sieve = bytearray([True]) * (N+1)
+    sieve[0] = sieve[1] = False
+    for i in range(2, isqrt(N)+1):
+        if sieve[i]:
+            sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
+    return [i for i, is_prime in enumerate(sieve) if is_prime]
+
+
+def sieve_Pritchards_wheel(N):
+    """Sieve of Eratosthenes optimized with a (2,3,5) wheel."""
+    while True:
+        primes = [2, 3]
+        primes_prod = prod(primes)
+
+        sieve = bytearray([True]) * (primes_prod+1)
+        for p in primes:
+            sieve[p:primes_prod+1:p] = bytearray([False])*((primes_prod - p)//p + 1)
+        print(list(sieve))
+        a = input()
 
 
 def digits_odd(n):
@@ -137,11 +161,11 @@ def is_triangle(t):
     return sqrt(8*t + 1).is_integer()
 
 
-# def is_pentagonal_old(P):
-#     '''Checks if a number is pentagonal.'''
-#     # Formulas are derived in (3*)
-#     n = (1 + sqrt(1 + 24*P))/6
-#     return n.is_integer()
+def is_pentagonal_old(P):
+    '''Checks if a number is pentagonal.'''
+    # Formulas are derived in (3*)
+    n = (1 + sqrt(1 + 24*P))/6
+    return n.is_integer()
 
 
 # Slightly faster
@@ -151,11 +175,11 @@ def is_pentagonal(P):
     return sqrt(1 + 24*P) % 6 == 5
 
 
-# def is_hexagonal_old(H):
-#     '''Checks if a number is hexagonal.'''
-#     # Formulas are derived in (3*)
-#     n = (1 + sqrt(1 + 8*H))/4
-#     return n.is_integer()
+def is_hexagonal_old(H):
+    '''Checks if a number is hexagonal.'''
+    # Formulas are derived in (3*)
+    n = (1 + sqrt(1 + 8*H))/4
+    return n.is_integer()
 
 
 def is_hexagonal(H):
