@@ -136,6 +136,7 @@ def sieve_Eratosthenes(N):
     return [i for i, is_prime in enumerate(sieve) if is_prime]
 
 
+# Not working as intended
 def sieve_Pritchards_wheel(N):
     """Sieve of Eratosthenes optimized with a (2,3,5) wheel."""
     primes = [2, 3]
@@ -147,19 +148,21 @@ def sieve_Pritchards_wheel(N):
             (primes_prod - p)//p + 1
         )
     coprimes = [i for i, is_prime in enumerate(sieve) if is_prime]
-    new_prime = coprimes[2]
-    while new_prime <= isqrt(N):
+    while True:
+        print(coprimes)
+        new_prime = coprimes[2]
         primes.append(new_prime)
         primes_prod *= new_prime
-        if primes_prod <= N:
-            new_coprimes = []
-            for i in range(new_prime):
-                new_coprimes += [j + 6*i for j in coprimes]
-        new_coprimes = [i for i in new_coprimes if i not in [new_prime*j for j in coprimes]]
+        new_coprimes = []
+        for i in range(new_prime):
+            new_coprimes += [j + 6*i for j in coprimes]
+        new_coprimes = [i for i in new_coprimes
+                        if i not in [new_prime*j for j in coprimes]]
         coprimes = new_coprimes
-        new_prime = coprimes[2]
+        if new_prime > isqrt(N):
+            break
 
-    return primes + coprimes
+    return sorted(list(set(primes + coprimes)))
 
 
 def digits_odd(n):
