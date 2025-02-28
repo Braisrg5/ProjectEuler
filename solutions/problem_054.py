@@ -218,7 +218,7 @@ def which_hand_wins(hand_pair):
                 elif hand1.rest_vals[i] < hand2.rest_vals[i]:
                     return 2
             # If all remaining cards are also equal, hands are a tie
-            print("There has been a tie!!!")
+            print('There has been a tie!!!')
             # Not implemented
             return None
 

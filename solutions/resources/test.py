@@ -1,7 +1,7 @@
 from time import perf_counter
 from math import floor, sqrt
 from useful_functions import (
-    prime_factors, sieve_Pritchards_wheel
+    digit_sum, digit_sum_v2
     )
 from collections import Counter
 
@@ -84,14 +84,17 @@ for i in range(1, MAX):
     prime_factors_sieve(i)
 print(perf_counter() - start)'''
 
-MAX = 27
-
 '''start = perf_counter()
 primes1 = sieve_Eratosthenes(MAX)
 print(perf_counter()-start)'''
 
-start = perf_counter()
+'''start = perf_counter()
 primes2 = sieve_Pritchards_wheel(MAX)
 print(perf_counter()-start)
 
-print(primes2)
+print(primes2)'''
+
+MAX = 100**100
+
+
+sum1 = digit_sum(MAX)

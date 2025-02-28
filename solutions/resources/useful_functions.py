@@ -1,4 +1,4 @@
-from math import floor, sqrt, ceil, isqrt, prod
+from math import floor, sqrt, ceil, isqrt, prod, log10
 
 
 def is_pandigital(num):
@@ -202,6 +202,10 @@ def is_hexagonal(H):
     '''Checks if a number is hexagonal.'''
     # Formulas are derived in (3**)
     return sqrt(1 + 8*H) % 4 == 3
+
+
+def flip_number(n):
+    return int(str(n)[::-1])
 
 
 '''
