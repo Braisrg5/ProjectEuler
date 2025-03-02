@@ -30,17 +30,17 @@ def is_Lychrel(n, its):
     reverse and addition in its tries.'''
     for _ in range(its):
         n += flip_number(n)
+        # Reverse and addition until we reach a palindrome
         if is_palindrome(n):
             return False
+    # After its tries, we consider the number to be Lychrel
     return True
 
 
 def num_Lychrels(bound, its):
     '''Finds the amount of Lychrel numbers below the given bound and with the
     given max iterations.'''
-    for i in range(bound):
-        if is_Lychrel(i, its):
-            yield i
+    yield from (i for i in range(bound) if is_Lychrel(i, its))
 
 
 if __name__ == '__main__':

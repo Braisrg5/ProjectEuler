@@ -1,7 +1,7 @@
 from time import perf_counter
 from math import floor, sqrt
 from useful_functions import (
-    digit_sum, digit_sum_v2
+    digit_sum, prime_factors
     )
 from collections import Counter
 
@@ -96,5 +96,6 @@ print(primes2)'''
 
 MAX = 100**100
 
-
-sum1 = digit_sum(MAX)
+for a in range(1, 100):
+    for b in range(1, 100):
+        sum1 = digit_sum(MAX)

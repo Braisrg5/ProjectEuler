@@ -1,4 +1,4 @@
-from math import floor, sqrt, ceil, isqrt, prod, log10
+from math import floor, sqrt, ceil, isqrt, prod
 
 
 def is_pandigital(num):
