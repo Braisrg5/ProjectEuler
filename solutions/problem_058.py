@@ -1,31 +1,100 @@
 '''https://projecteuler.net/problem=58
+Starting with 1 and spiralling anticlockwise in the following way, a square
+spiral with side length 7 is formed.
+
+            37 36 35 34 33 32 31
+            38 17 16 15 14 13 30
+            39 18  5  4  3 12 29
+            40 19  6  1  2 11 28
+            41 20  7  8  9 10 27
+            42 21 22 23 24 25 26
+            43 44 45 46 47 48 49
+
+It is interesting to note that the odd squares lie along the bottom right
+diagonal, but what is more interesting is that 8 out of the 13 numbers lying
+along both diagonals are prime; that is, a ratio of 8/13 ≈ 62%.
+
+If one complete new layer is wrapped around the spiral above, a square spiral
+with side length 9 will be formed. If this process is continued, what is the
+side length of the square spiral for which the ratio of primes along both
+diagonals first falls below 10%?
 '''
 from resources.useful_functions import is_prime
+from math import isqrt
 
 
-def elements_diags(n):
-    '''Finds the prime elements in the diagonals of a square matrix of size
-    n x n constructed by the methods in (1*).
-    '''
+def elements_diags(target_ratio=float('-inf'), target_dim=-1):
+    '''Finds the first side length for which the ratio of prime elements in the
+    diagonals of a spiral matrix constructed by the methods in (1*) is below
+    the target_ratio.'''
     k = 1  # Initialize first element
     # Number of prime and not prime elements in the diagonals (start with x=1)
     primes_in_diags, nums_in_diags = 0, 1
 
     # Initialize dimension and ratio
     dim, ratio = 1, float('inf')
-    while ratio > 0.1:
+    while ratio >= target_ratio and dim != target_dim:
         # Next loop
         dim += 2
-        for j in range(4):
-            k += dim - 1
-            if j!= 4 and is_prime(k):
-                primes_in_diags += 1
+        step = dim - 1
+        for _ in range(3):  # Only check first three corners
+            k += step
+            primes_in_diags += is_prime(k)
+        k += step
         nums_in_diags += 4
         ratio = primes_in_diags/nums_in_diags
+    # Return the side length of the spiral matrix and the ratio
+    return dim, ratio
+
+
+# Less elegant but faster
+def elements_diags_v2(target_ratio=float('-inf'), target_dim=-1):
+    '''Finds the first side length for which the ratio of prime elements in the
+    diagonals of a spiral matrix constructed by the methods in (1*) is below
+    the target_ratio.'''
+    k = 1  # Initialize first element
+    # Number of prime and not prime elements in the diagonals (start with x=1)
+    primes_in_diags, nums_in_diags = 0, 1
+
+    # Initialize dimension and ratio
+    dim, ratio = 1, float('inf')
+    while ratio >= target_ratio and dim != target_dim:
+        # Next loop
+        dim += 2
+        step = dim - 1
+        for _ in range(3):  # Only check first three corners
+            k += step
+
+            # Inline is_prime
+            n = k
+            if n < 2:
+                continue
+            if n in (2, 3):
+                primes_in_diags += 1
+                continue
+            if n & 1 == 0 or n % 3 == 0 or n % 5 == 0 and n > 5:
+                continue
+
+            sqrt_n = isqrt(n)
+            is_prime = True
+            for j in range(7, sqrt_n + 1, 6):
+                if n % j == 0 or n % (j + 4) == 0:
+                    is_prime = False
+                    break
+
+            primes_in_diags += is_prime
+        k += step
+        nums_in_diags += 4
+        ratio = primes_in_diags/nums_in_diags
+    # Return the side length of the spiral matrix and the ratio
+    return dim, ratio
 
 
 if __name__ == '__main__':
-    print(list(elements_diags(7)))
+    print(elements_diags(target_dim=7))  # (7, 0.615)
+    # print(elements_diags(target_ratio=0.1))  # (26241, 0.101), 1.06s
+    print(elements_diags_v2(target_ratio=0.1))  # (26241, 0.099), 0.94s
+    # print(elements_diags_v2(0.1, 27000))
 
 
 '''
