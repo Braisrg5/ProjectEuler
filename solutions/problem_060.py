@@ -11,6 +11,7 @@ concatenate to produce another prime.
 from resources.useful_functions import sieve_Eratosthenes, is_prime
 from itertools import combinations_with_replacement as combinations_wr
 from math import log10, floor
+from sympy import isprime
 from time import perf_counter
 
 
@@ -141,6 +142,36 @@ def prime_pair_sets_v4(n, bound):
                     return sol
 
 
+def prime_pair_sets_v5(n, bound):
+    '''Finds the smallest sum for a set of n primes for which any two primes
+    concatenate to produce another prime.'''
+    def recursive_helper(n, index, old):
+        if n == 0:
+            return old
+        for i in range(index + 1, num_primes):
+            p = primes_small[i]
+            if all(isprime(p) for p in new_concats(old, p)):
+                sol = recursive_helper(n - 1, i, old + [p])
+                if sol is not None:
+                    return sol
+
+    primes_small = sieve_Eratosthenes(bound)[1:]
+    num_primes = len(primes_small)
+    print("Generated all the primes.")
+    for i in range(num_primes):
+        p1 = primes_small[i]
+        for j in range(i+1, num_primes):
+            p2 = primes_small[j]
+            if all(isprime(p) for p in new_concats([p1], p2)):
+                sol = recursive_helper(n - 2, j, [p1, p2])
+                if sol is not None:
+                    return sol
+
+
 if __name__ == '__main__':
-    print(prime_pair_sets_v3(5, 10000))  # 26033, 6.16s
-    print(prime_pair_sets_v4(5, 10000))  # 26033, 6.89s
+    # Generate all primes beforehand
+    # print(prime_pair_sets_v3(5, 10000))  # 26033, 6.17s
+    # Is_prime function in resources.useful_functions
+    # print(prime_pair_sets_v4(5, 10000))  # 26033, 6.91s
+    # Sympy's isprime function
+    print(prime_pair_sets_v5(5, 10000))  # 26033, 2.40s
