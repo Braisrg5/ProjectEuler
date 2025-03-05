@@ -102,4 +102,5 @@ def find_password(path):
 
 
 if __name__ == '__main__':
-    print(find_password('resources/0059_cipher.txt'))  # 129448, 0.74s
+    path = 'resources/0059_cipher.txt'
+    print(find_password(path))  # 129448, 0.74s until user input
