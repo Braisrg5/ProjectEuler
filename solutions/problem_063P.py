@@ -16,5 +16,5 @@ For n = 3:
 For an arbitrary n:
             10^(n-1) <= x^n < 10^n
             10^(n-1)^(1/n) <= x < 10
-x has to be an integer, so we can take n until 
+x has to be an integer, so we can take n until
 '''
