@@ -52,7 +52,7 @@ def prime_pair_sets_v5(n, bound):
 
     primes_small = sieve_Eratosthenes(bound)[1:]
     num_primes = len(primes_small)
-    print("Generated all the primes.")
+    print('Generated all the primes.')
     for i in range(num_primes):
         p1 = primes_small[i]
         for j in range(i+1, num_primes):

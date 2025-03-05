@@ -22,3 +22,5 @@ Some of my fave problems/functions to solve have been:
 -Problem 49
 -Problem 51
 -Problem 54!!!!!!!!!!
+-Problem 59
+-Problem 61

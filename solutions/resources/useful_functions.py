@@ -183,11 +183,9 @@ def is_triangle(t):
     return sqrt(8*t + 1).is_integer()
 
 
-def is_pentagonal_old(P):
-    '''Checks if a number is pentagonal.'''
-    # Formulas are derived in (3*)
-    n = (1 + sqrt(1 + 24*P))/6
-    return n.is_integer()
+def is_square(s):
+    '''Checks if a number is a perfect square.'''
+    return sqrt(s).is_integer()
 
 
 # Slightly faster
@@ -197,17 +195,20 @@ def is_pentagonal(P):
     return sqrt(1 + 24*P) % 6 == 5
 
 
-def is_hexagonal_old(H):
-    '''Checks if a number is hexagonal.'''
-    # Formulas are derived in (3*)
-    n = (1 + sqrt(1 + 8*H))/4
-    return n.is_integer()
-
-
 def is_hexagonal(H):
     '''Checks if a number is hexagonal.'''
     # Formulas are derived in (3**)
     return sqrt(1 + 8*H) % 4 == 3
+
+
+def is_heptagonal(Hp):
+    '''Checks if a number is heptagonal.'''
+    return sqrt(9 + 40*Hp) % 10 == 7
+
+
+def is_octagonal(Oc):
+    '''Checks if a number is octagonal.'''
+    return sqrt(4 + 12*Oc) % 6 == 4
 
 
 def flip_number(n):

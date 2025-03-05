@@ -246,7 +246,6 @@ def find_prime_10(max_digs):
     the same digit, is part of a 10 prime value family.'''
     limit = 10**max_digs
     for prime in sieve.primerange(limit//10, limit):
-        print("HEY")
         # Prime as string and number of digits
         str_prime = str(prime)
         count_digits = Counter(str_prime)
@@ -344,7 +343,7 @@ if __name__ == '__main__':
     print(find_prime_9(max_digs=8))  # (38000201, '38*0*2*1'), 10.21s
 
     # Can't use sieve, need different approach
-    '''print("Test with x = 10")
+    '''print('Test with x = 10')
     print(find_prime_10(max_digs=11))'''
 
 
