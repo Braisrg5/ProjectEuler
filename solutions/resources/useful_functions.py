@@ -1,4 +1,5 @@
 from math import floor, sqrt, ceil, isqrt, prod
+from tqdm import tqdm
 
 
 def is_pandigital(num):
@@ -125,14 +126,19 @@ def sieve_Eratosthenes_old(N):
     return [i for i in range(2, N+1) if sieve[i]]
 
 
-def sieve_Eratosthenes(N):
+def sieve_Eratosthenes(N, progress=False):
     '''Basic implementation of the sieve of Eratosthenes.
     https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'''
     sieve = bytearray([True]) * (N+1)
     sieve[0] = sieve[1] = False
-    for i in range(2, isqrt(N)+1):
-        if sieve[i]:
-            sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
+    if progress:
+        for i in tqdm(range(2, isqrt(N)+1)):
+            if sieve[i]:
+                sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
+    else:
+        for i in range(2, isqrt(N)+1):
+            if sieve[i]:
+                sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
     return [i for i, is_prime in enumerate(sieve) if is_prime]
 
 
