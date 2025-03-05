@@ -40,7 +40,7 @@ def pth_permutation(p, objects):
 
 
 if __name__ == '__main__':
-    print(pth_permutation(3, ["B", "A", "C"]))  # 102
+    print(pth_permutation(3, ['0', '1', '2']))  # 102
     print(pth_permutation(1000000, list(range(10))))  # 2783915460, 0.0s
 
 
