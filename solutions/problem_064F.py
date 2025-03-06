@@ -69,7 +69,7 @@ def period_for_root(n):
         ck = ak*base - ck
 
 
-def odd_periods_roots(bound):
+def odd_period_roots(bound):
     '''Finds how many continued fractions for the square root of N have an odd
     period when N <= bound.'''
     count = 0
@@ -81,7 +81,9 @@ def odd_periods_roots(bound):
 
 
 if __name__ == '__main__':
-    print(odd_periods_roots(10000))  # 1322, 0.05s
+    print(odd_period_roots(13))  # 4
+    print(odd_period_roots(10000))  # 1322, 0.05s
+
 
 '''
 #-------#

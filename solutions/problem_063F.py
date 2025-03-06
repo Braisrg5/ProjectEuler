@@ -18,7 +18,7 @@ def n_digit_power():
 
 
 if __name__ == '__main__':
-    print(n_digit_power())
+    print(n_digit_power())  # 49, 0.000s
 
 
 '''
