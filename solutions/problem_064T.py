@@ -45,9 +45,9 @@ from math import sqrt
 def period_for_root(n):
     '''Finds the period for the continued fraction of sqrt(n).
     This function is explained further in (1*).'''
-    if sqrt(n).is_integer():
-        return 0
     sqrt_n = sqrt(n)
+    if sqrt_n.is_integer():
+        return 0
 
     # Initialize the variables for the continued fraction
     a0 = int(sqrt_n)
