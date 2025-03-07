@@ -1,15 +1,14 @@
-'''https://projecteuler.net/problem=17
-If the numbers 1 to 5 are written out in words: one, two, three, four, five,
-then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+'''https://projecteuler.net/problem=17'''
+# If the numbers 1 to 5 are written out in words: one, two, three, four, five,
+# then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 
-If all the numbers from 1 to 1000 (one thousand) inclusive were written out in
-words, how many letters would be used?
+# If all the numbers from 1 to 1000 (one thousand) inclusive were written out
+# in words, how many letters would be used?
 
-NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and
-forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20
-letters. The use of 'and' when writing out numbers is in compliance with
-British usage.
-'''
+# NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and
+# forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20
+# letters. The use of 'and' when writing out numbers is in compliance with
+# British usage.
 
 
 def num_to_letters(n):
@@ -35,24 +34,23 @@ def num_to_letters(n):
     if str_n in nums_ref:
         return nums_ref[str_n]
     # If it's a teen, return the prefix followed by 'teen'
-    elif 13 <= n <= 19:
+    if 13 <= n <= 19:
         return prefixes[str_n[1]]+'teen'
     # If is between 20 and 99, return the prefix for the first digit followed
     # by 'ty' and the name of the second digit
-    elif 20 <= n <= 99:
+    if 20 <= n <= 99:
         return prefixes[str_n[0]]+'ty ' + nums_ref[str_n[1]]
     # If it's 1000, return 'one thousand'
-    elif n == 1000:
+    if n == 1000:
         return 'one thousand'
     # If it's a multiple of 100, return the name of the first digit followed by
     # 'hundred'
-    elif n % 100 == 0:
+    if n % 100 == 0:
         return nums_ref[str_n[0]] + ' hundred'
     # If it's a number between 101 and 999, return the name of the first digit
     # followed by 'hundred and ' and call the function for the other 2 digits
-    else:
-        return (nums_ref[str_n[0]] + ' hundred and '
-                + num_to_letters(int(str_n[1:])))
+    return (nums_ref[str_n[0]] + ' hundred and '
+            + num_to_letters(int(str_n[1:])))
 
 
 def num_to_letter_count(n):
@@ -67,27 +65,26 @@ def num_to_letter_count(n):
     if str_n in nums_ref:
         return nums_ref[str_n]
     # If it's a teen, return the prefix count plus 4 ('teen')
-    elif 13 <= n <= 19:
+    if 13 <= n <= 19:
         return prefixes[str_n[1]]+4
     # If it's between 20 and 99, return the prefix count for the first digit
     # plus 2 ('ty') plus the count for the second digit
-    elif 20 <= n <= 99:
+    if 20 <= n <= 99:
         return prefixes[str_n[0]]+2 + nums_ref[str_n[1]]
     # one thousand has 11 letters
-    elif n == 1000:
+    if n == 1000:
         return 11
     # Multiples of 100 has the count for the first digit plus 7 ('hundred')
-    elif n % 100 == 0:
+    if n % 100 == 0:
         return nums_ref[str_n[0]] + 7
     # If it's a number between 101 and 999, return the count for the first
     # digit plus 10 ('hundred and') plus the count for the other 2 digits
-    else:
-        return (nums_ref[str_n[0]] + 10 + num_to_letter_count(int(str_n[1:])))
+    return (nums_ref[str_n[0]] + 10 + num_to_letter_count(int(str_n[1:])))
 
 
 def sum_letters(n):
     '''Returns the sum of the letters in every number from 1 to n.'''
-    return sum([num_to_letter_count(i) for i in range(1, n + 1)])
+    return sum(num_to_letter_count(i) for i in range(1, n + 1))
 
 
 if __name__ == '__main__':

@@ -1,19 +1,18 @@
-'''https://projecteuler.net/problem=11
-In the 20 x 20 grid in the file, four numbers along a diagonal line have
-been marked in red. The product of these numbers is
+'''https://projecteuler.net/problem=11'''
+# In the 20 x 20 grid in the file, four numbers along a diagonal line have
+# been marked in red. The product of these numbers is
+#
+#             26 x 63 x 78 x 14 = 1788696.
 
-            26 x 63 x 78 x 14 = 1788696.
-
-What is the greatest product of four adjacent numbers in the same direction
-(up, down, left, right, or diagonally) in the 20 x 20 grid in 11_grid.txt?
-'''
-import numpy as np
+# What is the greatest product of four adjacent numbers in the same direction
+# (up, down, left, right, or diagonally) in the 20 x 20 grid in 11_grid.txt?
 from functools import reduce
+import numpy as np
 
 
 def load_grid(path):
     '''Loads the 20x20 grid from path into a numpy array with proper format.'''
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         grid = np.array([
             [int(j) for j in i.replace('\n', '').split(' ')]
             for i in file.readlines()
@@ -26,15 +25,14 @@ def horizontal(grid, n):
     in the horizontal direction (from left to right).'''
     (y, x) = np.shape(grid)
     # Total products for a single row
-    totalProds = x - n + 1
+    total_prods = x - n + 1
     biggest = 0
     for i in range(y):
         # For every ro
-        for j in range(totalProds):
+        for j in range(total_prods):
             adj = grid[i, j:n+j]
             prod = reduce(lambda x, y: x * y, adj)
-            if prod > biggest:
-                biggest = prod
+            biggest = max(biggest, prod)
     return biggest
 
 
@@ -84,35 +82,33 @@ if __name__ == '__main__':
     print(big_prod(4))  # 70600674, 0.006s
 
 
-'''
-#-------#
+# ----- #
 # Notes #
-#-------#
+# ----- #
 
-(1*)
-In order to consider every possible product of adjacent numbers, we need to
-consider every possible direction to calculate them, and those would be:
-horizontal, vertical, and both diagonals (top left to bottom right and top
-right to bottom left).
+# (1*)
+# In order to consider every possible product of adjacent numbers, we need to
+# consider every possible direction to calculate them, and those would be:
+# horizontal, vertical, and both diagonals (top left to bottom right and top
+# right to bottom left).
 
-Let's focus on the horizontal direction first. We will have a matrix of size
-(y, x), where y is the number of rows and x is the number of columns.
-For every row we need to calculate all possible products of n adjacent numbers,
-so for row i, we will have (x - n + 1) products (similar to problem_008). So,
-we calculate all products and find the maximum.
+# Let's focus on the horizontal direction first. We will have a matrix of size
+# (y, x), where y is the number of rows and x is the number of columns.
+# For every row we need to calculate all possible products of n adjacent
+# numbers, so for row i, we will have (x - n + 1) products (similar to
+# problem_008). So, we calculate all products and find the maximum.
 
-For the vertical direction, we can transpose the matrix and apply the previous
-procedure.
+# For the vertical direction, we can transpose the matrix and apply the
+# previous procedure.
 
-For the diagonals, I first focus on the bottom left to top right one:
-I create a new matrix where each row is a diagonal of the original (completed
-by zeros if necessary). The matrix will have size (ny, nx), where ny is the
-number of diagonals and nx is the maximum length they can have.
-To create the matrix, I use the np.diag function with parameter k, going from
-bottom left (k=-y + 1) to top right (k=x - 1). If any diagonal is shorter than
-nx, it is completed by zeros.
-After creating the matrix, we apply the previous procedure.
+# For the diagonals, I first focus on the bottom left to top right one:
+# I create a new matrix where each row is a diagonal of the original (completed
+# by zeros if necessary). The matrix will have size (ny, nx), where ny is the
+# number of diagonals and nx is the maximum length they can have.
+# To create the matrix, I use the np.diag function with parameter k, going from
+# bottom left (k=-y + 1) to top right (k=x - 1). If any diagonal is shorter
+# than nx, it is completed by zeros.
+# After creating the matrix, we apply the previous procedure.
 
-For the other diagonal, we can just flip the matrix first (np.fliplr) and
-create the matrix as before.
-'''
+# For the other diagonal, we can just flip the matrix first (np.fliplr) and
+# create the matrix as before.

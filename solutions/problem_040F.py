@@ -1,16 +1,15 @@
-'''https://projecteuler.net/problem=40
-An irrational decimal fraction is created by concatenating the positive
-integers:
+'''https://projecteuler.net/problem=40'''
+# An irrational decimal fraction is created by concatenating the positive
+# integers:
 
-            0.123456789101112131415161718192021...
+#           0.123456789101112131415161718192021...
 
-It can be seen that the 12^th digit of the fractional part is 1.
+# It can be seen that the 12^th digit of the fractional part is 1.
 
-If d[n] represents the n^th digit of the fractional part, find the value
-of the following expression.
+# If d[n] represents the n^th digit of the fractional part, find the value
+# of the following expression.
 
-            d[1] * d[10] * d[100] * d[1000] * d[10000] * d[100000] * d[1000000]
-'''
+#           d[1] * d[10] * d[100] * d[1000] * d[10000] * d[100000] * d[1000000]
 from math import prod
 
 
@@ -71,30 +70,28 @@ if __name__ == '__main__':
     print(digit_prod())  # 210, 0.005
 
 
-'''
-#-------#
+# ----- #
 # Notes #
-#-------#
+# ----- #
 
-(1*)
-What is the index of the first digit of the number 10?
-Before 10, there are 9 numbers of length 1 and the indexes begin at 0.
-D = 9*1 = 9
+# (1*)
+# What is the index of the first digit of the number 10?
+# Before 10, there are 9 numbers of length 1 and the indexes begin at 0.
+# D = 9*1 = 9
 
-What is the index of the first digit of the number 100?
-9 numbers of length 1 and 90 of length 2
-D = 9*1 + (99-10+1)*2 = 189
+# What is the index of the first digit of the number 100?
+# 9 numbers of length 1 and 90 of length 2
+# D = 9*1 + (99-10+1)*2 = 189
 
-What is the index of the first digit of the number 1000?
-9 numbers of length 1, 90 of length 2 and 900 of length 3
-D = 9*1 + (99-10+1)*2 + (999-100+1)*3 + 1 = 2889
+# What is the index of the first digit of the number 1000?
+# 9 numbers of length 1, 90 of length 2 and 900 of length 3
+# D = 9*1 + (99-10+1)*2 + (999-100+1)*3 + 1 = 2889
 
-What is the index of the first digit of the number 10^x?
-We just repeat the sum until we reach the desired power of 10.
-D = 9*1 + 9*10*2 + 9*100*3 + ... + 9*10^(x-1)*x =
-= sum(9*10^(i-1)*i for i in range(1, x+1)).
+# What is the index of the first digit of the number 10^x?
+# We just repeat the sum until we reach the desired power of 10.
+# D = 9*1 + 9*10*2 + 9*100*3 + ... + 9*10^(x-1)*x =
+# = sum(9*10^(i-1)*i for i in range(1, x+1)).
 
-So, we can find the last D that is smaller than nth, and then keep adding the
-appropriate number of digits until we surpass nth.
-Once there, we will have a candidate, we only need to find the correct index.
-'''
+# So, we can find the last D that is smaller than nth, and then keep adding the
+# appropriate number of digits until we surpass nth.
+# Once there, we will have a candidate, we only need to find the correct index.

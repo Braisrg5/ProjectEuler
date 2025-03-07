@@ -8,9 +8,9 @@ property.
 Find the lowest sum for a set of five primes for which any two primes
 concatenate to produce another prime.
 '''
-from resources.useful_functions import sieve_Eratosthenes
 from math import log10, floor
 from sympy import isprime
+from resources.useful_functions import sieve_Eratosthenes
 
 
 def concats(nums):
@@ -49,6 +49,7 @@ def prime_pair_sets_v5(n, bound):
                 sol = recursive_helper(n - 1, i, old + [p])
                 if sol is not None:
                     return sol
+        return None
 
     primes_small = sieve_Eratosthenes(bound)[1:]
     num_primes = len(primes_small)
@@ -61,6 +62,8 @@ def prime_pair_sets_v5(n, bound):
                 sol = recursive_helper(n - 2, j, [p1, p2])
                 if sol is not None:
                     return sol
+    # No solution found within the given bound
+    return None
 
 
 if __name__ == '__main__':

@@ -1,10 +1,9 @@
-'''https://projecteuler.net/problem=41
-We shall say that an n-digit number is pandigital if it makes use of all
-the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital
-and is also prime.
+'''https://projecteuler.net/problem=41'''
+# We shall say that an n-digit number is pandigital if it makes use of all
+# the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital
+# and is also prime.
 
-What is the largest n-digit pandigital prime that exists?
-'''
+# What is the largest n-digit pandigital prime that exists?
 from itertools import permutations
 from resources.useful_functions import is_prime
 
@@ -33,16 +32,14 @@ if __name__ == '__main__':
     print(largest_pandigital_prime())  # 7652413, 0.002s
 
 
-'''
-#-------#
+# ----- #
 # Notes #
-#-------#
+# ----- #
 
-(1*)
-For n = 9, 1+2+3+4+5+6+7+8+9 = 45, which is divisible by 3, so not prime.
-For n = 8, 1+2+3+4+5+6+7+8 = 36, which is divisible by 3, so not prime.
-For n = 7, 1+2+3+4+5+6+7 = 28, which is not divisible by 3, so could be prime.
+# (1*)
+# For n = 9, 1+2+3+4+5+6+7+8+9 = 45, which is divisible by 3, so not prime.
+# For n = 8, 1+2+3+4+5+6+7+8 = 36, which is divisible by 3, so not prime.
+# For n = 7, 1+2+3+4+5+6+7 = 28, which is not divisible by 3, so may be prime.
 
-Same goes for n = 6, sum = 21, and n = 5, sum = 15, which are divisible by 3.
-And n = 3, sum = 6, and n = 2, sum = 3.
-'''
+# Same goes for n = 6, sum = 21, and n = 5, sum = 15, which are divisible by 3.
+# And n = 3, sum = 6, and n = 2, sum = 3.

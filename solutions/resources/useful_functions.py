@@ -1,3 +1,4 @@
+'''Module for functions used in many Project Euler problems.'''
 from math import floor, sqrt, ceil, isqrt, prod
 from tqdm import tqdm
 
@@ -19,10 +20,10 @@ def is_prime(n):
     if n == 1:
         return False
     # 2 and 3 are prime numbers
-    elif n in (2, 3):
+    if n in (2, 3):
         return True
     # Check divisibility by 2 and 3
-    elif n % 2 == 0 or n % 3 == 0:
+    if n % 2 == 0 or n % 3 == 0:
         return False
 
     # Only necessary to check until the integer square root of n (1*)
@@ -37,20 +38,22 @@ def is_prime(n):
     return True
 
 
-def prime_factors(n, list_fact=[]):
-    '''Constructs an ordered list of the prime factors of a number n
+def prime_factors(n, list_fact=0):
+    """Constructs an ordered list of the prime factors of a number n
     The factors are generated recursively, starting with an empty list. Once a
     factor is found, it is appended to the list, the number is divided by it
-    and the function rerun '''
+    and the function rerun."""
+    if list_fact == 0:
+        list_fact = []
     # Check until the integer square root of n (1*)
     end = isqrt(n)
     # If n is equal to 1, there are no prime factors
     if n == 1:
         return list_fact
     # If n is even or divisible by 3, the function is called again
-    elif n % 2 == 0:
+    if n % 2 == 0:
         return prime_factors(n // 2, list_fact + [2])
-    elif n % 3 == 0:
+    if n % 3 == 0:
         return prime_factors(n // 3, list_fact + [3])
     # Same as is_prime, it's enough to check the numbers of the form 6*j + 1
     # and 6*j - 1 (2*)
@@ -59,7 +62,7 @@ def prime_factors(n, list_fact=[]):
         p1, p2 = j - 1, j + 1
         if n % p1 == 0:
             return prime_factors(n // p1, list_fact + [p1])
-        elif n % p2 == 0:
+        if n % p2 == 0:
             return prime_factors(n // p2, list_fact + [p2])
     # No more factors found, n is a prime number and the list is returned
     return list_fact + [n]
@@ -68,10 +71,10 @@ def prime_factors(n, list_fact=[]):
 # Same as collections.Counter? Yes
 def counts(ls):
     '''Counts the number of times an element appears on a list.'''
-    counts = dict()
+    count_els = dict()
     for i in ls:
-        counts[i] = counts.get(i, 0) + 1
-    return counts
+        count_els[i] = count_els.get(i, 0) + 1
+    return count_els
 
 
 def digit_sum(n):
@@ -114,36 +117,36 @@ def sum_divisors(n):
     return total
 
 
-def sieve_Eratosthenes_old(N):
+def sieve_Eratosthenes_old(n):  # pylint: disable=invalid-name
     '''Basic implementation of the sieve of Eratosthenes.
     https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'''
-    sieve = [True] * (N+1)
+    sieve = [True] * (n+1)
     sieve[0] = sieve[1] = False
-    for i in range(2, floor(sqrt(N))+1):
+    for i in range(2, floor(sqrt(n))+1):
         if sieve[i]:
-            for j in range(i*i, N+1, i):
+            for j in range(i*i, n+1, i):
                 sieve[j] = False
-    return [i for i in range(2, N+1) if sieve[i]]
+    return [i for i in range(2, n+1) if sieve[i]]
 
 
-def sieve_Eratosthenes(N, progress=False):
+def sieve_Eratosthenes(n, progress=False):  # pylint: disable=invalid-name
     '''Basic implementation of the sieve of Eratosthenes.
     https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'''
-    sieve = bytearray([True]) * (N+1)
+    sieve = bytearray([True]) * (n+1)
     sieve[0] = sieve[1] = False
     if progress:
-        for i in tqdm(range(2, isqrt(N)+1)):
+        for i in tqdm(range(2, isqrt(n)+1)):
             if sieve[i]:
-                sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
+                sieve[i*i:n+1:i] = bytearray([False]) * ((n - i*i)//i + 1)
     else:
-        for i in range(2, isqrt(N)+1):
+        for i in range(2, isqrt(n)+1):
             if sieve[i]:
-                sieve[i*i:N+1:i] = bytearray([False]) * ((N - i*i)//i + 1)
+                sieve[i*i:n+1:i] = bytearray([False]) * ((n - i*i)//i + 1)
     return [i for i, is_prime in enumerate(sieve) if is_prime]
 
 
 # Not working as intended
-def sieve_Pritchards_wheel(N):
+def sieve_Pritchards_wheel(n):  # pylint: disable=invalid-name
     """Sieve of Eratosthenes optimized with a (2,3,5) wheel."""
     primes = [2, 3]
     primes_prod = prod(primes)
@@ -165,7 +168,7 @@ def sieve_Pritchards_wheel(N):
         new_coprimes = [i for i in new_coprimes
                         if i not in [new_prime*j for j in coprimes]]
         coprimes = new_coprimes
-        if new_prime > isqrt(N):
+        if new_prime > isqrt(n):
             break
 
     return sorted(list(set(primes + coprimes)))
@@ -189,96 +192,95 @@ def is_square(s):
 
 
 # Slightly faster
-def is_pentagonal(P):
+def is_pentagonal(p):
     '''Checks if a number is pentagonal.'''
     # Formulas are derived in (3**)
-    return sqrt(1 + 24*P) % 6 == 5
+    return sqrt(1 + 24*p) % 6 == 5
 
 
-def is_hexagonal(H):
+def is_hexagonal(h):
     '''Checks if a number is hexagonal.'''
     # Formulas are derived in (3**)
-    return sqrt(1 + 8*H) % 4 == 3
+    return sqrt(1 + 8*h) % 4 == 3
 
 
-def is_heptagonal(Hp):
+def is_heptagonal(hp):
     '''Checks if a number is heptagonal.'''
-    return sqrt(9 + 40*Hp) % 10 == 7
+    return sqrt(9 + 40*hp) % 10 == 7
 
 
-def is_octagonal(Oc):
+def is_octagonal(oc):
     '''Checks if a number is octagonal.'''
-    return sqrt(4 + 12*Oc) % 6 == 4
+    return sqrt(4 + 12*oc) % 6 == 4
 
 
 def flip_number(n):
+    '''Return n with inverted digits.'''
     return int(str(n)[::-1])
 
 
-'''
-#-------#
+# ----- #
 # Notes #
-#-------#
+# ----- #
 
-(1*)
-For any n, its divisors are always in pairs: if d is a divisor of n,
-then so is D = n//d.
+# (1*)
+# For any n, its divisors are always in pairs: if d is a divisor of n,
+# then so is D = n//d.
 
-If d != D, one of them has to be greater than the square root of n.
-If both are, then d*D > sqrt(n)^2 = n
-If neither is, then d*D < sqrt(n)^2 = n
+# If d != D, one of them has to be greater than the square root of n.
+# If both are, then d*D > sqrt(n)^2 = n
+# If neither is, then d*D < sqrt(n)^2 = n
 
-So, by checking every possible divisor up to sqrt(n) (or isqrt(n)), we will
-necessarily find all of them (or none of them, if the number is prime)
-
-
-(2*)
-For mod 6, the numbers can be organized as follows:
-
-mod 6:  2   3   4   5   0   -1
-
-        2   3   4   5   6   7
-        8   9   10  11  12  13
-        14  15  16  17  18  19
-        20  21...
-
-In the columns 2 and 4, the numbers are always even
-In the column 3, the numbers are always divisible by 3
-In the column 6, the numbers are divisible by 6
-
-That leaves us with the numbers in the columns 5 and -1, which can be
-calculated as 6*j + 1 and 6*j - 1, where j is an integer.
+# So, by checking every possible divisor up to sqrt(n) (or isqrt(n)), we will
+# necessarily find all of them (or none of them, if the number is prime)
 
 
-(3*)
-For triangle numbers, the formula is:
-T(n) = n*(n+1)/2 => n^2 + n - 2T = 0 => n = [-1 +- sqrt(1 + 8T)]/2
-n has to be greater than 0 so we only take the positive root.
-In order for T to be a triangular number, sqrt(1 + 8*2T) must be an integer.
-This is enough because 1+8*2T is odd, and sqrt(odd) = odd (in case it exists)
+# (2*)
+# For mod 6, the numbers can be organized as follows:
 
-For pentagonal numbers, the formula is:
-P(n) = n*(3n - 1)/2 => 3n^2 - n - 2P = 0 => n = [1 + sqrt(1 + 24*P)]/6
-We aren't as lucky as before (sqrt(1 + 24*2) = 7 but 8 is not divisible by 6)
-so we need to check if the whole expression for n is an integer. (3**)
+# mod 6:  2   3   4   5   0   -1
 
-For hexagonal numbers, the formula is:
-H(n) = 2n^2 + n => 2n^2 + n - H = 0 => n = [1 + sqrt(1 + 8*H)]/4
-We also need to check if the whole expression for n is an integer. (3**)
+#         2   3   4   5   6   7
+#         8   9   10  11  12  13
+#         14  15  16  17  18  19
+#         20  21...
+
+# In the columns 2 and 4, the numbers are always even
+# In the column 3, the numbers are always divisible by 3
+# In the column 6, the numbers are divisible by 6
+
+# That leaves us with the numbers in the columns 5 and -1, which can be
+# calculated as 6*j + 1 and 6*j - 1, where j is an integer.
 
 
-(3**)
-For pentagonal numbers, if we take sqrt(1 + 24*P) mod 6, we get sqrt(1). Now,
-what numbers mod 6 are the square root of 1?
+# (3*)
+# For triangle numbers, the formula is:
+# T(n) = n*(n+1)/2 => n^2 + n - 2T = 0 => n = [-1 +- sqrt(1 + 8T)]/2
+# n has to be greater than 0 so we only take the positive root.
+# In order for T to be a triangular number, sqrt(1 + 8*2T) must be an integer.
+# This is enough because 1+8*2T is odd, and sqrt(odd) = odd (in case it exists)
 
-    0*0 = 0; 1*1 = 1; 2*2 = 4; 3*3 = 3; 4*4 = 4; 5*5 = 1
+# For pentagonal numbers, the formula is:
+# P(n) = n*(3n - 1)/2 => 3n^2 - n - 2P = 0 => n = [1 + sqrt(1 + 24*P)]/6
+# We aren't as lucky as before (sqrt(1 + 24*2) = 7 but 8 is not divisible by 6)
+# so we need to check if the whole expression for n is an integer. (3**)
 
-So, sqrt(1) mod 6 = 1 or 5, and in our particular case we are interested when
-it is equal to 5, because then (1 + 5)/6 would be an integer.
+# For hexagonal numbers, the formula is:
+# H(n) = 2n^2 + n => 2n^2 + n - H = 0 => n = [1 + sqrt(1 + 8*H)]/4
+# We also need to check if the whole expression for n is an integer. (3**)
 
-For hexagonal numbers, if we take sqrt(1 + 8*H) mod 4, we also get sqrt(1).
-What numbers mod 4 are the square root of 1?
 
-    0*0 = 0; 1*1 = 1; 2*2 = 0; 3*3 = 1
-So, sqrt(1) mod 4 = 1 or 3, and in our particular case we are interested in 3
-'''
+# (3**)
+# For pentagonal numbers, if we take sqrt(1 + 24*P) mod 6, we get sqrt(1). Now,
+# what numbers mod 6 are the square root of 1?
+
+#     0*0 = 0; 1*1 = 1; 2*2 = 4; 3*3 = 3; 4*4 = 4; 5*5 = 1
+
+# So, sqrt(1) mod 6 = 1 or 5, and in our particular case we are interested when
+# it is equal to 5, because then (1 + 5)/6 would be an integer.
+
+# For hexagonal numbers, if we take sqrt(1 + 8*H) mod 4, we also get sqrt(1).
+# What numbers mod 4 are the square root of 1?
+
+#     0*0 = 0; 1*1 = 1; 2*2 = 0; 3*3 = 1
+# So, sqrt(1) mod 4 = 1 or 3, and in our particular case we are interested in 3

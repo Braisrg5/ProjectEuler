@@ -1,10 +1,9 @@
-'''https://projecteuler.net/problem=52
-It can be seen that the number, 125874, and its double, 251748, contain exactly
-the same digits, but in a different order.
+'''https://projecteuler.net/problem=52'''
+# It can be seen that the number, 125874, and its double, 251748, contain
+# exactly the same digits, but in a different order.
 
-Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
-contain the same digits.
-'''
+# Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
+# contain the same digits.
 
 
 def have_same_digits(numbers):
@@ -41,26 +40,24 @@ if __name__ == '__main__':
     print(smallest_same_digits(6))  # 142857, 0.05s
 
 
-'''
-#-------#
+# ----- #
 # Notes #
-#-------#
+# ----- #
 
-(1*)
-If x has one digit, then:
-            x ∈ [1, 9] -> 6x ∈ [6, 54]
-But 6x has to have one digit as well, so
-            6x ∈ [6, 9] -> x ∈ [1, 9/6]
+# (1*)
+# If x has one digit, then:
+#             x ∈ [1, 9] -> 6x ∈ [6, 54]
+# But 6x has to have one digit as well, so
+#             6x ∈ [6, 9] -> x ∈ [1, 9/6]
 
-If x has two digits, then:
-            x ∈ [10, 99] -> 6x ∈ [60, 594] -> 6x ∈ [60, 99] -> x ∈ [10, 99/6]
+# If x has two digits, then:
+#             x ∈ [10, 99] -> 6x ∈ [60, 594] -> 6x ∈ [60, 99] -> x ∈ [10, 99/6]
 
-if x has three digits, then:
-            x ∈ [100, 999/6]
+# if x has three digits, then:
+#             x ∈ [100, 999/6]
 
-If x has d digits, then:
-            x ∈ [10^(d-1), (10^d - 1)/6]
+# If x has d digits, then:
+#             x ∈ [10^(d-1), (10^d - 1)/6]
 
-To check optimally, for each number of digits, we check if 2x has the same
-digits, then 3x, then 4x, etc.
-'''
+# To check optimally, for each number of digits, we check if 2x has the same
+# digits, then 3x, then 4x, etc.

@@ -1,25 +1,22 @@
-'''https://projecteuler.net/problem=42
+'''https://projecteuler.net/problem=42'''
+# The nth term of the sequence of triangle numbers is given by, tn = ½n(n+1);
+# so the first ten triangle numbers are:
 
-The nth term of the sequence of triangle numbers is given by, tn = ½n(n+1); so
-the first ten triangle numbers are:
+#         1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
 
-        1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+# By converting each letter in a word to a number corresponding to its
+# alphabetical position and adding these values we form a word value. For
+# example, the word value for SKY is 19 + 11 + 25 = 55 = t10. If the word value
+# is a triangle then we shall call the word a triangle word.
 
-By converting each letter in a word to a number corresponding to its
-alphabetical position and adding these values we form a word value. For
-example, the word value for SKY is 19 + 11 + 25 = 55 = t10. If the word value
-is a triangle then we shall call the word a triangle word.
-
-Using words.txt, a 16K text file containing nearly two-thousand common English
-words, how many are triangle words?
-'''
-# is_triangle function explained in detail in useful_functions.py
+# Using words.txt, a 16K text file containing nearly two-thousand common
+# English words, how many are triangle words?
 from resources.useful_functions import is_triangle
 
 
 def load_words(path):
     '''Loads a list of words from a file.'''
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         text = f.read()
     return [word.replace('"', '') for word in text.split(',')]
 

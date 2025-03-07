@@ -1,18 +1,15 @@
-'''https://projecteuler.net/problem=37
-The number 3797 has an interesting property. Being prime itself, it
-is possible to continuously remove digits from left to right, and
-remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work
-from right to left: 3797, 379, 37, and 3.
+'''https://projecteuler.net/problem=37'''
+# The number 3797 has an interesting property. Being prime itself, it
+# is possible to continuously remove digits from left to right, and
+# remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work
+# from right to left: 3797, 379, 37, and 3.
 
-Find the sum of the only eleven primes that are both truncatable from
-left to right and right to left.
+# Find the sum of the only eleven primes that are both truncatable from
+# left to right and right to left.
 
-NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
-'''
-
-
-from resources.useful_functions import is_prime, sieve_Eratosthenes
+# NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 from math import floor, log10
+from resources.useful_functions import is_prime, sieve_Eratosthenes
 
 
 def mod_digits_odd(n):
@@ -20,7 +17,7 @@ def mod_digits_odd(n):
     the first digit is 2.'''
     n = str(n)
     all_odd = all(int(i) % 2 for i in n)
-    first2_all_odd = all(int(i) % 2 for i in n[1:]) and n[0] == '2'
+    first2_all_odd = n[0] == '2' and all(int(i) % 2 for i in n[1:])
     return all_odd or first2_all_odd
 
 
@@ -28,7 +25,7 @@ def check_truncatable(prime):
     '''Returns whether a prime is truncatable.'''
     n_digits = floor(log10(prime))
     reverse = int(str(prime)[::-1])
-    for i in range(n_digits):
+    for _ in range(n_digits):
         prime = prime//10
         if not is_prime(prime):
             return False

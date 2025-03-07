@@ -1,12 +1,11 @@
-'''https://projecteuler.net/problem=13
-Work out the first ten digits of the sum of the one-hundred 50-digit
-numbers from 13_numbers.txt.
-'''
+'''https://projecteuler.net/problem=13'''
+# Work out the first ten digits of the sum of the one-hundred 50-digit
+# numbers from 13_numbers.txt.
 
 
 def load_numbers(path):
     '''Loads the numbers from path.'''
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         numbers = [int(i.replace('\n', '')) for i in file.readlines()]
     return numbers
 

@@ -1,14 +1,13 @@
-'''https://projecteuler.net/problem=49
-The arithmetic sequence, 1487, 4817, 8147, which each of the terms increases
-by 3300, is unusual in two ways: (i) each of the three terms are prime, and,
-(ii) each of the 4-digit numbers are permutations of one another.
+'''https://projecteuler.net/problem=49'''
+# The arithmetic sequence, 1487, 4817, 8147, which each of the terms increases
+# by 3300, is unusual in two ways: (i) each of the three terms are prime, and,
+# (ii) each of the 4-digit numbers are permutations of one another.
 
-There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes,
-exhibiting this property, but there is one other 4-digit increasing sequence.
+# There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes,
+# exhibiting this property, but there is one other 4-digit increasing sequence.
 
-What 12-digit number do you form by concatenating the three terms in this
-sequence?
-'''
+# What 12-digit number do you form by concatenating the three terms in this
+# sequence?
 from itertools import permutations
 from resources.useful_functions import sieve_Eratosthenes
 
@@ -24,12 +23,12 @@ def possible_combinations():
         # Sorted string of the digits (to have uniqueness)
         digitsp = ''.join(sorted(str(p)))
         # The digits are already in the dictionary, skip
-        if digitsp in possible.keys():
+        if digitsp in possible:
             continue
         # The set of all the possible permutations of the prime digits.
-        pot_primes = set([
+        pot_primes = {
             int(''.join(perm)) for perm in list(permutations(digitsp))
-            ])
+        }
         # We only store the prime permutations that are also primes.
         prime_permutations = sorted(n for n in pot_primes if n in primes)
         # And we're only interested in digits that have at least 3 primes.
@@ -62,7 +61,7 @@ def find_sequence():
                 (pi, pj) = primes[i], primes[j]
                 diff = pj - pi
                 # We store the difference and the prime pairs.
-                if diff not in diff_dict.keys():
+                if diff not in diff_dict:
                     diff_dict[diff] = (pi, pj)
                 else:
                     existing_pair = diff_dict[diff]
@@ -70,6 +69,8 @@ def find_sequence():
                     # difference, we have found the solution.
                     if pi in existing_pair or pj in existing_pair:
                         return format_solution(pi, pj, existing_pair)
+    # No solution found.
+    return None
 
 
 if __name__ == '__main__':

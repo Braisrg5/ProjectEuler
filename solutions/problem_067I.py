@@ -18,7 +18,7 @@ billion years to check them all. There is an efficient algorithm to solve it.
 
 def load_triangle(path):
     """Loads the triangle from the path and returns it as an array."""
-    with open(path, "r") as file:
+    with open(path, "r", encoding='utf-8') as file:
         triangle = [[int(j) for j in i.replace("\n", "").split(" ")]
                     for i in file.readlines()
                     ]
@@ -38,5 +38,5 @@ def max_route(triangle):
 
 
 if __name__ == "__main__":
-    triangle = load_triangle("resources/67_triangle.txt")
-    print(max_route(triangle))  # 7273, 0.003s
+    big_triangle = load_triangle("resources/67_triangle.txt")
+    print(max_route(big_triangle))  # 7273, 0.003s

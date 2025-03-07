@@ -1,22 +1,23 @@
-'''https://projecteuler.net/problem=33
-The fraction 49/98 is a curious fraction, as an inexperienced mathematician in
-attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is
-correct, is obtained by cancelling the 9s.
+'''https://projecteuler.net/problem=33'''
+# The fraction 49/98 is a curious fraction, as an inexperienced mathematician
+# in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which
+# is correct, is obtained by cancelling the 9s.
 
-We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+# We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
 
-There are exactly four non-trivial examples of this type of fraction, less than
-one in value, and containing two digits in the numerator and denominator.
+# There are exactly four non-trivial examples of this type of fraction, less
+# than one in value, and containing two digits in the numerator and
+# denominator.
 
-If the product of these four fractions is given in its lowest common terms,
-find the value of the denominator.
-'''
+# If the product of these four fractions is given in its lowest common terms,
+# find the value of the denominator.
 from fractions import Fraction
-from functools import reduce
+from math import prod
 
 
 def check_fraction(str_n, str_d, s):
-    '''Checks if a fraction has the property.'''
+    '''Checks if a fraction with digit s in both numerator and denominator has
+    the property explained before.'''
     # Cancel out the common digit in the numerator and denominator
     str_d_rp = str_d.replace(s, '', 1)
     str_n_rp = str_n.replace(s, '', 1)
@@ -28,10 +29,12 @@ def check_fraction(str_n, str_d, s):
 
 def find_fractions():
     '''Finds the previously described fractions.'''
+    # Exclude 10/10 and 11/11
     for d in range(12, 99):
         # This are considered trivial, thus they are skipped
         if d % 10 == 0:
             continue
+        # Less than 1 in value (n < d)
         for n in range(11, d):
             # This are considered trivial, thus they are skipped
             if n % 10 == 0:
@@ -47,13 +50,13 @@ def find_fractions():
 def denominator_product():
     '''Returns the denominator of the product of the fractions which can be
     simplified as explained in the statement.'''
-    fractions = list(find_fractions())  # {'49/98', '19/95', '16/64', '26/65'}
+    fractions = list(find_fractions())  # ['49/98', '19/95', '16/64', '26/65']
     # Concert the solutions from str to Fraction
     fractions = [Fraction(f) for f in fractions]
     # Find out the product of the fractions
-    prod = reduce(lambda x, y: x*y, fractions)
+    product = prod(fractions)
     # Return the denominator
-    return prod.denominator
+    return product.denominator
 
 
 if __name__ == '__main__':
