@@ -80,7 +80,7 @@ class Hand:
         suits = [card[1] for card in self.cards]
         return vals, num_vals, suits
 
-    def _flush_and_straight(self):
+    def flush_and_straight(self):
         '''Helper function to self.calculate_rank.
         Checks all possible combinations of flush and straight.'''
         rank, max_val, rest_vals = '', -1, []
@@ -123,7 +123,7 @@ class Hand:
         rank_val = self.order_ranks[rank]
         return (rank, rank_val, max_val, rest_vals)
 
-    def _rank_repeated_cards(self, rank, rank_val, max_val, rest_vals):
+    def rank_repeated_cards(self, rank, rank_val, max_val, rest_vals):
         '''Helper function to self.calculate_rank.
         Looks for repeated cards and assigns the appropriate rank.'''
         count_num_vals = Counter(self.num_vals)
@@ -177,13 +177,13 @@ class Hand:
     def calculate_rank(self):
         '''Calculates and returns the rank of the hand.'''
         # Ranks and values obtained from flush and straight
-        (rank, rank_val, max_val, rest_vals) = self._flush_and_straight()
+        (rank, rank_val, max_val, rest_vals) = self.flush_and_straight()
 
         # Not Royal Flush or Straight Flush
         if rank_val <= 8:
             # Ranks and values obtained from checking repeating cards
             (rank, rank_val, max_val, rest_vals
-             ) = self._rank_repeated_cards(rank, rank_val, max_val, rest_vals)
+             ) = self.rank_repeated_cards(rank, rank_val, max_val, rest_vals)
         return (rank, rank_val, max_val, rest_vals)
 
 
