@@ -39,31 +39,7 @@
 
 # How many continued fractions for N <= 10000 have an odd period?
 from math import sqrt
-
-
-def period_for_root(n):
-    '''Finds the first and repeating elements in the continued fraction of
-    sqrt(n). This function is explained further in (1*).'''
-    sqrt_n = sqrt(n)
-    if not sqrt_n.is_integer():
-        # Initialize the variables for the continued fraction
-        a0 = int(sqrt_n)
-        yield a0
-        ak = a0
-        base, ck = 1, ak
-
-        while True:
-            # Base for the kth fraction
-            base = (n - ck**2)/base
-            # kth element of the period
-            ak = int((sqrt_n + ck)/base)
-            yield ak
-            # Stop condition
-            # https://en.wikipedia.org/wiki/Periodic_continued_fraction#Reduced_surds # noqa
-            if ak == 2*a0:
-                break
-            # Value in the remaining fraction that is subtracted from sqrt(n)
-            ck = ak*base - ck
+from resources.useful_functions import period_for_root
 
 
 def odd_period_roots(bound):
@@ -71,9 +47,11 @@ def odd_period_roots(bound):
     period when N <= bound.'''
     count = 0
     for n in range(2, bound + 1):
-        period = max(len(list(period_for_root(n))) - 1, 0)
-        # Sum if the period is odd
-        count += (period % 2 == 1)
+        # Exclude perfect squares
+        if sqrt(n) % 1 != 0:
+            period = len(period_for_root(n)) - 1
+            # Sum if the period is odd
+            count += (period % 2 == 1)
     return count
 
 

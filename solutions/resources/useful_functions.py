@@ -1,5 +1,6 @@
 '''Module for functions used in many Project Euler problems.'''
 from math import floor, sqrt, ceil, isqrt, prod, gcd
+from fractions import Fraction
 from tqdm import tqdm
 
 
@@ -239,7 +240,6 @@ def generate_primitive_pythagorean_triples(p):
                 b = 2*m*n
                 c = m**2 + n**2
                 ppt.append(set((a, b, c)))
-    print("DONE 1")
     return ppt
 
 
@@ -258,7 +258,6 @@ def generate_pythagorean_triples(bound):
         while k*perimeter <= bound:
             pt.append(set((k*a, k*b, k*c)))
             k += 1
-    print("DONE 2")
     return pt
 
 
@@ -278,8 +277,43 @@ def count_pyth_triples(bound):
         else:
             # Increment the count for the perimeter if already found
             num_pt[p] += 1
-    print("DONE 3")
     return num_pt
+
+
+def period_for_root(n):
+    '''Finds the first and repeating elements in the continued fraction of
+    sqrt(n). This function is explained further in (1*).'''
+    sqrt_n = sqrt(n)
+    terms = []
+    if not sqrt_n.is_integer():
+        # Initialize the variables for the continued fraction
+        a0 = int(sqrt_n)
+        terms.append(a0)
+        ak = a0
+        base, ck = 1, ak
+
+        while True:
+            # Base for the kth fraction
+            base = (n - ck**2)/base
+            # kth element of the period
+            ak = int((sqrt_n + ck)/base)
+            terms.append(ak)
+            # Stop condition
+            # https://en.wikipedia.org/wiki/Periodic_continued_fraction#Reduced_surds # noqa
+            if ak == 2*a0:
+                break
+            # Value in the remaining fraction that is subtracted from sqrt(n)
+            ck = ak*base - ck
+    return terms
+
+
+def recurring_convergents(terms):
+    '''Finds the nth convergent of the continued fraction of a number,
+    where terms are the elements of the continued fraction up to n.
+    This function is explained in (1*).'''
+    if len(terms) > 1:
+        return terms[0] + Fraction(1, recurring_convergents(terms[1:]))
+    return terms[0]
 
 
 # ----- #

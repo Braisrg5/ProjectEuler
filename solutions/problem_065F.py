@@ -30,8 +30,7 @@
 
 # Find the sum of digits in the numerator of the 100th convergent of the
 # continued fraction for e.
-from fractions import Fraction
-from resources.useful_functions import digit_sum
+from resources.useful_functions import digit_sum, recurring_convergents
 
 
 def cont_fraction_e(n):
@@ -50,15 +49,6 @@ def cont_fraction_e(n):
         else:
             cont_fraction.append(1)
     return cont_fraction
-
-
-def recurring_convergents(terms):
-    '''Finds the nth convergent of the continued fraction of a number,
-    where terms are the elements of the continued fraction up to n.
-    This function is explained in (1*).'''
-    if len(terms) > 1:
-        return terms[0] + Fraction(1, recurring_convergents(terms[1:]))
-    return terms[0]
 
 
 def convergent_e(n):
