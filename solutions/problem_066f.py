@@ -73,6 +73,7 @@ if __name__ == '__main__':
     print(max_x_minimal_solutions(7))  # 5
     print(max_x_minimal_solutions(1000))  # 661, 0.02s
 
+
 # ----- #
 # Notes #
 # ----- #
