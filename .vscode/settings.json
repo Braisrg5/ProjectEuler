@@ -10,6 +10,7 @@
         "digitsp",
         "eigh",
         "fliplr",
+        "linalg",
         "Lychrel",
         "Lychrels",
         "Pell's",
