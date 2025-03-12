@@ -316,6 +316,27 @@ def recurring_convergents(terms):
     return terms[0]
 
 
+def sieve_totient(bound):
+    '''Calculates Euler's totient function up to bound.'''
+    phi = [0] * (bound+1)
+    phi[0] = 0
+    phi[1] = 1
+    for i in range(2, bound):
+        if phi[i] == 0:
+            phi[i] = i - 1
+            for j in range(i+i, bound+1, i):
+                if phi[j] == 0:
+                    phi[j] = phi[i]
+                else:
+                    phi[j] *= phi[i]
+            i_pow = i*i
+            while i_pow <= bound:
+                for j in range(i_pow, bound+1, i_pow):
+                    phi[j] *= i
+                i_pow *= i
+    return phi
+
+
 # ----- #
 # Notes #
 # ----- #

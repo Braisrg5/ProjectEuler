@@ -26,11 +26,8 @@
 # Using the numbers 1 to 10, and depending on arrangements, it is possible to
 # form 16- and 17-digit strings. What is the maximum 16-digit string for a
 # "magic" 5-gon ring?
-
 # See resources/0068_2.png
 from itertools import permutations
-from time import perf_counter
-from tqdm import tqdm
 import numpy as np
 
 
@@ -52,8 +49,7 @@ def lowest_permutations(n):
 def remove_permutations(perms):
     '''For the special case n=5, removes the permutations of the external nodes
     that don't contain the number 10, as seen in (1.2*)'''
-    perms = [perm for perm in perms if any(el == 10 for el in perm)]
-    return perms
+    return [perm for perm in perms if any(el == 10 for el in perm)]
 
 
 def check_permutation(perm, n, limits, a):
@@ -84,7 +80,9 @@ def ngon_permutations(n):
     if n == 5:
         perms = remove_permutations(perms)
 
-    limits = (6, sum(range(2*n, 2*n-3, -1)))
+    # Limits for the sums are (1+2+3) and (2n + 2n - 1 + 2n - 2)
+    limits = (6, 3*(2*n - 1))
+
     # Creation of matrix A
     x = np.zeros(n)
     x[:2] = 1
@@ -92,10 +90,13 @@ def ngon_permutations(n):
     for shift in range(1, n):
         a = np.vstack([a, np.roll(x, shift)])
 
+    # List of permutations that solve the system and are 'pandigital 1-10'
     pandigital_perms = []
-    for perm in tqdm(perms):
+    for perm in perms:
         internal = check_permutation(perm, n, limits, a)
+        # If the permutation is valid
         if internal:
+            # Concatenate the sums
             digit_string = ''
             for i, el in enumerate(perm):
                 if i == (n-1):
@@ -110,54 +111,65 @@ def ngon_permutations(n):
 
 def check_permutation_v2(ext_perm, rest_perms):
     '''Checks if a permutation of the external nodes is valid by checking if
-    there exists a permutation of the rest of the values'''
+    there exists a permutation of the rest of the values for which the 5-gon
+    ring is "magic".
+    If so, returns the concatenation of the sums and the value of each.'''
+    # Values for the external nodes
     x1, x2, x3, x4, x5 = ext_perm
     for int_perm in rest_perms:
+        # Values for the internal nodes
         a, b, c, d, e = int_perm
+
+        # First sum
         val = x1 + a + b
-        if (
-            x2 + b + c == val and x3 + c + d == val and
-            x4 + d + e == val and x5 + e + a == val
-        ):
-            return int_perm
+        # Check if the rest of the sums equal the same value
+        if (x2 + b + c == val and x3 + c + d == val and
+                x4 + d + e == val and x5 + e + a == val):
+            # Concatenate the sums
+            sum_string = str(x1) + str(a) + str(b)
+            sum_string += str(x2) + str(b) + str(c)
+            sum_string += str(x3) + str(c) + str(d)
+            sum_string += str(x4) + str(d) + str(e)
+            sum_string += str(x5) + str(e) + str(a)
+            return sum_string, val
     return False
 
 
 # Optimized case for n == 5
 def five_gon_permutations():
     '''Finds all the possible ordered sets of the elements 1-10 for which a
-    "magic" 5-gon ring is possible.
+    "magic" 5-gon ring is possible with 10 in one of the external nodes.
     Returns the maximum 16-digit string for a "magic" 5-gon ring.'''
-    n = 5
-    nums = set(range(1, 2*n+1))
-    perms = lowest_permutations(n)
+    # Numbers in the n-gon ring
+    nums = set(range(1, 2*5+1))
+
+    # All the permutations of the external nodes
+    perms = lowest_permutations(5)
+    # Remove permutations where 10 is not in the external nodes
     perms = remove_permutations(perms)
 
-    valid = []
+    # Dictionary of existing sum strings
+    valid = {}
     for perm in perms:
-        rest = list(nums-set(perm))
-        rest_perms = permutations(rest)
-        internal = check_permutation_v2(perm, rest_perms)
-        if internal:
-            digit_string = ''
-            for i, node in enumerate(perm):
-                if i == (n-1):
-                    str_sum = str(node) + str(internal[n-1]) + str(internal[0])
-                    digit_string += str_sum
-                else:
-                    str_sum = str(node) + str(internal[i]) + str(internal[i+1])
-                    digit_string += str_sum
-            valid.append(int(digit_string))
+        # Values for the internal nodes
+        internal = list(nums-set(perm))
+        # All possible permutations of the internal nodes
+        internal_perms = permutations(internal)
+
+        # Finds whether any of the permutations forms a "magic" 5-gon ring
+        string_val = check_permutation_v2(perm, internal_perms)
+        if string_val:
+            sum_string = string_val[0]
+            val = string_val[1]
+            # Add the sum string and the value of the sums to the dictionary
+            valid[int(sum_string)] = val
+    # Return the maximum 16-digit string
     return max(valid)
 
 
 if __name__ == '__main__':
-    start = perf_counter()
-    print(ngon_permutations(3))  # 6531031914842725: 14
-    print(perf_counter() - start)
-    start = perf_counter()
-    print(five_gon_permutations())  # 14870663820: 14
-    print(perf_counter() - start)
+    print(ngon_permutations(3))  # 432621513
+    print(five_gon_permutations())  # 6531031914842725, 0.04s
 
 
 # ----- #
@@ -185,6 +197,8 @@ if __name__ == '__main__':
 #                         d + e = t - x4 = y4
 #             a               e = t - x5 = y5
 # where (a, b, c, d, e) are the vertices of the inside pentagon.
+# This system can be expressed by A*v = y, where A is the pertinent matrix, v
+# is the vector (a, b, c, d, e)^t and y = (y1, y2, y3, y4, y5)^t.
 
 # With a bit of Algebra (or a lot), we can find the general solution for this
 # system of equations:
@@ -220,3 +234,17 @@ if __name__ == '__main__':
 # Elements x1,...,x5 each appear once, and the inside nodes each appear twice.
 # To have a 16-digit string, 10 has to be one of the x1,...,x5 elements,
 # further reducing the permutations we have to check.
+
+
+# (2*)
+# Another option is, considering all of the above, instead of trying to solve
+# the system for each permutation and each n, we could:
+#       i.- Generate all of the permutations of the external nodes where the
+#       first element is the lowest and 10 is one of the elements.
+#       ii.- For each permutation of the external nodes, generate all of the
+#       permutations of the internal nodes
+#           ii.i.- For each pair of permutations of the external and internal
+#           nodes, check whether the formed 5-gon ring is magic, i.e., if the
+#           5 pertinent sums add to the same value.
+# This turns out to be faster, because I didn't find an easy way to limit the
+# possible values t for the sums.
