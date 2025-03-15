@@ -15,8 +15,8 @@ from math import ceil, gcd
 
 
 def left_frac_v2(og_n, og_d, max_d):
-    '''Finds the reduced fraction immediately to the left of n/d (which we
-    assume is a reduced fraction) for d <= max_d.'''
+    '''Finds the reduced fraction immediately to the left of n/d for
+    d <= max_d.'''
     closest = (0, 1)
     for d in range(2, max_d+1):
         n_inf = ceil(closest[0]*d/closest[1])
@@ -27,5 +27,23 @@ def left_frac_v2(og_n, og_d, max_d):
     return closest
 
 
+def left_frac_v3(a, b, max_d):
+    '''Finds the reduced fraction immediately to the left of n/d for
+    d <= max_d.'''
+    best_n, best_d = 0, 1
+    d, min_d = max_d, 1
+    while d >= min_d:
+        n = (a*d - 1)//b
+        if best_n*d < n*best_d:
+            best_n, best_d = n, d
+            delta = a*d - b*n
+            min_d = d//delta + 1
+        d -= 1
+    return best_n, best_d
+
+
 if __name__ == '__main__':
-    print(left_frac_v2(3, 7, 1000000))  # 428570, 0.31s
+    from time import perf_counter
+    start = perf_counter()
+    print(left_frac_v3(74, 75, 10**27))  # 428570, 0.31s
+    print(f'Calculation completed in {perf_counter()-start} seconds')

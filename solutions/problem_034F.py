@@ -39,7 +39,7 @@ def transform(combs):
 def sum_sum_factorial_v2(bound):
     '''Finds the sum of the numbers that are the sum of the factorials of their
     digits.'''
-    # Generate all combinations of the factorials of numbers 1 to 9,
+    # Generate all the factorials of numbers 1 to 9
     factorials = [factorial(i) for i in range(1, 10)]
     # The max number of digits for a number to have the property
     digits_lim = floor(log10(bound)) + 1
@@ -59,7 +59,7 @@ def sum_sum_factorial_v2(bound):
         # The number has to be at least 10 and have the property
         if num >= 10 and is_sum_digit_factorial(num, [1] + factorials):
             sum_factorial.append(num)
-    return sum(sum_factorial)
+    return sum_factorial
 
 
 if __name__ == '__main__':
