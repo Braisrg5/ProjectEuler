@@ -45,9 +45,14 @@ def problem_57(bound):
     return count
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(problem_57(8))  # 1
     print(problem_57(1000))  # 153, 0.013s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

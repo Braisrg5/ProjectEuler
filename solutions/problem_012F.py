@@ -39,6 +39,11 @@ def div_triangle_number(d):
     return int(t)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(div_triangle_number(5))  # 28
     print(div_triangle_number(500))  # 76576500, 0.11s
+
+
+if __name__ == '__main__':
+    main()

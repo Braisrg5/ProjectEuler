@@ -5,6 +5,11 @@
 from resources.useful_functions import prime_factors
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(prime_factors(13195))  # [5, 7, 13, 29]
     print(prime_factors(600851475143))  # [71, 839, 1471, 6857], 0.0s
+
+
+if __name__ == '__main__':
+    main()

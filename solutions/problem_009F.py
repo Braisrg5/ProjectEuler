@@ -20,9 +20,14 @@ def find_triplet(n):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     a, b, c = find_triplet(1000)  # (200, 375, 425)
     print(a * b * c)  # 31875000, 0.015s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

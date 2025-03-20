@@ -27,7 +27,12 @@ def calc_sum_last_ten_digits(bound, builtin=False):
     return series
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     # Compensate for the MOD
     print(calc_sum_last_ten_digits(10)+10**10)  # 10405071317
     print(calc_sum_last_ten_digits(1000))  # 9110846700, 0.04s
+
+
+if __name__ == '__main__':
+    main()

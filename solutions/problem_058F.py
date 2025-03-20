@@ -44,9 +44,14 @@ def elements_diags(target_ratio=float('-inf'), target_dim=-1):
     return dim, ratio
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(elements_diags(target_dim=7))  # (7, 0.615)
     print(elements_diags(target_ratio=0.1))  # (26241, 0.0999), 0.068s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

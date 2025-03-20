@@ -56,8 +56,13 @@ def missing_odd_composite(bound):
     return set(composite)-set(ptwicesq)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(missing_odd_composite(6000))  # 5777, 0.004s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

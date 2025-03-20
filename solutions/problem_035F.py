@@ -39,7 +39,12 @@ def circular_primes_v4(bound):
     return len(circ_primes)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(rotate_number(197))  # [197, 971, 719]
     print(circular_primes_v4(100))  # 13
     print(circular_primes_v4(1000000))  # 55, 0.13s
+
+
+if __name__ == '__main__':
+    main()

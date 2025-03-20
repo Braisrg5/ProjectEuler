@@ -17,8 +17,13 @@ def n_digit_power():
     return count
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(n_digit_power())  # 49, 0.000s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -17,12 +17,14 @@
 
 # Given that L is the length of the wire, for how many values of L <= 1500000
 # can exactly one integer sided right angle triangle be formed?
-from time import perf_counter
 from resources.useful_functions import count_pyth_triples
 
 
-if __name__ == '__main__':
-    start = perf_counter()
+def main():
+    '''Main code of module.'''
     ways = count_pyth_triples(1500000)
     print(sum(1 for way in ways.values() if way == 1))  # 161667, 2.5s
-    print(perf_counter() - start)
+
+
+if __name__ == '__main__':
+    main()

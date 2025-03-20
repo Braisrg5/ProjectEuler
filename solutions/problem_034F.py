@@ -62,10 +62,15 @@ def sum_sum_factorial_v2(bound):
     return sum_factorial
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(is_sum_digit_factorial(145))  # True
     # print(sum_sum_factorial(2540160))  # 40730, 3.17s
     print(sum_sum_factorial_v2(2540160))  # 40730, 0.06s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

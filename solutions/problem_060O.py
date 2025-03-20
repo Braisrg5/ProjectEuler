@@ -66,6 +66,11 @@ def prime_pair_sets_v5(n, bound):
     return None
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     # Sympy's isprime function
     print(prime_pair_sets_v5(5, 10000))  # 26033, 2.40s
+
+
+if __name__ == '__main__':
+    main()

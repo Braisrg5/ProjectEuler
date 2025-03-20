@@ -42,9 +42,14 @@ def sum_sum_nth_pows(n):
     return total
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sum_sum_nth_pows(4))  # 19316
     print(sum_sum_nth_pows(5))  # 443839, 0.29s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

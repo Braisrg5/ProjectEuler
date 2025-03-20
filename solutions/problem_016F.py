@@ -5,7 +5,12 @@
 from resources.useful_functions import digit_sum
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(digit_sum(2**15))  # 26
     # Computers are strong
     print(digit_sum(2**1000))  # 1366, 0.0s
+
+
+if __name__ == '__main__':
+    main()

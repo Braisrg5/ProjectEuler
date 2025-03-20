@@ -94,5 +94,10 @@ def find_cyclic_nums():
             return cyclic
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_cyclic_nums())  # 28684, 0.014s
+
+
+if __name__ == '__main__':
+    main()

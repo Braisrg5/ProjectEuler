@@ -42,8 +42,13 @@ def pent_pair(bound):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(pent_pair(1827553))  # 5482660, 5.85s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

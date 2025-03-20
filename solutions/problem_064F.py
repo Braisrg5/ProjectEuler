@@ -55,9 +55,14 @@ def odd_period_roots(bound):
     return count
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(odd_period_roots(13))  # 4
     print(odd_period_roots(10000))  # 1322, 0.05s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

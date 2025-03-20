@@ -22,5 +22,10 @@ def palindrome_sum_v2(bound):
     return s
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(palindrome_sum_v2(1000000))  # 872187, 0.19s
+
+
+if __name__ == '__main__':
+    main()

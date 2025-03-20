@@ -37,7 +37,8 @@ def max_route(triangle):
     return accumulated[0]
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     small_triangle = [
         [3],
         [7, 4],
@@ -47,3 +48,7 @@ if __name__ == '__main__':
     print(max_route(small_triangle))  # 23
     big_triangle = load_triangle('resources/18_triangle.txt')
     print(max_route(big_triangle))  # 1074, 0.0002s
+
+
+if __name__ == '__main__':
+    main()

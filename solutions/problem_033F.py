@@ -59,6 +59,11 @@ def denominator_product():
     return product.denominator
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(check_fraction('49', '98', '9'))  # True
     print(denominator_product())  # 100, 0.002s
+
+
+if __name__ == '__main__':
+    main()

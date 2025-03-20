@@ -15,6 +15,11 @@ def nth_prime_v2(n):
     return primes[n-1]
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(nth_prime_v2(6))  # 13
     print(nth_prime_v2(10001))  # 104743, 0.007s
+
+
+if __name__ == '__main__':
+    main()

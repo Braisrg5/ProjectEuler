@@ -82,6 +82,11 @@ def sum_truncatable_primes_v3(bound):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(check_truncatable(3797))  # True
     print(sum_truncatable_primes_v3(800000))  # 748317, 0.09s
+
+
+if __name__ == '__main__':
+    main()

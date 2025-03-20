@@ -34,9 +34,14 @@ def prod_adj_dig(n):
     return biggest
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(prod_adj_dig(4))  # 5832
     print(prod_adj_dig(13))  # 23514624000, 0.003s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

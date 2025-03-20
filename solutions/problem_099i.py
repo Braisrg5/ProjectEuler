@@ -37,5 +37,10 @@ def find_biggest(path):
     return target
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_biggest('resources/0099_base_exp.txt'))  # 709, 0.001s
+
+
+if __name__ == '__main__':
+    main()

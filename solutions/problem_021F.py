@@ -32,7 +32,12 @@ def sum_amicables(bound):
     return sum(i for i in range(1, bound) if is_amicable(i))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(is_amicable(284))  # True
     print(is_amicable(220))  # True
     print(sum_amicables(10000))  # 31626, 0.08s
+
+
+if __name__ == '__main__':
+    main()

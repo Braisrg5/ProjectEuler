@@ -167,9 +167,14 @@ def five_gon_permutations():
     return max(valid)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(ngon_permutations(3))  # 432621513
     print(five_gon_permutations())  # 6531031914842725, 0.04s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

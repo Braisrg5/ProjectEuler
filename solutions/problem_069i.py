@@ -72,10 +72,15 @@ def totient_values_v2(bound, bound_primes=100):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(totient_values(10))  # 6
     # print(totient_values(1000000))  # 510510, 30mins xd
     print(totient_values_v2(1000000))  # 510510, 0.000s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

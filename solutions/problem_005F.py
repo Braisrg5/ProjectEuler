@@ -42,6 +42,11 @@ def lcm_to_number(n):
     return lcm(list(range(1, n+1)))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(lcm_to_number(10))  # 2520
     print(lcm_to_number(20))  # 232792560, 0.0s
+
+
+if __name__ == '__main__':
+    main()

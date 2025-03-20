@@ -12,35 +12,49 @@ def process_file(file_path):
             main_block_start = i
             break
     else:
-        raise Exception(f"if __name__ == '__main__' not found in {file_path}")
+        raise NotImplementedError(
+            f"if __name__ == '__main__' not found in {file_path}"
+            )
 
     if main_block_start is None:
         return  # Skip files without `if __name__ == '__main__':`
 
     # Extract indentation
-    indent_match = re.match(r"(\s*)if\s+__name__\s*==\s*['\"]__main__['\"]\s*:", content[main_block_start])
+    indent_match = re.match(
+        r"(\s*)if\s+__name__\s*==\s*['\"]__main__['\"]\s*:",
+        content[main_block_start])
     indent = indent_match.group(1) if indent_match else ""
 
     # Collect lines inside `if __name__ == '__main__':`
     main_code = []
+    main_block_end = None
     for i in range(main_block_start + 1, len(content)):
         if content[i].strip() == "":
             main_code.append(content[i])  # Preserve blank lines
             continue
-        if not content[i].startswith(indent + "    "):  # Stop when indentation level changes
+        # Stop when indentation level changes
+        if not content[i].startswith(indent + "    "):
+            main_block_end = i
             break
-        main_code.append(content[i][len(indent):])  # Remove one level of indentation
+        # Remove one level of indentation
+        main_code.append(content[i][len(indent):])
 
     if not main_code:
         return  # Skip if there's no meaningful content
 
     # Construct new content
-    new_content = content[:main_block_start]  # Keep everything before the `if __name__`
+    # Keep everything before the `if __name__`
+    new_content = content[:main_block_start]
     new_content.append("def main():\n")
     new_content.append("    '''Main code of module.'''\n")
     new_content.extend(main_code)
     new_content.append("if __name__ == '__main__':\n")
     new_content.append("    main()\n")
+
+    # Add the remaining content after the `if __name__` block
+    if main_block_end is not None:
+        new_content.append("\n\n")
+        new_content.extend(content[main_block_end:])
 
     with open(file_path.lower(), 'w', encoding='utf-8') as f:
         f.writelines(new_content)
@@ -55,4 +69,6 @@ def process_directory(directory):
                 process_file(os.path.join(root, file))
 
 
-process_directory('C:/Users/PC/Documents/Programación/Python/ProjectEuler/solutions')
+# process_file("problem_001F.py")
+process_directory('C:/Users/a3592/OneDrive - INSTRUMENTACION Y COMPONENTES SA'
+                  + '/Documentos/Python/ProjectEuler/solutions')

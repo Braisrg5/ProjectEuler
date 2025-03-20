@@ -60,10 +60,15 @@ def permuted_min_ratio_v2(bound):
     return obj_n, min_ratio
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     # init = perf_counter()
     # print(permuted_min_ratio(10000000))  # 8319823, 6.67s
     # print(f"Calculation completed in {perf_counter()-init} seconds")
     init = perf_counter()
     print(permuted_min_ratio_v2(10000000))  # 8319823, 0.48s
     print(f"Calculation completed in {perf_counter()-init} seconds")
+
+
+if __name__ == '__main__':
+    main()

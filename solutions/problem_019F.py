@@ -55,8 +55,13 @@ def sundays_twentieth_century():
     return sundays
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sundays_twentieth_century())  # 171, 0.000s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

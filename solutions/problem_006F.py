@@ -21,6 +21,11 @@ def diff_squares(n):
     return sum_squared - sum_of_squares
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(diff_squares(10))  # 2640
     print(diff_squares(100))  # 25164150, 0.0s
+
+
+if __name__ == '__main__':
+    main()

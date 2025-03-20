@@ -63,9 +63,14 @@ def convergent_e(n):
     return digit_sum(numerator)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(convergent_e(10))  # 17
     print(convergent_e(100))  # 272, 0.000s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -333,7 +333,8 @@ def find_prime_10(max_digs):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_prime_v3(6, max_digs=6))  # (13, '*X')
     print(find_prime_v3(7, max_digs=6))  # (56003, 'XX**X')
     # Optimization for the case x = 8
@@ -343,6 +344,10 @@ if __name__ == '__main__':
     # Can't use sieve, need different approach
     # print('Test with x = 10')
     # print(find_prime_10(max_digs=11))
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

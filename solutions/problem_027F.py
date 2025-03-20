@@ -78,10 +78,15 @@ def max_cons_primes_v2(bound):
     return pair[0] * pair[1]
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(consecutive_primes(1, 41))  # 40
     print(consecutive_primes(-79, 1601))  # 80
     print(max_cons_primes_v2(1000))  # (-61, 971), 0.04s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

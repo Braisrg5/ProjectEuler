@@ -87,6 +87,11 @@ def sum_letters(n):
     return sum(num_to_letter_count(i) for i in range(1, n + 1))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sum_letters(5))  # 19
     print(sum_letters(1000))  # 21124, 0.002s
+
+
+if __name__ == '__main__':
+    main()

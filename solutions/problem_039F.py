@@ -14,10 +14,15 @@ def max_pyth_triples(num_pt):
     return max(num_pt, key=num_pt.get)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     triples_under_1000 = count_pyth_triples(1000)
     print(triples_under_1000[120])  # 3
     print(max_pyth_triples(triples_under_1000))  # 840, 0.0004s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

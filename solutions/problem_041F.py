@@ -28,8 +28,13 @@ def largest_pandigital_prime():
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(largest_pandigital_prime())  # 7652413, 0.002s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

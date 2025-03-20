@@ -41,8 +41,13 @@ def sum_triangle_words():
     return sum(is_triangle(num) for num in nums)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     value = transform_to_num(['SKY'])[0]
     print(value)  # 55
     print(is_triangle(value))  # True
     print(sum_triangle_words())  # 162, 0.001s
+
+
+if __name__ == '__main__':
+    main()

@@ -73,5 +73,10 @@ def find_sequence():
     return None
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_sequence())  # 296962999629, 0.1s
+
+
+if __name__ == '__main__':
+    main()

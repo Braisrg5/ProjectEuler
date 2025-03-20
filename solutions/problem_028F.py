@@ -41,9 +41,14 @@ def sum_diags_v2(n):
     return s
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sum_diags_v2(5))  # 101
     print(sum_diags_v2(1001))  # 669171001, 0.0004s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

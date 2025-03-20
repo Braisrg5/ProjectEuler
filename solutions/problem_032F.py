@@ -51,9 +51,14 @@ def pandigital_products_v2():
     return sum(solutions)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(check_2nd('391867254'))  # True
     print(pandigital_products_v2())  # 45228, 0.019s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -16,5 +16,10 @@ def sum_numbers():
     return sum(load_numbers('resources/13_numbers.txt'))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(str(sum_numbers())[:10])  # 5537376230, 0.0004s
+
+
+if __name__ == '__main__':
+    main()

@@ -45,9 +45,14 @@ def combinatorics_greater_v2(bound, ncr_bound, start=1):
     return total_count
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     # Much faster for bigger values
     print(combinatorics_greater_v2(100, 1000000, start=23))  # 4075, 0.000
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

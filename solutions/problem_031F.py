@@ -32,6 +32,11 @@ def recursive_coin_count(pence, rest_coins, ways=0):
     return ways
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     coins = [200, 100, 50, 20, 10, 5, 2, 1]
     print(recursive_coin_count(200, coins))  # 73683, 0.039s
+
+
+if __name__ == '__main__':
+    main()

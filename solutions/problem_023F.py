@@ -48,8 +48,13 @@ def not_sum_abundants_v3(n):
     return sum(i for i in range(1, n+1) if not is_sum_abundants(i, abundants))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(not_sum_abundants_v3(28123))  # 4179871, 0.55s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

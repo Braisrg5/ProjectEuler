@@ -50,7 +50,12 @@ def distinct_pf(x, upper, lower=0):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(distinct_pf(2, 100))  # 14
     print(distinct_pf(3, 1000))  # 644
     print(distinct_pf(4, 200000))  # 134043, 0.51
+
+
+if __name__ == '__main__':
+    main()

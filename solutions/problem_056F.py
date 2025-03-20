@@ -22,5 +22,10 @@ def max_digit_sum(bound):
     return maximum
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(max_digit_sum(100))  # 972, 0.06s
+
+
+if __name__ == '__main__':
+    main()

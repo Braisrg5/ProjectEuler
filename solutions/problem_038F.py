@@ -30,8 +30,13 @@ def pandigital_multiples_2():
     return concatenate
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(pandigital_multiples_2())  # 932718654, 0.0007s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

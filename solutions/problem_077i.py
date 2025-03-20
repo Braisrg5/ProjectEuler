@@ -32,5 +32,10 @@ def prime_ways_matrix(target, max_n=''):
     return -1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(prime_ways_matrix(5000, 1000))  # 71 (5006 ways), 0.001s
+
+
+if __name__ == '__main__':
+    main()

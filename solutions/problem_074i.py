@@ -68,5 +68,10 @@ def target_chain(bound, target):
     return sum(val == target for val in length_chain.values())
 
 
-if __name__ == "__main__":
+def main():
+    '''Main code of module.'''
     print(target_chain(1000000, 60))  # 402, 1.01s
+
+
+if __name__ == '__main__':
+    main()

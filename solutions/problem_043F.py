@@ -85,8 +85,13 @@ def sum_pandigitals_property():
     return sum(list_property)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sum_pandigitals_property())  # 16695334890, 0.001s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -34,6 +34,11 @@ def total_name_score_v2():
     return s
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(alphabetic_score_v2('COLIN'))  # 53
     print(total_name_score_v2())  # 871198282, 0.009s
+
+
+if __name__ == '__main__':
+    main()

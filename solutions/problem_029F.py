@@ -26,6 +26,11 @@ def num_pows(bound):
     return len(pows)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(num_pows(5))  # 15
     print(num_pows(100))  # 9183, 0.006s
+
+
+if __name__ == '__main__':
+    main()

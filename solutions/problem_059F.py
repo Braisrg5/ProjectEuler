@@ -108,6 +108,11 @@ def find_password(path):
     return None
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     MESSAGE = 'resources/0059_cipher.txt'
     print(find_password(MESSAGE))  # 129448, 0.74s until user input
+
+
+if __name__ == '__main__':
+    main()

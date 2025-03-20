@@ -242,8 +242,13 @@ def wins_first_player(path):
     return wins
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(wins_first_player('resources/0054_poker.txt'))  # 376, 0.011s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

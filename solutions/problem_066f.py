@@ -68,10 +68,15 @@ def max_x_minimal_solutions(bound):
     return max_d
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(minimal_value(13))  # 649
     print(max_x_minimal_solutions(7))  # 5
     print(max_x_minimal_solutions(1000))  # 661, 0.02s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

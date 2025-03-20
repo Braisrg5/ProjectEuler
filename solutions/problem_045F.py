@@ -23,6 +23,11 @@ def tph(lower):
     return n, tn
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(tph(0))  # 40755
     print(tph(285))  # 1533776805, 0.057s
+
+
+if __name__ == '__main__':
+    main()

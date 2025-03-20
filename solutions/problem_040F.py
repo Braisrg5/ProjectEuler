@@ -65,9 +65,14 @@ def digit_prod():
     return prod(find_digit(10**i) for i in range(7))
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_digit(12))  # 1
     print(digit_prod())  # 210, 0.005
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

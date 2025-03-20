@@ -36,6 +36,11 @@ def fibonacci_digits(d):
     return nth
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(fibonacci_digits(3))  # 12
     print(fibonacci_digits(1000))  # 4782, 0.002s
+
+
+if __name__ == '__main__':
+    main()

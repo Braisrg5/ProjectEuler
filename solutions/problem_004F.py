@@ -21,5 +21,10 @@ def palindromes():
     return largest
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(palindromes())  # 906609, 0.07s
+
+
+if __name__ == '__main__':
+    main()

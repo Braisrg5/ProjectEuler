@@ -43,7 +43,11 @@ def ways_matrix(max_n, max_k=''):
     return matrix[max_n][max_k]
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(ways_matrix(5))  # 6
     print(ways_matrix(100))  # 190569291, 0.011s
-    print(ways_matrix(449))
+
+
+if __name__ == '__main__':
+    main()

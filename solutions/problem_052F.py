@@ -36,8 +36,13 @@ def smallest_same_digits(multiple):
         d += 1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(smallest_same_digits(6))  # 142857, 0.05s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

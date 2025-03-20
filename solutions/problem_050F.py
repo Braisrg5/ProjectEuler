@@ -55,10 +55,15 @@ def consecutive_prime_sum_v2(bound):
     return max_prime
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(consecutive_prime_sum_v2(100))  # 41
     print(consecutive_prime_sum_v2(1000))  # 953
     print(consecutive_prime_sum_v2(1000000))  # 997651, 0.138s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

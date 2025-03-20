@@ -44,7 +44,12 @@ def num_lychrels(bound, its):
     return len([i for i in range(bound) if is_lychrel(i, its)])
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(is_lychrel(196, 50))  # True
     print(is_lychrel(4994, 50))  # True
     print(num_lychrels(10000, 50))  # 249, 0.02s
+
+
+if __name__ == '__main__':
+    main()

@@ -13,9 +13,14 @@ def paths(n):
     return factorial(2*n)//(n_fact*n_fact)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(paths(2))  # 6
     print(paths(20))  # 137846528820, 0.0s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -42,8 +42,13 @@ def left_frac_v3(a, b, max_d):
     return best_n, best_d
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     from time import perf_counter
     start = perf_counter()
     print(left_frac_v3(74, 75, 10**27))  # 428570, 0.31s
     print(f'Calculation completed in {perf_counter()-start} seconds')
+
+
+if __name__ == '__main__':
+    main()

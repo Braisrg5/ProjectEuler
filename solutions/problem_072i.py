@@ -20,6 +20,11 @@ def proper_fractions(bound):
     return sum(phi[2:])
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(proper_fractions(8))  # 21
     print(proper_fractions(1000000))  # 30396355229, 0.4s
+
+
+if __name__ == '__main__':
+    main()

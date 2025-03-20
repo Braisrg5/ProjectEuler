@@ -38,9 +38,14 @@ def pth_permutation(p, objects):
     return perm + str(objects.pop())
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(pth_permutation(3, ['0', '1', '2']))  # 102
     print(pth_permutation(1000000, list(range(10))))  # 2783915460, 0.0s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

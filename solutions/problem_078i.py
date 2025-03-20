@@ -59,9 +59,13 @@ def compute_partitions_div_v2(div):
     return n
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     DIV = 1000000
-    MAX_N = 10000
     start = perf_counter()
     print(compute_partitions_div_v2(DIV))  # 55374, 1.701s
     print(f'Calculation completed in {perf_counter()-start} seconds')
+
+
+if __name__ == '__main__':
+    main()

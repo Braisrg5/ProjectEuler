@@ -78,8 +78,13 @@ def big_prod(n):
     return max(h_big, v_big, diag_neg, diag_pos)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(big_prod(4))  # 70600674, 0.006s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

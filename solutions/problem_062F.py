@@ -26,6 +26,11 @@ def cube_permutations(k):
         n += 1
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(cube_permutations(3))  # 41063625
     print(cube_permutations(5))  # 1270350783, 0.010s
+
+
+if __name__ == '__main__':
+    main()

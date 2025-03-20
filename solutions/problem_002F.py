@@ -19,5 +19,10 @@ def sum_even_fibonacci(n):
     return s
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(sum_even_fibonacci(4000000))  # 4613732, 0.001s
+
+
+if __name__ == '__main__':
+    main()

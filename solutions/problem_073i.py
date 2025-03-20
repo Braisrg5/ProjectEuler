@@ -43,9 +43,14 @@ def fractions_between_v2(a1, b1, a20, b20, max_d):
     return count
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(fractions_between(1, 3, 1, 2, 12000))  # 7295372, 2.09s
     print(fractions_between_v2(1, 3, 1, 2, 12000))  # 7295372, 1.21s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -68,9 +68,14 @@ def longest_recurring_cycle_v2(bound):
     return max(d_cycle, key=d_cycle.get)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(longest_recurring_cycle_v2(11))  # 7
     print(longest_recurring_cycle_v2(1000))  # 983, 0.12s
+
+
+if __name__ == '__main__':
+    main()
 
 
 # ----- #

@@ -16,5 +16,10 @@ def find_password(path):
     return int(not keylogs) + 73162890
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(find_password('resources/0079_keylog.txt'))
+
+
+if __name__ == '__main__':
+    main()

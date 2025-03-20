@@ -57,6 +57,11 @@ def longest_chain_v4(bound):
     return index  # , largest
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(collatz_sequence(13))  # 10
     print(longest_chain_v4(1000000))  # 837799, 0.40s
+
+
+if __name__ == '__main__':
+    main()
