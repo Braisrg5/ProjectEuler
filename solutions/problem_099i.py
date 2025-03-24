@@ -27,13 +27,13 @@ def find_biggest(path):
     biggest, target = 0, -1
     for i, pair in enumerate(nums):
         a, b = pair
-        # If a > 0, then a < b <-> log(a) < log(b)
+        # If a,b > 0, we have that a < b <-> log(a) < log(b)
         # Also, log(n^m) = m*log(n)
         len_num = b * log10(a)
         if len_num > biggest:
             biggest = len_num
+            # Adjust for index
             target = i + 1
-    # Adjust for index
     return target
 
 

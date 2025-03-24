@@ -88,7 +88,7 @@ if __name__ == '__main__':
 # ----- #
 
 # (1*)
-# https://en.wikipedia.org/wiki/Euler%27s_totient_function#Computing_Euler's_totient_function  # noqa
+# https://en.wikipedia.org/wiki/Euler%27s_totient_function
 # If n = p1^k1 * p2^k2 * ... * pr^kr, then:
 #           phi(n) = p1^(k1-1)*(p1-1)*...*pr^(kr-1)*(pr-1)
 
@@ -101,5 +101,6 @@ if __name__ == '__main__':
 # We need to maximize each of the factors, so let's compare two of them:
 #          pi/(pi-1) > pj/(pj-1) <-> pi*pj - pi > pi*pj - pj <-> pi < pj
 # So, we need to choose the set of primes as small as possible. It is trivial
-# to see that these primes are going to be the first nth primes such that
-#          p1*p2*...*pn <= bound
+# to see that these primes are going to be the first kth primes:
+#          p1*p2*...*pk <= bound
+# where k is such that p1*p2*...*pk*p(k+1) > bound.

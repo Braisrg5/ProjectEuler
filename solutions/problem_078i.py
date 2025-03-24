@@ -32,24 +32,21 @@ def compute_partitions_v2(max_n):
 def compute_partitions_div_v2(div):
     '''Computes the partition function until the number of partitions is
     divisible by div.'''
-    # count = perf_counter()
     parts = [1]
     pent_vals = [(0, 0)]
     n = 0
     while parts[n] != 0:
         n += 1
         parts.append(0)
+
         for k in range(1, n+1):
-            coef = 1 if k % 2 else -1
-            if k < len(pent_vals):
-                t1, t2 = pent_vals[k]
-            else:
-                t1, t2 = pentagonal(k), pentagonal(-k)
-                pent_vals.append((t1, t2))
+            coef = 1 if k % 2 else -1  # (-1)**(k+1)
+            if k >= len(pent_vals):
+                pent_vals.append((pentagonal(k), pentagonal(-k)))
+            t1, t2 = pent_vals[k]
+
             if t1 > n:
                 break
-
-            # No more elements will be less than
             parts[n] += coef * parts[n-t1]
             if t2 > n:
                 break
@@ -61,9 +58,9 @@ def compute_partitions_div_v2(div):
 
 def main():
     '''Main code of module.'''
-    DIV = 1000000
+    div = 1000000
     start = perf_counter()
-    print(compute_partitions_div_v2(DIV))  # 55374, 1.701s
+    print(compute_partitions_div_v2(div))  # 55374, 1.701s
     print(f'Calculation completed in {perf_counter()-start} seconds')
 
 
