@@ -1,6 +1,6 @@
 '''https://projecteuler.net/problem=81'''
-import numpy as np
 from pathlib import Path
+import numpy as np
 
 
 def load_matrix(path):
