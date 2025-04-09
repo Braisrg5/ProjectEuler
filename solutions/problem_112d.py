@@ -30,7 +30,6 @@ def percentage_bouncy(perc):
         total += 1
         if is_bouncy(total):
             bouncy += 1
-    print(bouncy, total)
     return total
 
 
