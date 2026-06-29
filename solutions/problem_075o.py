@@ -23,7 +23,7 @@ from resources.useful_functions import count_pyth_triples
 def main():
     '''Main code of module.'''
     ways = count_pyth_triples(1500000)
-    print(sum(1 for way in ways.values() if way == 1))  # 161667, 2.5s
+    print(sum(1 for way in ways.values() if way == 1))  # 161667, 1.101s
 
 
 if __name__ == '__main__':

@@ -18,7 +18,7 @@ clever method! ;o)
 
 def load_triangle(path):
     '''Loads the triangle from the path and returns it as an array.'''
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         triangle = [
             [int(j) for j in i.replace('\n', '').split(' ')]
             for i in file.readlines()
@@ -46,5 +46,5 @@ if __name__ == '__main__':
         [8, 5, 9, 3]
     ]
     print(max_route(small_triangle))  # 23
-    triangle = load_triangle('resources/18_triangle.txt')
-    print(max_route(triangle))  # 1074, 0.0002s
+    medium_triangle = load_triangle('resources/18_triangle.txt')
+    print(max_route(medium_triangle))  # 1074, 0.0002s

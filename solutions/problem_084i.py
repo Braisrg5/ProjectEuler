@@ -106,8 +106,10 @@ class Player:
         # Move the player on the board
         result = self.throw()
         if self.doubles == 3:
+            self.doubles = 0
             self.position = 10
             self.square = self.board[self.position]
+            return
 
         # Landed on square
         self.position += result
@@ -148,7 +150,13 @@ def montecarlo_monopoly(dice, n=1000):
 
 def main():
     '''Main code of module.'''
-    print(montecarlo_monopoly(4, 10000000))
+    odds = montecarlo_monopoly(6, 1000000)
+    modal_string = ''.join(f'{k:02}' for k in list(odds.keys())[:3])
+    print(modal_string)  # 102400, 1.02s
+
+    odds = montecarlo_monopoly(4, 1000000)
+    modal_string = ''.join(f'{k:02}' for k in list(odds.keys())[:3])
+    print(modal_string)  # 101524, 1.02s
 
 
 if __name__ == '__main__':
