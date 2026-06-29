@@ -1,11 +1,10 @@
-'''https://projecteuler.net/problem=35
-The number, 197, is called a circular prime because all rotations of
-the digits: 197, 971, and 719, are themselves prime.
-There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31,
-37, 71, 73, 79, and 97.
+'''https://projecteuler.net/problem=35'''
+# The number, 197, is called a circular prime because all rotations of
+# the digits: 197, 971, and 719, are themselves prime.
+# There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31,
+# 37, 71, 73, 79, and 97.
 
-How many circular primes are there below one million?
-'''
+# How many circular primes are there below one million?
 from resources.useful_functions import (
     sieve_Eratosthenes, digits_odd
 )
@@ -40,7 +39,12 @@ def circular_primes_v4(bound):
     return len(circ_primes)
 
 
-if __name__ == '__main__':
+def main():
+    '''Main code of module.'''
     print(rotate_number(197))  # [197, 971, 719]
     print(circular_primes_v4(100))  # 13
     print(circular_primes_v4(1000000))  # 55, 0.13s
+
+
+if __name__ == '__main__':
+    main()
