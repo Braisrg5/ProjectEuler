@@ -6,6 +6,7 @@
         "concats",
         "coprime",
         "digitsp",
+        "dijkstra",
         "eigh",
         "fliplr",
         "Lychrel",
