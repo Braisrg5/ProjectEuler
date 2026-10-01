@@ -9,6 +9,8 @@
         "dijkstra",
         "eigh",
         "fliplr",
+        "keylog",
+        "keylogs",
         "Lychrel",
         "Lychrels",
         "primerange",
@@ -22,6 +24,10 @@
         "thir",
         "truncatable",
         "twen",
-        "unreverse"
+        "unreverse",
+        "VIIIIIIIIIII",
+        "VVIIIIII",
+        "VVVI",
+        "XIIIIII"
     ]
 }

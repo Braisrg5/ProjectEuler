@@ -27,7 +27,7 @@ def is_prime(n):
     if n % 2 == 0 or n % 3 == 0:
         return False
 
-    # Only necessary to check until the integer square root of n (1*)
+    # Only necessary to check until the integer square root of n
     end = isqrt(n)
     # It's enough to check the numbers of the form 6*j + 1 and 6*j - 1,
     # because in mod 6 every other number is not prime (2*)

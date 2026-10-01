@@ -32,7 +32,7 @@ def h(cell, n):
     '''Heuristic function that calculates the taxicab distance from the current
     cell (x, y) to the bottom right cell, in a matrix of size n x n.'''
     x, y = cell
-    return 1000*(abs(n - 1 - x) + abs(n - 1 - y))
+    return 1*(abs(n - 1 - x) + abs(n - 1 - y))
 
 
 def d(cell, matrix):
@@ -71,18 +71,20 @@ def neighbors(cell, n):
 
 def a_start_algorithm(matrix):
     '''Application of the A* algorithm to find the minimal path sum from top
-    left to bottom right for a given matrix.'''
+    left to bottom right for a given matrix.
+    The code is based on the pseudocode in the Wikipedia page of the algorithm
+    https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode'''
     n = matrix.shape[0]
     goal = (n - 1, n - 1)
     open_set = set([(0, 0)])
     came_from = {}
 
-    # The first node has weight
+    # The first node has weight in this matrix
     g_score = {(0, 0): d((0, 0), matrix)}
     f_score = {}
     f_score[(0, 0)] = g_score[(0, 0)] + h((0, 0), n)
     while len(open_set) != 0:
-        current = min((c for c in f_score if c in open_set), key=f_score.get)
+        current = min(open_set, key=f_score.get)
         if current == goal:
             return g_score[goal]  # reconstruct_path(came_from, current)
 
@@ -110,8 +112,8 @@ def main():
         ))
     print(a_start_algorithm(small_matrix))
 
-    big_matrix = load_matrix("resources/0081_matrix.txt")  # 427337, 0.004s
-    print(a_start_algorithm(big_matrix))  # 425185, 0.75s
+    big_matrix = load_matrix("resources/0083_matrix.txt")
+    print(a_start_algorithm(big_matrix))  # 425185, 0.036s
 
 
 if __name__ == '__main__':

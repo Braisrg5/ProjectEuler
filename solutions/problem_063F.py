@@ -3,7 +3,6 @@
 # 9-digit number, 134217728 = 8^9, is a ninth power.
 
 # How many n-digit positive integers exist which are also a nth power?
-
 from math import ceil, pow as math_pow
 
 

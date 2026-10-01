@@ -24,8 +24,9 @@
 # each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and
 # octagonal, is represented by a different number in the set.
 from resources.useful_functions import (
-    is_triangle, is_square, is_pentagonal, is_hexagonal, is_heptagonal,
-    is_octagonal)
+    is_triangle, is_square, is_pentagonal, 
+    is_hexagonal, is_heptagonal, is_octagonal
+)
 
 
 def get_figs(n):

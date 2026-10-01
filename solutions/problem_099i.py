@@ -8,21 +8,21 @@
 # Using base_exp.txt, a 22K text file containing one thousand lines with a
 # base/exponent pair on each line, determine which line number has the greatest
 # numerical value.
+from pathlib import Path
 from math import log10
 
 
 def load_nums(path):
     '''Loads the numbers from the given path.'''
-    with open(path, 'r', encoding='utf-8') as file:
+    file_path = Path(__file__).parent / path
+    with open(file_path, 'r', encoding='utf-8') as file:
         nums = file.read().split('\n')
         nums = [tuple(int(num) for num in pair.split(',')) for pair in nums]
     return nums
 
 
-def find_biggest(path):
-    '''Finds the index of the biggest number in the given path.'''
-    nums = load_nums(path)
-
+def find_biggest(nums):
+    '''Finds the index of the biggest number in the nums list.'''
     # Init biggest and target row
     biggest, target = 0, -1
     for i, pair in enumerate(nums):
@@ -39,7 +39,8 @@ def find_biggest(path):
 
 def main():
     '''Main code of module.'''
-    print(find_biggest('resources/0099_base_exp.txt'))  # 709, 0.001s
+    nums = load_nums('resources/0099_base_exp.txt')
+    print(find_biggest(nums))  # 709, 0.001s
 
 
 if __name__ == '__main__':
